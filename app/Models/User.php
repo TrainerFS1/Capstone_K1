@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_type',
     ];
 
     /**
@@ -40,22 +41,15 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
-    // Relasi dengan Admin
+
     public function admin()
     {
         return $this->hasOne(Admin::class);
     }
-
-    // Relasi dengan Company
-    public function company()
-    {
-        return $this->hasOne(Company::class);
-    }
-
-    // Relasi dengan JobSeeker
     public function jobSeeker()
     {
-        return $this->hasOne(JobSeeker::class);
+        return $this->hasOne(jobSeeker::class);
     }
 }
