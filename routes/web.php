@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\JobSeeker\JobSeekerController;
-
+use App\Http\Controllers\Company\CompanyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +26,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/admin', [LoginController::class, 'authenticate'])->name('cekloginadmin');
     Route::post('/company', [LoginController::class, 'authenticate'])->name('ceklogincompany');
     Route::post('/jobseeker', [LoginController::class, 'authenticate'])->name('cekloginjobseeker');
+    
+    Route::get('/company/register', [CompanyController::class, 'showRegistrationForm'])->name('company.register');
+    Route::post('/company/register', [CompanyController::class, 'register'])->name('company.register.submit');
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -40,8 +43,8 @@ Route::middleware(['auth', 'company'])->group(function () {
 });
 
 Route::middleware(['auth', 'job_seeker'])->group(function () {
-    Route::get('/jobseeker/profile', [JobSeekerController::class, 'showProfile'])->name('jobseekerProfile');
-
+    Route::get('/jobseeker/profile', [JobSeekerController::class, 'showProfile'])->name('jobseeker.profile');
+    Route::post('/jobseeker/profile', [JobSeekerController::class, 'updateProfile'])->name('jobseeker.profile.update');
 
     Route::get('/jobseeker/setting', function () {
         return view('jobseeker.setting');
@@ -50,5 +53,7 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
     //     return view('jobseeker.profile');
     // })->name('jobseeker.profile');
 });
+
+
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -44,12 +44,19 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function admin()
+    /**
+     * Get the company associated with the user.
+     */
+    public function company()
     {
-        return $this->hasOne(Admin::class);
+        return $this->hasOne(Company::class);
     }
+
+    /**
+     * Get the job seeker associated with the user.
+     */
     public function jobSeeker()
     {
-        return $this->hasOne(jobSeeker::class);
+        return $this->hasOne(JobSeeker::class);
     }
 }

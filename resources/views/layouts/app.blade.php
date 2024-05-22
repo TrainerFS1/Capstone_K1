@@ -168,7 +168,7 @@
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 @if (Auth::check())
-                  <a href="{{ route('jobseekerProfile') }}" class="dropdown-item">Profile</a>
+                  <a href="{{ route('jobseeker.profile') }}" class="dropdown-item">Profile</a>
                   <a href="{{ route('jobseeker.setting') }}" class="dropdown-item">Settings</a>
                   <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                 @else
