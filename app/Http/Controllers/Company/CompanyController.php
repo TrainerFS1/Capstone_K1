@@ -52,6 +52,26 @@ class CompanyController extends Controller
         // Kirim data perusahaan ke tampilan 'company.profile'
         return view('company.joblisting', compact('company', 'user', 'jobs'));
     }
+    public function showEditJob($id)
+    {
+        $company = Company::where('user_id', Auth::id())->first();
+        $user = User::where('id', Auth::id())->firstOrFail();
+        if (!$company) {
+            $company = new Company(); // Atau Anda bisa membuat data default
+            $company->user_id = Auth::id();
+            $company->company_name = 'Company';
+            $company->company_logo = 'Company';
+            // Set properti lainnya sesuai kebutuhan
+        }
+        // Cari job berdasarkan ID
+        $job = Job::findOrFail($id);
+        $jobCategories = Category::all();
+        $jobTypes = JobType::all();
+
+
+        // Tampilkan halaman edit dengan data yang diperlukan
+        return view('company.editjob', compact('company','user','job','jobCategories','jobTypes'));
+    }
     // public function showLamaranMasuk()
     // {
     //     // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
@@ -86,8 +106,46 @@ class CompanyController extends Controller
         return view('company.addjob', compact('company', 'user', 'jobCategories', 'jobTypes'));
     }
     // Edit
+    public function updateJob(Request $request, $id)
+    {
+        // Validasi input
+        $request->validate([
+            'job_title' => 'required|string|max:255',
+            'category_id' => 'required|integer',
+            'job_type_id' => 'required|integer',
+            'job_location' => 'required|string|max:255',
+            'job_salary' => 'required|string|max:255',
+            'job_skills' => 'required|string',
+            'job_description' => 'required|string',
+        ]);
+
+        $job = Job::findOrFail($id);
+        // Update data job
+        $job->job_title = $request->job_title;
+        $job->category_id = $request->category_id;
+        $job->job_type_id = $request->job_type_id;
+        $job->job_location = $request->job_location;
+        $job->job_salary = $request->job_salary;
+        $job->job_skills = $request->job_skills;
+        $job->job_description = $request->job_description;
+        $job->save();
+
+        // Redirect ke halaman yang diinginkan dengan pesan sukses
+        return redirect()->route('company.jobs')->with('success', 'Job has been Edited successfully.');
+    }
 
     // Hapus
+    public function deleteJob($id)
+    {
+        // Cari job berdasarkan ID
+        $job = Job::findOrFail($id);
+
+        // Hapus job
+        $job->delete();
+
+        // Redirect ke halaman yang diinginkan dengan pesan sukses
+        return redirect()->route('company.jobs')->with('success', 'Job has been deleted successfully.');
+    }
     // Create
     public function addJob(Request $request)
     {

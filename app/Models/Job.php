@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Job extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     protected $fillable = [
         'company_id',
         'job_title',
@@ -19,6 +22,7 @@ class Job extends Model
         'job_status',
         'job_salary',
     ];
+    protected $dates = ['deleted_at'];
 
     public function company()
     {

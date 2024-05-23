@@ -75,12 +75,16 @@
                                   <tr>
                                       <td><span class="text-secondary">{{ $loop->iteration }}</span></td>
                                       <td>{{ $jobListing->job_title }}</td>
-                                      <td>{{ $jobListing->Category->category_name }}</td>
+                                      <td>{{ $jobListing->category->category_name }}</td>
                                       <td>{{ $jobListing->jobType->job_type_name }}</td>
                                       <td>{{ $jobListing->job_salary }}</td>
                                       <td>
-                                        <a href="#">Edit</a> /
-                                        <a href="#">Delete</a>
+                                        <a class="btn btn-primary btn-sm" href="{{ route('company.showeditjob', $jobListing->id) }}">Edit</a> /
+                                        <form action="{{  route('company.deletejob', $jobListing->id) }}" method="POST" style="display: inline">
+                                          @csrf
+                                          @method('DELETE')
+                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                        </form>
                                       </td>
                                   </tr>
                               @endforeach
