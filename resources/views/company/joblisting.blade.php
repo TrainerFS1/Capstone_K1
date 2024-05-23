@@ -83,7 +83,7 @@
                                         <form action="{{  route('company.deletejob', $jobListing->id) }}" method="POST" style="display: inline">
                                           @csrf
                                           @method('DELETE')
-                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                          <button class="btn btn-danger btn-sm" type="submit">Delete</button>
                                         </form>
                                       </td>
                                   </tr>
