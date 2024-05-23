@@ -55,7 +55,7 @@
 @endsection
 
 @section('customjs')
-<script>
+    <script>
         // Set focus to the Company Name input field
         document.getElementsByName("name")[0].focus();
     </script>
