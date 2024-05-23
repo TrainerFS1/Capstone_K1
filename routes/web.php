@@ -42,6 +42,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'company'])->group(function () {
 });
 
+
 Route::middleware(['auth', 'job_seeker'])->group(function () {
     Route::get('/jobseeker/profile', [JobSeekerController::class, 'showProfile'])->name('jobseeker.profile');
     Route::post('/jobseeker/profile', [JobSeekerController::class, 'updateProfile'])->name('jobseeker.profile.update');

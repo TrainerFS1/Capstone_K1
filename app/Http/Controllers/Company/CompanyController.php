@@ -41,6 +41,6 @@ class CompanyController extends Controller
         // ]);
 
         // Redirect ke halaman login perusahaan dengan pesan sukses
-        // return redirect()->route('loginCompany')->with('success', 'Company registered successfully. Please login.');
+        return redirect()->route('loginCompany')->with('success', 'Company registered successfully. Please login.');
     }
 }

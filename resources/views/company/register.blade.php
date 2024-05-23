@@ -18,27 +18,34 @@
                 <div class="col-lg-12">
                     <div class="row row-cards">
                         <div class="col-12">
-                        <form action="{{ route('company.register.submit') }}" method="post">
-                        @csrf
-                        <div class="mb-3">
-                            <label class="form-label">Company Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email address</label>
-                            <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" name="password_confirmation" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Register</button>
-                    </form>
-
+                            <form action="{{ route('company.register.submit') }}" method="post">
+                                @csrf
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Company Name <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" placeholder="Company Name" required autofocus>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Email address <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email address" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Password <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Confirm Password <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Register</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -48,7 +55,8 @@
 @endsection
 
 @section('customjs')
-    <script>
-        // Tambahkan kode JavaScript khusus jika diperlukan
+<script>
+        // Set focus to the Company Name input field
+        document.getElementsByName("name")[0].focus();
     </script>
 @endsection

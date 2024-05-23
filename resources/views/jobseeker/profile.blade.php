@@ -31,14 +31,18 @@
                                     <div class="row row-cards">
                                         <div class="col-md-4">
                                             <div class="mb-3">
-                                                <label class="form-label">Job Seeker</label>
-                                                <input type="text" class="form-control" name="job_seeker_name" placeholder="Job Seeker" value="{{ $jobSeeker->job_seeker_name ?? '' }}">
+                                                <label class="form-label">
+                                                    Job Seeker <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" class="form-control" name="job_seeker_name" placeholder="Job Seeker" value="{{ $jobSeeker->job_seeker_name ?? '' }}" autofocus required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-4">
                                             <div class="mb-3">
-                                                <label class="form-label">Phone</label>
-                                                <input type="text" class="form-control" name="job_seeker_phone" placeholder="phone" value="{{ $jobSeeker->job_seeker_phone ?? '' }}">
+                                                <label class="form-label">
+                                                    Phone <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" class="form-control" name="job_seeker_phone" placeholder="Phone" value="{{ $jobSeeker->job_seeker_phone ?? '' }}" required>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-md-4">
@@ -72,6 +76,7 @@
         </div>
     </div>
 @endsection
+
 
 @section('customjs')
     <script>
