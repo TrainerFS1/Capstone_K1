@@ -17,6 +17,7 @@ class Job extends Model
         'job_skills',
         'job_type_id',
         'job_status',
+        'job_salary',
     ];
 
     public function company()

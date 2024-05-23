@@ -48,6 +48,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Admin::class);
     }
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
     public function jobSeeker()
     {
         return $this->hasOne(jobSeeker::class);

@@ -12,7 +12,7 @@
           <!-- Page title actions -->
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
-              <a href="{{ route('company.showtambahlowongan') }}" class="btn btn-primary d-none d-sm-inline-block">
+              <a href="{{ route('company.showaddjob') }}" class="btn btn-primary d-none d-sm-inline-block">
                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                 Tambah Lowongan Kerja
@@ -53,7 +53,7 @@
                   {{ session('success') }}
               </div>
               @endif
-              @if($jobListings->isEmpty())
+              @if($jobs->isEmpty())
                   <p>Belum ada lowongan yang dibuat.</p>
               @else
                   <div class="table-responsive">
@@ -71,13 +71,13 @@
                               </tr>
                           </thead>
                           <tbody>
-                              @foreach($jobListings as $jobListing)
+                              @foreach($jobs as $jobListing)
                                   <tr>
                                       <td><span class="text-secondary">{{ $loop->iteration }}</span></td>
                                       <td>{{ $jobListing->job_title }}</td>
-                                      <td>{{ $jobListing->jobCategory->job_category_name }}</td>
+                                      <td>{{ $jobListing->Category->category_name }}</td>
                                       <td>{{ $jobListing->jobType->job_type_name }}</td>
-                                      <td>{{ $jobListing->salary_range }}</td>
+                                      <td>{{ $jobListing->job_salary }}</td>
                                       <td>
                                         <a href="#">Edit</a> /
                                         <a href="#">Delete</a>

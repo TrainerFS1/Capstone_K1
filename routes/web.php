@@ -39,7 +39,6 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // Rute untuk dashboard masing-masing peran
 Route::middleware(['auth', 'admin'])->group(function () {
-
 });
 
 Route::middleware(['auth', 'company'])->group(function () {
@@ -48,8 +47,8 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/lamaranmasuk', [CompanyController::class, 'showLamaranMasuk'])->name('company.lamaranmasuk');
     Route::get('/company/dashboard', [CompanyController::class, 'showDashboard'])->name('company.dashboard');
     Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.profile');
-    Route::get('/company/tambahlowongan', [CompanyController::class, 'showtambahlowongan'])->name('company.showtambahlowongan');
-    Route::post('/company/tambahlowongan', [CompanyController::class, 'tambahlowongan'])->name('company.tambahlowongan');
+    Route::get('/company/addjob', [CompanyController::class, 'showAddJob'])->name('company.showaddjob');
+    Route::post('/company/addjob', [CompanyController::class, 'addJob'])->name('company.addjob');
     Route::post('/company/updateprofile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
 });
 
