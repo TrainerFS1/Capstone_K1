@@ -31,23 +31,15 @@
               {{-- <div class="card-header">
                 <h3 class="card-title"></h3>
               </div> --}}
-              <div class="card-body border-bottom py-3">
-                <div class="d-flex">
-                  <div class="text-secondary">
-                    Show
-                    <div class="mx-2 d-inline-block">
-                      <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
+              <div class="col-4 card-body border-bottom ms-auto text-secondary">
+                <form action="{{ route('jobs.search') }}" method="GET" class="d-flex justify-content-end">
+                    <div class="input-group input-group-smo">
+                        {{-- <span class="input-group-text text-secondary">Search:</span> --}}
+                        <input type="text" name="search" value="{{ request('search') }}" class="form-control p-2" aria-label="Search jobs" placeholder="search...">
+                        <button class="btn btn-primary" type="submit">Search</button>
                     </div>
-                    entries
-                  </div>
-                  <div class="ms-auto text-secondary">
-                    Search:
-                    <div class="ms-2 d-inline-block">
-                      <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
-                    </div>
-                  </div>
-                </div>
-              </div>
+                </form>
+            </div>
               @if(session('success'))
               <div class="alert alert-success">
                   {{ session('success') }}
@@ -111,28 +103,35 @@
                   </div>
               @endif
               <div class="card-footer d-flex align-items-center">
-                <p class="m-0 text-secondary">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
+                <p class="m-0 text-secondary">
+                    Showing <span>{{ $jobs->firstItem() }}</span> to <span>{{ $jobs->lastItem() }}</span> of <span>{{ $jobs->total() }}</span> entries
+                </p>
                 <ul class="pagination m-0 ms-auto">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                      <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
-                      prev
-                    </a>
-                  </li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#">5</a></li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">
-                      next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
-                    </a>
-                  </li>
+                    <!-- Tambahkan kustomisasi untuk tombol previous -->
+                    <li class="page-item {{ $jobs->onFirstPage() ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $jobs->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $jobs->onFirstPage() }}">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+                            prev
+                        </a>
+                    </li>
+                    
+                    <!-- Tampilkan nomor halaman -->
+                    @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
+                        <li class="page-item {{ $page == $jobs->currentPage() ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
+                    
+                    <!-- Tambahkan kustomisasi untuk tombol next -->
+                    <li class="page-item {{ $jobs->hasMorePages() ? '' : 'disabled' }}">
+                        <a class="page-link" href="{{ $jobs->nextPageUrl() }}" aria-disabled="{{ !$jobs->hasMorePages() }}">
+                            next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+                        </a>
+                    </li>
                 </ul>
-              </div>
+            </div>
             </div>
           </div>
         </div>

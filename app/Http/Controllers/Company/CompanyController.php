@@ -35,7 +35,7 @@ class CompanyController extends Controller
         // Kirim data perusahaan ke tampilan 'company.profile'
         return view('company.dashboard', compact('company', 'user'));
     }
-    public function showJobs()
+    public function showJobs(Request $request)
     {
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $company = Company::where('user_id', Auth::id())->first();
@@ -47,9 +47,25 @@ class CompanyController extends Controller
             $company->company_logo = 'Company';
             // Set properti lainnya sesuai kebutuhan
         }
-        $jobs = Job::where('company_id', $company->id)->get();
+        $search = $request->input('search');
+        $query = Job::where('company_id', $company->id);
 
-        // Kirim data perusahaan ke tampilan 'company.profile'
+        if ($search) {
+            $query->where('job_title', 'LIKE', "%{$search}%")
+                ->orWhere('job_description', 'LIKE', "%{$search}%")
+                ->orWhere('job_location', 'LIKE', "%{$search}%")
+                ->orWhere('job_skills', 'LIKE', "%{$search}%")
+                ->orWhere('job_salary', 'LIKE', "%{$search}%");
+        }
+
+        $jobs = $query->paginate(10);
+
+        // Menambahkan parameter pencarian pada pagination links
+        if ($search) {
+            $jobs->appends(['search' => $search]);
+        }
+
+        // Kirim data perusahaan ke tampilan 'company.joblisting'
         return view('company.joblisting', compact('company', 'user', 'jobs'));
     }
     public function showEditJob($id)

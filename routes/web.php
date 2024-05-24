@@ -57,6 +57,10 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/{id}/edit', [CompanyController::class, 'showEditJob'])->name('company.showeditjob');
     Route::post('/company/{id}/edit', [CompanyController::class, 'updateJob'])->name('company.editjob');
     Route::put('/company/{id}/ubahstatus', [CompanyController::class, 'updateStatus'])->name('company.editstatus');
+    // pencarian
+    // Route::get('/company/jobs/search', [CompanyController::class, 'ajaxSearch'])->name('company.searchjob');
+    Route::get('/company/jobs/search', [CompanyController::class, 'showJobs'])->name('jobs.search');
+
     // delete lowongan kerja
     Route::delete('/company/{id}/delete', [CompanyController::class, 'deleteJob'])->name('company.deletejob');
     // 
