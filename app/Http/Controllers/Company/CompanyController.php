@@ -70,7 +70,7 @@ class CompanyController extends Controller
 
 
         // Tampilkan halaman edit dengan data yang diperlukan
-        return view('company.editjob', compact('company','user','job','jobCategories','jobTypes'));
+        return view('company.editjob', compact('company', 'user', 'job', 'jobCategories', 'jobTypes'));
     }
     // public function showLamaranMasuk()
     // {
@@ -106,6 +106,25 @@ class CompanyController extends Controller
         return view('company.addjob', compact('company', 'user', 'jobCategories', 'jobTypes'));
     }
     // Edit
+    public function updateStatus(Request $request, $id)
+    {
+        // Cari job berdasarkan ID
+        $job = Job::findOrFail($id);
+
+        // Periksa status yang diinginkan dari permintaan
+        if ($job->job_status == 'active') {
+            $job->job_status = 'inactive';
+            $job->save();
+        } elseif ($job->job_status == 'inactive') {
+            $job->job_status = 'active';
+            $job->save();
+            // dd($job);
+        }
+        // Simpan perubahan
+
+        // Redirect ke halaman yang diinginkan dengan pesan sukses
+        return redirect()->route('company.jobs')->with('success', 'Job has been updated successfully.');
+    }
     public function updateJob(Request $request, $id)
     {
         // Validasi input
@@ -171,10 +190,10 @@ class CompanyController extends Controller
         $job->job_salary = $request->job_salary;
         $job->job_skills = $request->job_skills;
         $job->job_description = $request->job_description;
-        $job->job_status = 'active'; // Atau logika lain untuk status
+        $job->job_status = 'inactive'; // Atau logika lain untuk status
         $job->save();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job has been created successfully.');
+        return redirect()->route('company.jobs')->with('success', 'The job has been created successfully. Please activate the status from show to jobseeker.');
     }
 }

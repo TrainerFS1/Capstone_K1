@@ -56,6 +56,7 @@ Route::middleware(['auth', 'company'])->group(function () {
     // edit lowongan kerja
     Route::get('/company/{id}/edit', [CompanyController::class, 'showEditJob'])->name('company.showeditjob');
     Route::post('/company/{id}/edit', [CompanyController::class, 'updateJob'])->name('company.editjob');
+    Route::put('/company/{id}/ubahstatus', [CompanyController::class, 'updateStatus'])->name('company.editstatus');
     // delete lowongan kerja
     Route::delete('/company/{id}/delete', [CompanyController::class, 'deleteJob'])->name('company.deletejob');
     // 
