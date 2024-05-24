@@ -51,10 +51,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(Company::class);
     }
-
-    /**
-     * Get the job seeker associated with the user.
-     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
     public function jobSeeker()
     {
         return $this->hasOne(JobSeeker::class);

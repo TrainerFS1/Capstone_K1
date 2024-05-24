@@ -40,6 +40,22 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'company'])->group(function () {
+    Route::get('/company/setting', [CompanyController::class, 'showSetting'])->name('company.setting');
+    Route::get('/company/lamaranmasuk', [CompanyController::class, 'showLamaranMasuk'])->name('company.lamaranmasuk');
+    Route::get('/company/dashboard', [CompanyController::class, 'showDashboard'])->name('company.dashboard');
+    Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.profile');
+    //halaman list lowongan kerja
+    Route::get('/company/jobs', [CompanyController::class, 'showJobs'])->name('company.jobs');
+    // tambah lowongan
+    Route::get('/company/addjob', [CompanyController::class, 'showAddJob'])->name('company.showaddjob');
+    Route::post('/company/addjob', [CompanyController::class, 'addJob'])->name('company.addjob');
+    // edit lowongan kerja
+    Route::get('/company/{id}/edit', [CompanyController::class, 'showEditJob'])->name('company.showeditjob');
+    Route::post('/company/{id}/edit', [CompanyController::class, 'updateJob'])->name('company.editjob');
+    // delete
+    Route::delete('/company/{id}/delete', [CompanyController::class, 'deleteJob'])->name('company.deletejob');
+
+    Route::post('/company/updateprofile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
 });
 
 

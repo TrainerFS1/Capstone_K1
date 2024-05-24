@@ -35,12 +35,13 @@
       <div class="container container-tight py-4">
         <div class="text-center mb-4">
           <a href="." class="navbar-brand navbar-brand-autodark">
-            <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            {{-- <img src="./static/logo.svg" width="110" height="32" alt="InpoLoker" class="navbar-brand-image"> --}}
+            InpoLoker
           </a>
         </div>
         <div class="card card-md">
           <div class="card-body">
-            <h2 class="h2 text-center mb-4">Login to your account</h2>
+            <h2 class="h2 text-center mb-4">Login Company Area</h2>
             <form action="{{ route('cekloginadmin') }}" method="post" autocomplete="off" novalidate>
               @csrf
               <div class="mb-3">
@@ -51,7 +52,7 @@
                 <label class="form-label">
                   Password
                   <span class="form-label-description">
-                    <a href="./forgot-password.html">I forgot password</a>
+                    <a href="#">I forgot password</a>
                   </span>
                 </label>
                 <div class="input-group input-group-flat">
