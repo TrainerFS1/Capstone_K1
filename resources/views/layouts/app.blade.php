@@ -173,7 +173,8 @@
                   <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                 @else
                   <a href="{{ route('loginJobSeeker') }}" class="dropdown-item">Login</a>
-                  <a href="#" class="dropdown-item">Register</a>
+                  <a href="{{ route('jobseeker.register') }}" class="dropdown-item">Register</a>
+
                 @endif
               </div>
             </div>
