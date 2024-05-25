@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Admin Login</title>
+    <title>Company Login</title>
     <!-- CSS files -->
     <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
     <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
@@ -92,7 +92,7 @@
           </div>
         </div>
         <div class="text-center text-secondary mt-3">
-          Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a>
+          Don't have account yet? <a href="{{ route('company.register') }}" tabindex="-1">Sign up</a>
         </div>
       </div>
     </div>

@@ -32,13 +32,13 @@ class UserSeeder extends Seeder
         //     'email_verified_at' => now(),
         // ]);
 
-        // // Job Seeker User
-        // User::create([
-        //     'name' => 'Job Seeker User',
-        //     'email' => 'jobseeker',
-        //     'password' => Hash::make('123'),
-        //     'user_type' => 'job_seeker',
-        //     'email_verified_at' => now(),
-        // ]);
+        // Job Seeker User
+        User::create([
+            'name' => 'Job Seeker User',
+            'email' => 'jobseeker',
+            'password' => Hash::make('123'),
+            'user_type' => 'job_seeker',
+            'email_verified_at' => now(),
+        ]);
     }
 }
