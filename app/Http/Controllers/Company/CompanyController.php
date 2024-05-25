@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\JobType;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Industry;
 
 class CompanyController extends Controller
 {
@@ -20,8 +21,8 @@ class CompanyController extends Controller
     // Registration
     public function showRegistrationForm()
     {
-        return view('company.register');
-    }
+        $industries = Industry::all();
+        return view('company.register', compact('industries'));    }
 
     public function register(Request $request)
     {
@@ -52,8 +53,11 @@ class CompanyController extends Controller
         // Simpan data perusahaan
         $company = Company::create([
             'user_id' => $user->id,
-            'company_name' => $request->name, // Nama perusahaan diisi sesuai input nama
-            // Kolom lain yang ingin Anda tambahkan
+            'company_name' => $request->name, 
+            'company_address' => $request->company_address,
+            'company_website' => $request->company_website,
+            'company_phone' => $request->company_phone,
+            'industry_id' => $request->industry_id,
         ]);
     
         // Redirect ke halaman login perusahaan dengan pesan sukses

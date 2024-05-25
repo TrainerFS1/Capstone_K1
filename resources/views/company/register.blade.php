@@ -53,6 +53,47 @@
                                     </label>
                                     <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
                                 </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Company Address
+                                    </label>
+                                    <input type="text" name="company_address" class="form-control @error('company_address') is-invalid @enderror" value="{{ old('company_address') }}" placeholder="Company Address">
+                                    @error('company_address')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Company Website
+                                    </label>
+                                    <input type="text" name="company_website" class="form-control @error('company_website') is-invalid @enderror" value="{{ old('company_website') }}" placeholder="Company Website">
+                                    @error('company_website')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Company Phone
+                                    </label>
+                                    <input type="text" name="company_phone" class="form-control @error('company_phone') is-invalid @enderror" value="{{ old('company_phone') }}" placeholder="Company Phone">
+                                    @error('company_phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        Industry
+                                    </label>
+                                    <select name="industry_id" class="form-select @error('industry_id') is-invalid @enderror">
+                                        <option value="">Select Industry</option>
+                                        @foreach($industries as $industry)
+                                            <option value="{{ $industry->id }}" {{ old('industry_id') == $industry->id ? 'selected' : '' }}>{{ $industry->industry_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('industry_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <button type="submit" class="btn btn-primary">Register</button>
                             </form>
                         </div>
