@@ -24,19 +24,28 @@
                                     <label class="form-label">
                                         Company Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" placeholder="Company Name" required autofocus>
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Company Name" required autofocus>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">
                                         Email address <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="Email address" required>
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email address" required>
+                                    @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">
                                         Password <span class="text-danger">*</span>
                                     </label>
-                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                    <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required>
+                                    @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">

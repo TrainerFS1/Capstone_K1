@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('company_website')->nullable();
             $table->string('company_phone')->nullable();
             $table->text('company_description')->nullable();
-            $table->foreignId('industry_id')->constrained()->onDelete('cascade');
+            $table->foreignId('industry_id')->nullable()->constrained();            
             $table->string('company_logo')->nullable();
             $table->timestamps();
         });

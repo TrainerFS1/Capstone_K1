@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\Company\CompanyController;
+use App\Http\Controllers\Job\JobController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +30,9 @@ Route::middleware('guest')->group(function () {
     
     Route::get('/company/register', [CompanyController::class, 'showRegistrationForm'])->name('company.register');
     Route::post('/company/register', [CompanyController::class, 'register'])->name('company.register.submit');
+
+    Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

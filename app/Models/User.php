@@ -47,10 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Get the company associated with the user.
      */
-    public function company()
-    {
-        return $this->hasOne(Company::class);
-    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);
