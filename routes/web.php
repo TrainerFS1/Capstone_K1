@@ -5,6 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\Company\CompanyController;
+use App\Http\Controllers\Company\JobListingController;
+use App\Http\Controllers\Company\ApplyJobController;
 use App\Http\Controllers\Job\JobController;
 /*
 |--------------------------------------------------------------------------
@@ -57,24 +59,24 @@ Route::middleware(['auth', 'company'])->group(function () {
     // 
     // 
     //halaman list lowongan kerja
-    Route::get('/company/jobs', [CompanyController::class, 'showJobs'])->name('company.jobs');
+    Route::get('/company/jobs', [JobListingController::class, 'showJobs'])->name('company.jobs');
     // tambah lowongan
-    Route::get('/company/addjob', [CompanyController::class, 'showAddJob'])->name('company.showaddjob');
-    Route::post('/company/addjob', [CompanyController::class, 'addJob'])->name('company.addjob');
+    Route::get('/company/addjob', [JobListingController::class, 'showAddJob'])->name('company.showaddjob');
+    Route::post('/company/addjob', [JobListingController::class, 'addJob'])->name('company.addjob');
     // edit lowongan kerja
-    Route::get('/company/{id}/edit', [CompanyController::class, 'showEditJob'])->name('company.showeditjob');
-    Route::post('/company/{id}/edit', [CompanyController::class, 'updateJob'])->name('company.editjob');
-    Route::put('/company/{id}/ubahstatus', [CompanyController::class, 'updateStatus'])->name('company.editstatus');
+    Route::get('/company/{id}/edit', [JobListingController::class, 'showEditJob'])->name('company.showeditjob');
+    Route::post('/company/{id}/edit', [JobListingController::class, 'updateJob'])->name('company.editjob');
+    Route::put('/company/{id}/ubahstatus', [JobListingController::class, 'updateStatus'])->name('company.editstatus');
     // pencarian
     // Route::get('/company/jobs/search', [CompanyController::class, 'ajaxSearch'])->name('company.searchjob');
-    Route::get('/company/jobs/search', [CompanyController::class, 'showJobs'])->name('jobs.search');
+    Route::get('/company/jobs/search', [JobListingController::class, 'showJobs'])->name('jobs.search');
 
     // delete lowongan kerja
-    Route::delete('/company/{id}/delete', [CompanyController::class, 'deleteJob'])->name('company.deletejob');
+    Route::delete('/company/{id}/delete', [JobListingController::class, 'deleteJob'])->name('company.deletejob');
     // 
     // 
     // halaman lamaran masuk
-    Route::get('/company/lamaranmasuk', [CompanyController::class, 'showLamaranMasuk'])->name('company.lamaranmasuk');
+    Route::get('/company/lamaranmasuk', [ApplyJobController::class, 'showLamaranMasuk'])->name('company.lamaranmasuk');
 });
 
 

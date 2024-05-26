@@ -48,4 +48,8 @@ class Job extends Model
     {
         return $this->hasMany(SavedJob::class);
     }
+    public function jobSeeker()
+    {
+        return $this->belongsTo(JobSeeker::class);
+    }
 }

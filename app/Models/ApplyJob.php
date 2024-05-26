@@ -15,7 +15,7 @@ class ApplyJob extends Model
         'status',
     ];
 
-    public function jobSeeker()
+    public function JobSeeker()
     {
         return $this->belongsTo(JobSeeker::class);
     }
