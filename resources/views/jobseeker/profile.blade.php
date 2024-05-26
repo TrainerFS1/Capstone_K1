@@ -25,7 +25,7 @@
                                 </div>
                             @endif
 
-                            <form class="card" action="{{ route('jobseeker.profile.update') }}" method="post">
+                            <form class="card" action="{{ route('jobseeker.profile.update') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="row row-cards">
@@ -63,6 +63,19 @@
                                                 <textarea rows="5" class="form-control" name="job_seeker_resume" placeholder="Here can be your description">{{ $jobSeeker->job_seeker_resume ?? '' }}</textarea>
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">
+                                                    Profile Picture
+                                                </label>
+                                                <input type="file" class="form-control" name="profile_picture">
+                                                <div class="form-text">
+                                                    Upload your profile picture (max size: 2MB)
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                                 <div class="card-footer text-end">
@@ -76,8 +89,6 @@
         </div>
     </div>
 @endsection
-
-
 
 @section('customjs')
     <script>

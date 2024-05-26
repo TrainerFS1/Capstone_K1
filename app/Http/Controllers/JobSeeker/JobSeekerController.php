@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\JobSeeker;
-use App\Models\FileJobSeeker;
+use Illuminate\Support\Facades\Storage;
 
 class JobSeekerController extends Controller
 {
@@ -56,20 +56,17 @@ class JobSeekerController extends Controller
         return redirect()->route('loginJobSeeker')->with('success', 'Job Seeker registered successfully. Please login.');
     }
 
-
-
+    // Menampilkan halaman profil job seeker
     public function showProfile()
     {
-        // Ambil user yang sedang login
-        $user = Auth::user();
-
         // Ambil data job seeker berdasarkan user_id
-        $jobSeeker = JobSeeker::where('user_id', $user->id)->first();
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
 
         // Kirim data ke view
         return view('jobseeker.profile', compact('jobSeeker'));
     }
 
+    // Mengupdate profil job seeker
     public function updateProfile(Request $request)
     {
         // Validasi input
@@ -78,6 +75,7 @@ class JobSeekerController extends Controller
             'job_seeker_phone' => 'nullable|string|max:255',
             'job_seeker_address' => 'nullable|string|max:255',
             'job_seeker_resume' => 'nullable|string',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // max 2MB
         ]);
     
         // Ambil data job seeker berdasarkan user_id
@@ -88,11 +86,25 @@ class JobSeekerController extends Controller
         $jobSeeker->job_seeker_phone = $request->job_seeker_phone;
         $jobSeeker->job_seeker_address = $request->job_seeker_address;
         $jobSeeker->job_seeker_resume = $request->job_seeker_resume;
+
+        // Handle profile picture upload
+        if ($request->hasFile('profile_picture')) {
+            // Delete the previous profile picture if exists
+            if ($jobSeeker->profile_picture) {
+                Storage::delete('public/profile_pictures/' . $jobSeeker->profile_picture);
+            }
+    
+            // Store the new profile picture
+            $profilePictureName = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
+            $request->file('profile_picture')->storeAs('public/profile_pictures', $profilePictureName);
+            $jobSeeker->profile_picture = $profilePictureName;
+        }
+    
+        // Save job seeker
         $jobSeeker->save();
     
         // Redirect kembali ke halaman profil dengan pesan sukses
         return redirect()->route('jobseeker.profile')->with('success', 'Profile updated successfully.');
     }
 
-     
 }

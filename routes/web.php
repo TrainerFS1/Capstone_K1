@@ -38,8 +38,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/jobseeker/register', [JobSeekerController::class, 'register'])->name('jobseeker.register.submit');
 
     Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');});
+    Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
+    
 
-});
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 

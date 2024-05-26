@@ -1,0 +1,58 @@
+.job_details_area {
+    margin-top: 50px;
+}
+
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.company_logo img {
+    max-width: 100px;
+}
+
+.links_locat .location {
+    margin-right: 20px;
+}
+
+.descript_wrap {
+    margin-top: 30px;
+}
+
+.single_wrap {
+    margin-bottom: 20px;
+}
+
+.job_sumary {
+    margin-top: 30px;
+}
+
+.summery_header h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.job_content ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.job_content ul li {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .company_logo {
+        margin-bottom: 20px;
+    }
+
+    .jobs_left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .jobs_conetent {
+        margin-top: 10px;
+    }
+}

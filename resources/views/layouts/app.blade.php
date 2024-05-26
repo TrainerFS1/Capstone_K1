@@ -19,6 +19,9 @@
     <link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -196,6 +199,26 @@
                     </span>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('jobs') }}">
+                      <span class="nav-link-icon d-md-none d-lg-inline-block">
+                          <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <rect x="4" y="4" width="16" height="16" rx="2" />
+                              <path d="M12 8v4m-4 -2h8" />
+                          </svg>
+                      </span>
+                      <span class="nav-link-title">
+                          Find Jobs
+                      </span>
+                  </a>
+              </li>
+
+
+
+
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
