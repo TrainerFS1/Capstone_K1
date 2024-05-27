@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class JobSeekerMiddleware
 {
     public function handle(Request $request, Closure $next)

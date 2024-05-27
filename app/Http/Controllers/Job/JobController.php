@@ -8,6 +8,7 @@ use App\Models\Job;
 use App\Models\Category;
 use App\Models\JobType;
 
+
 class JobController extends Controller
 {
     /**
@@ -94,5 +95,6 @@ class JobController extends Controller
     }
 
    
+
 }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Company\JobListingController;
 use App\Http\Controllers\Company\ApplyJobController;
 use App\Http\Controllers\Job\JobController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,8 @@ use App\Http\Controllers\Job\JobController;
 
 Route::get('/', [FrontController::class, 'index'])->name('front');
 
+Route::get('/login-jobseeker', [LoginController::class, 'showLoginFormJobSeeker'])->name('loginJobseeker');
+Route::post('/login-jobseeker', [LoginController::class, 'authenticate'])->name('cekloginjobseeker');
 
 Route::middleware('guest')->group(function () {
     Route::get('/admin', [LoginController::class, 'showLoginFormAdmin'])->name('loginAdmin');
@@ -33,24 +36,21 @@ Route::middleware('guest')->group(function () {
     Route::get('/company/register', [CompanyController::class, 'showRegistrationForm'])->name('company.register');
     Route::post('/company/register', [CompanyController::class, 'register'])->name('company.register.submit');
 
-// Route untuk menampilkan form registrasi job seeker
     Route::get('/jobseeker/register', [JobSeekerController::class, 'showRegistrationForm'])->name('jobseeker.register');
-    
-    // Route untuk menyimpan data job seeker
     Route::post('/jobseeker/register', [JobSeekerController::class, 'register'])->name('jobseeker.register.submit');
 
     Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');});
+    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
     Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
-    
+
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+});
 
 
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-
-// Rute untuk dashboard masing-masing peran
 Route::middleware(['auth', 'admin'])->group(function () {
+    // Routes for admin dashboard
 });
 
 Route::middleware(['auth', 'company'])->group(function () {
@@ -58,26 +58,18 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/setting', [CompanyController::class, 'showSetting'])->name('company.setting');
     Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.profile');
     Route::post('/company/updateprofile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
-    // 
-    // 
-    //halaman list lowongan kerja
+    
+    // Routes for managing jobs
     Route::get('/company/jobs', [JobListingController::class, 'showJobs'])->name('company.jobs');
-    // tambah lowongan
     Route::get('/company/addjob', [JobListingController::class, 'showAddJob'])->name('company.showaddjob');
     Route::post('/company/addjob', [JobListingController::class, 'addJob'])->name('company.addjob');
-    // edit lowongan kerja
     Route::get('/company/{id}/edit', [JobListingController::class, 'showEditJob'])->name('company.showeditjob');
     Route::post('/company/{id}/edit', [JobListingController::class, 'updateJob'])->name('company.editjob');
-    Route::put('/company/{id}/ubahstatus', [JobListingController::class, 'updateStatus'])->name('company.editstatus');
-    // pencarian
-    // Route::get('/company/jobs/search', [CompanyController::class, 'ajaxSearch'])->name('company.searchjob');
-    Route::get('/company/jobs/search', [JobListingController::class, 'showJobs'])->name('jobs.search');
-
-    // delete lowongan kerja
+    Route::put('/company/{id}/updatestatus', [JobListingController::class, 'updateStatus'])->name('company.editstatus');
+    Route::get('/company/jobs/search', [JobListingController::class, 'ajaxSearch'])->name('company.searchjob');
     Route::delete('/company/{id}/delete', [JobListingController::class, 'deleteJob'])->name('company.deletejob');
-    // 
-    // 
-    // halaman lamaran masuk
+    
+    // Route for managing job applications
     Route::get('/company/lamaranmasuk', [ApplyJobController::class, 'showLamaranMasuk'])->name('company.lamaranmasuk');
 });
 
@@ -89,11 +81,14 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
     Route::get('/jobseeker/setting', function () {
         return view('jobseeker.setting');
     })->name('jobseeker.setting');
-    // Route::get('/jobseeker/profile', function () {
-    //     return view('jobseeker.profile');
-    // })->name('jobseeker.profile');
+
+    Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
+    Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
+
+    //ini tambahan
+    Route::post('/job/{id}/apply', [ApplyJobController::class, 'applyJob'])->name('applyJob');
+
 });
-
-
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
