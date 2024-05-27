@@ -11,18 +11,17 @@ use App\Models\Job;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\JobType;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Industry;
 
 class CompanyController extends Controller
 {
-    //
     // Registration
     public function showRegistrationForm()
     {
         $industries = Industry::all();
-        return view('company.register', compact('industries'));    }
+        return view('company.register', compact('industries'));
+    }
 
     public function register(Request $request)
     {
@@ -63,7 +62,69 @@ class CompanyController extends Controller
         // Redirect ke halaman login perusahaan dengan pesan sukses
         return redirect()->route('loginCompany')->with('success', 'Company registered successfully. Please login.');
     }
-    
+
+    // Show Profile
+    public function showProfile()
+    {
+        // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
+        $company = Company::where('user_id', Auth::id())->first();
+        $user = User::where('id', Auth::id())->firstOrFail();
+
+        // Jika tidak ada data perusahaan, buat data default atau biarkan sebagai null
+        if (!$company) {
+            $company = new Company(); // Atau Anda bisa membuat data default
+            $company->user_id = Auth::id();
+            $company->company_name = 'Company';
+            $company->company_logo = 'Company';
+            // Set properti lainnya sesuai kebutuhan
+        }
+
+        // Kirim data perusahaan ke tampilan 'company.profile'
+        return view('company.profile', compact('company', 'user'));
+    }
+
+    // Edit Profile
+    public function editProfile()
+    {
+        // Mengambil data perusahaan yang sedang login
+        $company = Company::where('user_id', Auth::id())->first();
+        $user = User::where('id', Auth::id())->firstOrFail();
+
+        // Jika tidak ada data perusahaan, buat data default atau biarkan sebagai null
+        if (!$company) {
+            $company = new Company();
+            $company->user_id = Auth::id();
+        }
+
+        // Mengirim data perusahaan ke view 'company.editprofile'
+        return view('company.editprofile', compact('company', 'user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'company_name' => 'required|string|max:255',
+            'company_phone' => 'required|string|max:255',
+            'company_address' => 'nullable|string|max:255',
+            'company_website' => 'nullable|string|max:255',
+            'company_description' => 'nullable|string',
+        ]);
+
+        // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
+        $company = Company::where('user_id', Auth::id())->firstOrFail();
+
+        // Update data perusahaan
+        $company->company_name = $request->company_name;
+        $company->company_phone = $request->company_phone;
+        $company->company_address = $request->company_address;
+        $company->company_website = $request->company_website;
+        $company->company_description = $request->company_description;
+        $company->save();
+
+        // Redirect ke halaman profil dengan pesan sukses
+        return redirect()->route('company.profile')->with('success', 'Profile updated successfully.');
+    }
 
     // Dashboard
     public function showDashboard()
@@ -81,7 +142,7 @@ class CompanyController extends Controller
             // Set properti lainnya sesuai kebutuhan
         }
 
-        // Kirim data perusahaan ke tampilan 'company.profile'
+        // Kirim data perusahaan ke tampilan 'company.dashboard'
         return view('company.dashboard', compact('company', 'user'));
     }
 
@@ -92,6 +153,7 @@ class CompanyController extends Controller
         $company = Company::where('user_id', Auth::id())->first();
         $user = User::where('id', Auth::id())->firstOrFail();
         if (!$company) {
+            $company = new Company(); // Atau Anda bisa membuat
             $company = new Company(); // Atau Anda bisa membuat data default
             $company->user_id = Auth::id();
             $company->company_name = 'Company';
@@ -100,7 +162,7 @@ class CompanyController extends Controller
         }
         $jobs = Job::where('company_id', $company->id)->get();
 
-        // Kirim data perusahaan ke tampilan 'company.profile'
+        // Kirim data perusahaan ke tampilan 'company.joblisting'
         return view('company.joblisting', compact('company', 'user', 'jobs'));
     }
 
@@ -141,7 +203,7 @@ class CompanyController extends Controller
         $jobCategories = Category::all();
         $jobTypes = JobType::all();
 
-        // Kirim data perusahaan ke tampilan 'company.profile'
+        // Kirim data perusahaan ke tampilan 'company.addjob'
         return view('company.addjob', compact('company', 'user', 'jobCategories', 'jobTypes'));
     }
 
@@ -171,7 +233,7 @@ class CompanyController extends Controller
         $job->save();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job has been Edited successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Job has been edited successfully.');
     }
 
     // Delete Job
@@ -212,7 +274,7 @@ class CompanyController extends Controller
         $job->job_salary = $request->job_salary;
         $job->job_skills = $request->job_skills;
         $job->job_description = $request->job_description;
-        $job->job_status = 'active'; // Atau logika lain untuk status
+        $job->job_status = 'active'; // Atau // Atau logika lain untuk status
         $job->save();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
