@@ -26,4 +26,32 @@ class ApplyJobController extends Controller
 
         return view('company.jobapply.jobapply', compact('company', 'user'));
     }
+    public function rejectLamaran($id)
+    {
+        $applyJob = ApplyJob::find($id);
+
+        if (!$applyJob) {
+            return response()->json(['message' => 'Application not found'], 404);
+        }
+
+        // Lakukan aksi penolakan, misalnya mengupdate status
+        $applyJob->status = 'rejected';
+        $applyJob->save();
+
+        return response()->json(['message' => 'Application rejected successfully']);
+    }
+    public function acceptLamaran($id)
+    {
+        $applyJob = ApplyJob::find($id);
+
+        if (!$applyJob) {
+            return response()->json(['message' => 'Application not found'], 404);
+        }
+
+        // Lakukan aksi penolakan, misalnya mengupdate status
+        $applyJob->status = 'accepted';
+        $applyJob->save();
+
+        return response()->json(['message' => 'Application Accepted successfully']);
+    }
 }

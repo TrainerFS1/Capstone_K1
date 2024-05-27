@@ -54,13 +54,37 @@
                                       <span class="badge bg-purple-lt"><a href="" class="">Detail</a></span>
                                     </div>
                                   </div>
-                                  <div class="d-flex">
-                                    <a href="#" class="btn btn-danger btn-square col-6"><!-- Download SVG icon from http://tabler-icons.io/i/phone -->
+                                  @if ($applyJob->status == 'inprogress')
+                                    <div class="d-flex" id="apply-job-{{ $applyJob->id }}">
+                                      <button class="btn btn-danger btn-square col-6 btn-reject"  data-id="{{ $applyJob->id }}">
                                       <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-ban"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.7 5.7l12.6 12.6" /></svg>
-                                      Reject</a>
-                                    <a href="#" class="btn btn-success btn-square col-6"><!-- Download SVG icon from http://tabler-icons.io/i/phone -->
+                                        Reject</button>
+                                      <button class="btn btn-success btn-square col-6 btn-accept"  data-id="{{ $applyJob->id }}">
+                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
+                                        Accept</button>
+                                    </div>
+                                  @elseif($applyJob->status == 'rejected')
+                                  <div class="" >
+                                    <button class="btn btn-danger btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-ban"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.7 5.7l12.6 12.6" /></svg>
+                                      Rejected</button>
+                                  </div>
+                                  @elseif($applyJob->status == 'accepted')
+                                  <div class="">
+                                    <button class="btn btn-success btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
                                       <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
-                                      Accept</a>
+                                      Accepted</button>
+                                  </div>
+                                  @endif
+                                  <div class="d-none" id="rejected-job-{{ $applyJob->id }}">
+                                    <button class="btn btn-danger btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-ban"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.7 5.7l12.6 12.6" /></svg>
+                                      Rejected</button>
+                                  </div>
+                                  <div class="d-none" id="accepted-job-{{ $applyJob->id }}">
+                                    <button class="btn btn-success btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
+                                      <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
+                                      Accepted</button>
                                   </div>
                                 </div>
                               </div>
@@ -79,7 +103,59 @@
     </div>
 @endsection
 @section('customjs')
-    <script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.btn-reject').on('click', function() {
+            var applyJobId = $(this).data('id');
+            var url = '{{ route("company.lamaranmasuk.reject", ":id") }}';
+            url = url.replace(':id', applyJobId);
 
-    </script>
+            if (confirm('Are you sure you want to reject this application?')) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        alert(response.message);
+                        // Optionally remove the rejected application from the DOM
+                        $('#apply-job-' + applyJobId).remove();
+                        $('#rejected-job-' + applyJobId).removeClass('d-none').show();
+                    },
+                    error: function(xhr) {
+                        alert('Error rejecting application');
+                    }
+                });
+            }
+        });
+    });
+    $(document).ready(function() {
+        $('.btn-accept').on('click', function() {
+            var applyJobId = $(this).data('id');
+            var url = '{{ route("company.lamaranmasuk.accept", ":id") }}';
+            url = url.replace(':id', applyJobId);
+
+            if (confirm('Are you sure you want to reject this application?')) {
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        alert(response.message);
+                        // Optionally remove the rejected application from the DOM
+                        $('#apply-job-' + applyJobId).remove();
+                        $('#accepted-job-' + applyJobId).removeClass('d-none').show();
+                    },
+                    error: function(xhr) {
+                        alert('Error accepting application');
+                    }
+                });
+            }
+        });
+    });
+</script>
 @endsection
