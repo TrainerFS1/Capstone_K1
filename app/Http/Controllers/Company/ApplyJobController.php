@@ -18,7 +18,7 @@ class ApplyJobController extends Controller
     {
         // Validate the incoming request
         $validator = Validator::make($request->all(), [
-            'cover_letter' => 'required|string|max:1000',
+
             'cv' => 'required|file|mimes:pdf|max:2048',
             'certificate' => 'required|file|mimes:pdf|max:2048',
         ]);
@@ -38,6 +38,7 @@ class ApplyJobController extends Controller
             $cvFile = $request->file('cv');
             $cvName = 'cv_' . time() . '.' . $cvFile->getClientOriginalExtension();
             $cvPath = $cvFile->storeAs('cv', $cvName, 'public');
+
         } else {
             return back()->with('error', 'CV file is required.');
         }
@@ -53,7 +54,7 @@ class ApplyJobController extends Controller
 
         // Create or update FileJobSeeker entry
         $fileJobSeeker = FileJobSeeker::create([
-            'job_seeker_id' => $user->id,
+            'job_seeker_id' => $user->jobSeeker->id,
             'cv' => $cvPath,
             'certificate' => $certificatePath,
         ]);
@@ -61,10 +62,9 @@ class ApplyJobController extends Controller
         // Create ApplyJob entry
         ApplyJob::create([
             'job_id' => $job->id,
-            'job_seeker_id' => $user->id,
-            'file_job_seeker_id' => $fileJobSeeker->id,
-            'cover_letter' => $request->cover_letter,
-            'status' => 'created', // Set initial status
+            'job_seeker_id' => $user->jobSeeker->id,
+            'category_name'=>'terserah',
+            'status' => 'inprogress', 
         ]);
 
         return back()->with('success', 'Job application submitted successfully.');

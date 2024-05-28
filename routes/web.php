@@ -22,6 +22,11 @@ use App\Http\Controllers\Job\JobController;
 
 Route::get('/', [FrontController::class, 'index'])->name('front');
 
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
+    Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
+
+
 Route::get('/login-jobseeker', [LoginController::class, 'showLoginFormJobSeeker'])->name('loginJobseeker');
 Route::post('/login-jobseeker', [LoginController::class, 'authenticate'])->name('cekloginjobseeker');
 
@@ -39,10 +44,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/jobseeker/register', [JobSeekerController::class, 'showRegistrationForm'])->name('jobseeker.register');
     Route::post('/jobseeker/register', [JobSeekerController::class, 'register'])->name('jobseeker.register.submit');
 
-    Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
-    Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
-
+    
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
@@ -84,9 +86,9 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
         return view('jobseeker.setting');
     })->name('jobseeker.setting');
 
-    Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-    Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
-    Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
+    // Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
+    // Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
+    // Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
 
     //ini tambahan
     Route::post('/job/{id}/apply', [ApplyJobController::class, 'applyJob'])->name('applyJob');

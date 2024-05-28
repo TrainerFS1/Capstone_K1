@@ -18,4 +18,9 @@ class FileJobSeeker extends Model
     {
         return $this->belongsTo(JobSeeker::class);
     }
+
+    public function ApplyJob()
+    {
+        return $this->belongsTo(ApplyJob::class);
+    }
 }
