@@ -44,7 +44,7 @@
                               <div class="col-md-6 col-lg-3">
                                 <div class="card col-12">
                                   <div class="card-body p-4 text-center">
-                                    <span class="avatar avatar-xl mb-3 rounded" style="background-image: url(./static/avatars/000m.jpg)"></span>
+                                    <span class="avatar avatar-xl mb-3 rounded" style="background-image: url('{{ asset('storage/profile_pictures/' . $applyJob->jobSeeker->profile_picture) }}')"></span>
                                     <h3 class="m-0 mb-1"><a href="#">{{ $applyJob->jobSeeker->job_seeker_name }}</a></h3>
                                     <div class="text-secondary">Phone: {{ $applyJob->jobSeeker->job_seeker_phone }}</div>
                                     {{-- <div class="mt-3">
