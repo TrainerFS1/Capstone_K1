@@ -69,13 +69,48 @@
                                                     Profile Picture
                                                 </label>
                                                 <input type="file" class="form-control" name="profile_picture">
-                                                <div class="form-text">
-                                                    Upload your profile picture (max size: 2MB)
-                                                </div>
+                                                @if ($jobSeeker->profile_picture)
+                                                    <div class="form-text">
+                                                        Current Profile Picture: <a href="{{ asset('storage/profile_pictures/' . $jobSeeker->profile_picture) }}" target="_blank">{{ $jobSeeker->profile_picture }}</a>
+                                                    </div>
+                                                @else
+                                                    <div class="form-text">
+                                                        Upload your profile picture (max size: 2MB)
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
 
-
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">CV</label>
+                                                <input type="file" class="form-control" name="cv">
+                                                @if ($fileJobSeeker && $fileJobSeeker->cv)
+                                                    <div class="form-text">
+                                                        Current CV: <a href="{{ asset('storage/' . $fileJobSeeker->cv) }}" target="_blank">{{ basename($fileJobSeeker->cv) }}</a>
+                                                    </div>
+                                                @else
+                                                    <div class="form-text">
+                                                        Upload your CV (max size: 5MB)
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Certificate</label>
+                                                <input type="file" class="form-control" name="certificate">
+                                                @if ($fileJobSeeker && $fileJobSeeker->certificate)
+                                                    <div class="form-text">
+                                                        Current Certificate: <a href="{{ asset('storage/' . $fileJobSeeker->certificate) }}" target="_blank">{{ basename($fileJobSeeker->certificate) }}</a>
+                                                    </div>
+                                                @else
+                                                    <div class="form-text">
+                                                        Upload your certificate (max size: 5MB)
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card-footer text-end">

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('job_seeker_id')->constrained('job_seekers')->onDelete('cascade');
             $table->string('cv');
-            $table->string('certificate');
+            $table->string('certificate')->nullable();
             $table->timestamps();
         });
     }

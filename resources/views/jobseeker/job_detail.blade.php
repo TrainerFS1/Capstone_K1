@@ -53,8 +53,7 @@
                         </div>
 
                         <div class="descript_wrap white-bg p-3">
-
-                        <div class="single_wrap">
+                            <div class="single_wrap">
                                 <h4>Company Name</h4>
                                 {!! nl2br($job->company->company_name) !!}
                             </div>
@@ -82,12 +81,17 @@
                         @auth
                             <div class="apply_job_area">
                                 <h3>Apply for this Job</h3>
-                                <form action="{{ route('applyJob', $job->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('applyJob', $job->id) }}" method="POST" enctype="multipart/form-data" id="applyJobForm">
                                     @csrf
+
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" id="useExistingFiles" name="use_existing_files">
+                                        <label class="form-check-label" for="useExistingFiles">Use Existing Files</label>
+                                    </div>
 
                                     <div class="mb-3">
                                         <label for="cv" class="form-label">CV (PDF only)</label>
-                                        <input type="file" class="form-control" id="cv" name="cv">
+                                        <input type="file" class="form-control" id="cv" name="cv" @if(old('use_existing_files')) disabled @endif>
                                         @error('cv')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -95,7 +99,7 @@
 
                                     <div class="mb-3">
                                         <label for="certificate" class="form-label">Certificate (PDF only)</label>
-                                        <input type="file" class="form-control" id="certificate" name="certificate">
+                                        <input type="file" class="form-control" id="certificate" name="certificate" @if(old('use_existing_files')) disabled @endif>
                                         @error('certificate')
                                             <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -132,3 +136,25 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const useExistingFiles = document.getElementById('useExistingFiles');
+            const cvInput = document.getElementById('cv');
+            const certificateInput = document.getElementById('certificate');
+
+            useExistingFiles.addEventListener('change', function () {
+                const isChecked = useExistingFiles.checked;
+
+                cvInput.disabled = isChecked;
+                certificateInput.disabled = isChecked;
+            });
+
+            // Set initial state based on existing file selection
+            const initialChecked = useExistingFiles.checked;
+            cvInput.disabled = initialChecked;
+            certificateInput.disabled = initialChecked;
+        });
+    </script>
+@endpush

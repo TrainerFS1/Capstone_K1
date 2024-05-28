@@ -77,7 +77,7 @@
 
         </div>
         <div class="text-center text-secondary mt-3">
-          Don't have account yet? <a href="./sign-up.html" tabindex="-1">Sign up</a>
+          Don't have account yet? <a href="{{ route('jobseeker.register') }}">Sign up</a>
         </div>
         <div class="text-center text-secondary mt-3">
           Want to post a job as a company? <a href="{{ route('company.register') }}">Register as a Company</a>

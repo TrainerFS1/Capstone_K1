@@ -7,6 +7,7 @@ use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Company\JobListingController;
 use App\Http\Controllers\Company\ApplyJobController;
+use App\Http\Controllers\JobSeeker\JobSeekerApplyJobController;
 use App\Http\Controllers\Job\JobController;
 
 /*
@@ -91,7 +92,7 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
     // Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
 
     //ini tambahan
-    Route::post('/job/{id}/apply', [ApplyJobController::class, 'applyJob'])->name('applyJob');
+    Route::post('/job/{id}/apply', [JobSeekerApplyJobController::class, 'applyJob'])->name('applyJob');
 
 });
 
