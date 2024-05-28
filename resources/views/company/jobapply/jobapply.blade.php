@@ -39,8 +39,8 @@
                         @if ($job->applyJobs->isEmpty())
                           <p>No applications found for this job.</p>
                           @else
+                          <div class="row row-cards">
                         @foreach ($job->applyJobs as $applyJob)
-                            <div class="row row-cards">
                               <div class="col-md-6 col-lg-3">
                                 <div class="card col-12">
                                   <div class="card-body p-4 text-center">
@@ -88,8 +88,8 @@
                                   </div>
                                 </div>
                               </div>
+                              @endforeach
                             </div>
-                            @endforeach
                             @endif
                       </div>
                     </div>
