@@ -6,6 +6,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\JobSeeker\JobSeekerController;
 use App\Http\Controllers\Company\CompanyController;
 use App\Http\Controllers\Job\JobController;
+use App\Http\Controllers\PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,3 +76,9 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Rute untuk menampilkan formulir perubahan kata sandi
+Route::get('password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
+
+// Rute untuk menangani permintaan perubahan kata sandi
+Route::post('password/change', [PasswordController::class, 'changePassword'])->name('password.update');

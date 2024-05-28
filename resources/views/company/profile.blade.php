@@ -10,6 +10,7 @@
                 </div>
                 <div class="col-auto">
                     <a href="{{ route('company.editprofile') }}" class="btn btn-primary">Edit Profil</a>
+                    <a href="{{ route('password.change') }}" class="btn btn-warning">Ubah Kata Sandi</a>
                 </div>
             </div>
         </div>
