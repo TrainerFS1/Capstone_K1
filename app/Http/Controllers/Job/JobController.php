@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\Category;
+use App\Models\JobSeeker;
 use App\Models\JobType;
+use Illuminate\Support\Facades\Auth;
 
 
 class JobController extends Controller
@@ -21,29 +23,31 @@ class JobController extends Controller
     {
         // Get jobs query with filters
         $jobsQuery = Job::query();
-    
+
         // Apply keyword filter
         if ($request->has('keyword')) {
             $keyword = $request->input('keyword');
             $jobsQuery->where('job_title', 'like', "%{$keyword}%")
-                      ->orWhere('job_description', 'like', "%{$keyword}%");
+                ->orWhere('job_description', 'like', "%{$keyword}%")
+                ->orWhere('job_skills', 'like', "%{$keyword}%")
+                ->orWhere('job_location', 'like', "%{$keyword}%");
         }
-    
+
         // Apply location filter
         if ($request->has('location')) {
             $jobsQuery->where('job_location', 'like', '%' . $request->input('location') . '%');
         }
-    
+
         // Apply category filter
         if ($request->has('category')) {
             $jobsQuery->where('category_id', $request->input('category'));
         }
-    
+
         // Apply job type filter
         if ($request->has('job_type')) {
             $jobsQuery->whereIn('job_type_id', $request->input('job_type'));
         }
-    
+
         // Apply sort order
         if ($request->has('sort')) {
             $sortOrder = $request->input('sort') == '1' ? 'desc' : 'asc';
@@ -52,22 +56,24 @@ class JobController extends Controller
             // Default sort order
             $jobsQuery->orderBy('created_at', 'desc');
         }
-    
+
         // Get jobs paginated
         $jobs = $jobsQuery->paginate(10)->withQueryString();
-    
         // Get job categories
         $categories = Category::all();
-    
+
         // Get job types
         $jobTypes = JobType::all();
-    
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+
+
+
         // Get job type array for checkbox
         $jobTypeArray = $request->input('job_type', []);
-    
-        return view('jobseeker.jobs', compact('jobs', 'categories', 'jobTypes', 'jobTypeArray'));
+
+        return view('jobseeker.jobs', compact('jobSeeker', 'jobs', 'categories', 'jobTypes', 'jobTypeArray'));
     }
-    
+
 
     /**
      * Search jobs based on form submission.
@@ -79,10 +85,10 @@ class JobController extends Controller
     {
         // Build the URL with the query parameters
         $url = route('jobs');
-    
+
         // Add the query parameters to the URL
         $queryParameters = http_build_query($request->all());
-    
+
         // Redirect to the jobs page with the query string
         return redirect($url . '?' . $queryParameters);
     }
@@ -90,11 +96,8 @@ class JobController extends Controller
     {
         // Find the job by ID
         $job = Job::with(['jobType', 'category', 'company'])->findOrFail($id);
-        return view('jobseeker.job_detail', compact('job'));
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
 
+        return view('jobseeker.job_detail', compact('jobSeeker','job'));
     }
-
-   
-
 }
-

@@ -11,8 +11,8 @@ class ApplyJob extends Model
     protected $fillable = [
         'job_seeker_id',
         'job_id',
-        'category_name',
         'status',
+        'file_jobseeker_id',
     ];
 
     public function JobSeeker()
