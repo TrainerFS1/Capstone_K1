@@ -31,6 +31,15 @@ class JobSeekerApplyJobController extends Controller
         // Get the authenticated user (job seeker)
         $user = Auth::user();
 
+            // Check if job seeker has already applied for this job
+            $existingApplication = ApplyJob::where('job_id', $job->id)
+            ->where('job_seeker_id', $user->jobSeeker->id)
+            ->exists();
+
+        if ($existingApplication) {
+            return back()->with('error', 'You have already applied for this job.');
+        }
+
         // Initialize fileJobSeeker variable
         $fileJobSeeker = null;
 
