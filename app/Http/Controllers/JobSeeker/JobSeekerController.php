@@ -167,4 +167,14 @@ public function updateProfile(Request $request)
     return redirect()->route('jobseeker.profile')->with('success', 'Profil berhasil diperbarui.');
 }
 
+    //detail job seeker yang melamar
+    public function show($id)
+    {
+        $user = Auth::user();
+        
+        // $jobSeeker = JobSeeker::findOrFail($id);
+        $jobSeeker = JobSeeker::with('file_job_seekers')->findOrFail($id);
+        return view('company.jobseeker-detail', compact('jobSeeker', 'user'));
+    }
+
 }

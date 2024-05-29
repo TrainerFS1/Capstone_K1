@@ -81,6 +81,9 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/lamaranmasuk', [ApplyJobController::class, 'showLamaranMasuk'])->name('company.lamaranmasuk');
     Route::post('/company/lamaranmasuk/{id}/reject', [ApplyJobController::class, 'rejectLamaran'])->name('company.lamaranmasuk.reject');
     Route::post('/company/lamaranmasuk/{id}/accept', [ApplyJobController::class, 'acceptLamaran'])->name('company.lamaranmasuk.accept');
+
+    Route::get('/company/job-seeker/{id}', [JobSeekerController::class, 'show'])->name('company.jobseeker.detail');
+
 });
 
 
