@@ -70,6 +70,15 @@ class JobListingController extends Controller
         // Tampilkan halaman edit dengan data yang diperlukan
         return view('company.editjob', compact('company', 'user', 'job', 'jobCategories', 'jobTypes'));
     }
+        //show detail job
+        public function showJobDetail($id)
+        {
+            $user = Auth::user();
+        $job = Job::with(['company', 'category', 'jobType'])->findOrFail($id);
+        return view('company.detailjob', compact('job', 'user'));
+        }
+
+
     // Show Add Job Form
     public function showAddJob()
     {

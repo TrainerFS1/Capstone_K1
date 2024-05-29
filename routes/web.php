@@ -70,6 +70,8 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/addjob', [JobListingController::class, 'showAddJob'])->name('company.showaddjob');
     Route::post('/company/addjob', [JobListingController::class, 'addJob'])->name('company.addjob');
     Route::get('/company/{id}/edit', [JobListingController::class, 'showEditJob'])->name('company.showeditjob');
+    // routes/web.php
+    Route::get('/company/{id}/detail', [JobListingController::class, 'showJobDetail'])->name('company.showjobdetail');
     Route::post('/company/{id}/edit', [JobListingController::class, 'updateJob'])->name('company.editjob');
     Route::put('/company/{id}/updatestatus', [JobListingController::class, 'updateStatus'])->name('company.editstatus');
     Route::get('/company/jobs/search', [JobListingController::class, 'ajaxSearch'])->name('company.searchjob');
