@@ -57,9 +57,11 @@ class JobSeekerApplyJobController extends Controller
             }
 
             // Save or update FileJobSeeker entry
-            $fileJobSeeker = FileJobSeeker::UpdateorCreate(
-                ['job_seeker_id' => $user->jobSeeker->id],
-                ['cv' => $cvPath, 'certificate' => $certificatePath]
+            $fileJobSeeker = FileJobSeeker::Create(
+                ['job_seeker_id' => $user->jobSeeker->id,
+                    'cv' => $cvPath,
+                    'certificate' => $certificatePath
+                ]
             );
         }
 
