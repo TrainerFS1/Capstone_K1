@@ -173,7 +173,7 @@ public function updateProfile(Request $request)
         $user = Auth::user();
         
         // $jobSeeker = JobSeeker::findOrFail($id);
-        $jobSeeker = JobSeeker::with('file_job_seekers')->findOrFail($id);
+        $jobSeeker = JobSeeker::with('fileJobSeekers')->findOrFail($id);
         return view('company.jobseeker-detail', compact('jobSeeker', 'user'));
     }
 

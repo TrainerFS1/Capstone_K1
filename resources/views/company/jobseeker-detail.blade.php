@@ -24,8 +24,8 @@
                         <p>{{ $jobSeeker->job_seeker_resume }}</p>
                     </div>
 
-                    @if($jobSeeker->file_job_seekers->isNotEmpty())
-                        @foreach($jobSeeker->file_job_seekers as $file)
+                    @if($jobSeeker->fileJobSeekers->isNotEmpty())
+                        @foreach($jobSeeker->fileJobSeekers as $file)
                             <div class="mb-3">
                                 <h5>CV</h5>
                                 <a href="{{ asset('storage/cv/' . $file->cv) }}" download>{{ $file->cv }}</a>

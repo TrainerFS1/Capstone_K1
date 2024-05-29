@@ -32,7 +32,7 @@ class JobSeeker extends Model
         return $this->hasMany(SavedJob::class);
     }
 
-    public function file_job_seekers()
+    public function fileJobSeekers()
     {
         return $this->hasMany(FileJobSeeker::class);
     }
