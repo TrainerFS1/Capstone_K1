@@ -37,7 +37,9 @@ class JobSeekerApplyJobController extends Controller
         // Check if user wants to use existing files
         if ($request->has('use_existing_files') && $request->input('use_existing_files')) {
             // Use existing files from database
-            $fileJobSeeker = FileJobSeeker::where('job_seeker_id', $user->jobSeeker->id)->firstOrFail();
+            $fileJobSeeker = FileJobSeeker::where('job_seeker_id', $user->jobSeeker->id)
+                ->where('file_type', 'primary')
+                ->firstOrFail();
         } else {
             // Handle CV upload
             if ($request->hasFile('cv')) {
@@ -56,14 +58,14 @@ class JobSeekerApplyJobController extends Controller
             } else {
                 return back()->with('error', 'Certificate file is required.');
             }
-            // dd($cvPath);
-            // Save or update FileJobSeeker entry
-            $fileJobSeeker = FileJobSeeker::Create(
-                ['job_seeker_id' => $user->jobSeeker->id,
-                    'cv' => $cvPath,
-                    'certificate' => $certificatePath
-                 ]
-            );
+
+            // Save new FileJobSeeker entry with type 'secondary'
+            $fileJobSeeker = FileJobSeeker::Create([
+                'job_seeker_id' => $user->jobSeeker->id,
+                'cv' => $cvPath,
+                'certificate' => $certificatePath,
+                'file_type' => 'secondary',
+            ]);
         }
 
         // Create ApplyJob entry

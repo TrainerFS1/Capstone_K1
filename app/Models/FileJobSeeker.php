@@ -12,6 +12,7 @@ class FileJobSeeker extends Model
         'job_seeker_id',
         'cv',
         'certificate',
+        'file_type'
     ];
 
     public function jobSeeker()
