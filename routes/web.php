@@ -10,6 +10,7 @@ use App\Http\Controllers\Company\ApplyJobController;
 use App\Http\Controllers\JobSeeker\JobSeekerApplyJobController;
 use App\Http\Controllers\Job\JobController;
 use App\Http\Controllers\Admin\KelCompanyController;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +56,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     // Routes for admin dashboard
-    Route::get('/admin/dashboard', [KelCompanyController::class, 'showKelCompany'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/datacompany', [KelCompanyController::class, 'showKelCompany'])->name('admin.companylist');
 });
 

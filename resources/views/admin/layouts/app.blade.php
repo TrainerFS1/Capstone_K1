@@ -211,6 +211,7 @@
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
     <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
     @yield('customjs')
+    @stack('scripts')
   </body>
 </html>
 
