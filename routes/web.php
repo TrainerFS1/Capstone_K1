@@ -32,6 +32,12 @@ Route::middleware('guest')->group(function () {
     Route::get('/company/register', [CompanyController::class, 'showRegistrationForm'])->name('company.register');
     Route::post('/company/register', [CompanyController::class, 'register'])->name('company.register.submit');
 
+// Route untuk menampilkan form registrasi job seeker
+    Route::get('/jobseeker/register', [JobSeekerController::class, 'showRegistrationForm'])->name('jobseeker.register');
+    
+    // Route untuk menyimpan data job seeker
+    Route::post('/jobseeker/register', [JobSeekerController::class, 'register'])->name('jobseeker.register.submit');
+
     Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 });
 
