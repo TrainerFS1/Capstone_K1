@@ -29,41 +29,11 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="row row-cards">
-                                        <div class="col-md-4">
-                                            <div class="mb-3">
-                                                <label class="form-label">
-                                                    Job Seeker <span class="text-danger">*</span>
-                                                </label>
-                                                <input type="text" class="form-control" name="job_seeker_name" placeholder="Job Seeker" value="{{ $jobSeeker->job_seeker_name ?? '' }}" autofocus required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="mb-3">
-                                                <label class="form-label">
-                                                    Phone <span class="text-danger">*</span>
-                                                </label>
-                                                <input type="text" class="form-control" name="job_seeker_phone" placeholder="Phone" value="{{ $jobSeeker->job_seeker_phone ?? '' }}" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6 col-md-4">
-                                            <div class="mb-3">
-                                                <label class="form-label">Email address</label>
-                                                <input type="email" class="form-control" value="{{ $jobSeeker->user->email }}" disabled>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Address</label>
-                                                <input type="text" class="form-control" name="job_seeker_address" placeholder="Home Address" value="{{ $jobSeeker->job_seeker_address ?? '' }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="mb-3 mb-0">
-                                                <label class="form-label">About Me</label>
-                                                <textarea rows="5" class="form-control" name="job_seeker_resume" placeholder="Here can be your description">{{ $jobSeeker->job_seeker_resume ?? '' }}</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
+
+
+                                    <div class="col-md-8">
+                                    <span class="avatar avatar-xl mb-3 rounded" style="background-image: url('{{ asset('storage/profile_pictures/' . $jobSeeker->profile_picture) }}')"></span>
+
                                             <div class="mb-3">
                                                 <label class="form-label">
                                                     Profile Picture
@@ -80,6 +50,42 @@
                                                 @endif
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">
+                                                    Full Name <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" class="form-control" name="job_seeker_name" placeholder="Job Seeker" value="{{ $jobSeeker->job_seeker_name ?? '' }}" autofocus required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">
+                                                    Phone <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" class="form-control" name="job_seeker_phone" placeholder="Phone" value="{{ $jobSeeker->job_seeker_phone ?? '' }}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Email address</label>
+                                                <input type="email" class="form-control" value="{{ $jobSeeker->user->email }}" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address</label>
+                                                <input type="text" class="form-control" name="job_seeker_address" placeholder="Home Address" value="{{ $jobSeeker->job_seeker_address ?? '' }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="mb-3 mb-0">
+                                                <label class="form-label">About Me</label>
+                                                <textarea rows="5" class="form-control" name="job_seeker_resume" placeholder="Here can be your description">{{ $jobSeeker->job_seeker_resume ?? '' }}</textarea>
+                                            </div>
+                                        </div>
+
 
                                         <div class="col-md-4">
                                             <div class="mb-3">

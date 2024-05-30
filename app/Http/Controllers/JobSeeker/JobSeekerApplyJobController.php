@@ -31,13 +31,24 @@ class JobSeekerApplyJobController extends Controller
         // Get the authenticated user (job seeker)
         $user = Auth::user();
 
+            // Check if job seeker has already applied for this job
+            $existingApplication = ApplyJob::where('job_id', $job->id)
+            ->where('job_seeker_id', $user->jobSeeker->id)
+            ->exists();
+
+        if ($existingApplication) {
+            return back()->with('error', 'You have already applied for this job.');
+        }
+
         // Initialize fileJobSeeker variable
         $fileJobSeeker = null;
 
         // Check if user wants to use existing files
         if ($request->has('use_existing_files') && $request->input('use_existing_files')) {
             // Use existing files from database
-            $fileJobSeeker = FileJobSeeker::where('job_seeker_id', $user->jobSeeker->id)->firstOrFail();
+            $fileJobSeeker = FileJobSeeker::where('job_seeker_id', $user->jobSeeker->id)
+                ->where('file_type', 'primary')
+                ->firstOrFail();
         } else {
             // Handle CV upload
             if ($request->hasFile('cv')) {
@@ -56,14 +67,14 @@ class JobSeekerApplyJobController extends Controller
             } else {
                 return back()->with('error', 'Certificate file is required.');
             }
-            // dd($cvPath);
-            // Save or update FileJobSeeker entry
-            $fileJobSeeker = FileJobSeeker::Create(
-                ['job_seeker_id' => $user->jobSeeker->id,
-                    'cv' => $cvPath,
-                    'certificate' => $certificatePath
-                 ]
-            );
+
+            // Save new FileJobSeeker entry with type 'secondary'
+            $fileJobSeeker = FileJobSeeker::Create([
+                'job_seeker_id' => $user->jobSeeker->id,
+                'cv' => $cvPath,
+                'certificate' => $certificatePath,
+                'file_type' => 'secondary',
+            ]);
         }
 
         // Create ApplyJob entry
