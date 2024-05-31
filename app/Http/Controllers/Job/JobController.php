@@ -100,4 +100,6 @@ class JobController extends Controller
 
         return view('jobseeker.job_detail', compact('jobSeeker','job'));
     }
+
+    
 }

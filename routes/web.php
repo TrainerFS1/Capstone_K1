@@ -10,6 +10,7 @@ use App\Http\Controllers\Company\ApplyJobController;
 use App\Http\Controllers\JobSeeker\JobSeekerApplyJobController;
 use App\Http\Controllers\Job\JobController;
 use App\Http\Controllers\Admin\KelCompanyController;
+use App\Http\Controllers\AboutUsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 
 Route::get('/login-jobseeker', [LoginController::class, 'showLoginFormJobSeeker'])->name('loginJobseeker');
 Route::post('/login-jobseeker', [LoginController::class, 'authenticate'])->name('cekloginjobseeker');
+
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('aboutUs');
 
 Route::middleware('guest')->group(function () {
     Route::get('/admin', [LoginController::class, 'showLoginFormAdmin'])->name('loginAdmin');
