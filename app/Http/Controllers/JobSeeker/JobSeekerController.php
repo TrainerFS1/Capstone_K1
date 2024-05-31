@@ -168,4 +168,24 @@ class JobSeekerController extends Controller
         return redirect()->route('jobseeker.profile')->with('success', 'Profil berhasil diperbarui.');
     }
 
+<<<<<<< HEAD
+=======
+    // Simpan job seeker
+    $jobSeeker->save();
+
+    // Redirect kembali ke halaman profil dengan pesan sukses
+    return redirect()->route('jobseeker.profile')->with('success', 'Profil berhasil diperbarui.');
+}
+
+    //detail job seeker yang melamar
+    public function show($id)
+    {
+        $user = Auth::user();
+        
+        // $jobSeeker = JobSeeker::findOrFail($id);
+        $jobSeeker = JobSeeker::with('fileJobSeekers')->findOrFail($id);
+        return view('company.jobseeker-detail', compact('jobSeeker', 'user'));
+    }
+
+>>>>>>> b50f1e15f7bb5cc12b22718dab02a171640c51a8
 }

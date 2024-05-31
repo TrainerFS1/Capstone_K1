@@ -51,7 +51,7 @@
                                       <span class="badge bg-purple-lt">{{ $applyJob->jobSeeker->user->user_type  == 'job_seeker' ? 'Job Seeker' : ''}}</span>
                                     </div> --}}
                                     <div class="mt-3">
-                                      <span class="badge bg-purple-lt"><a href="" class="">Detail</a></span>
+                                    <span class="badge bg-purple-lt"><a href="{{ route('company.jobseeker.detail', $applyJob->jobSeeker->id) }}">Detail</a></span>
                                     </div>
                                   </div>
                                   @if ($applyJob->status == 'inprogress')
