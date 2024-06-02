@@ -77,7 +77,9 @@ class KelCompanyController extends Controller
     {
         // Cari company berdasarkan ID
         $company = Company::findOrFail($id);
-
+        if (!$company) {
+            return redirect()->route('admin.companylist')->with('error', 'Company not found');
+        }
         // Ambil user_id yang terkait dengan company ini
         $userId = $company->user_id;
 

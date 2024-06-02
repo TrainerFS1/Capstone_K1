@@ -46,9 +46,24 @@ class JobListingController extends Controller
         if ($search) {
             $jobs->appends(['search' => $search]);
         }
+        $jobCategories = Category::all();
+        $jobTypes = JobType::all();
+        
 
         // Kirim data perusahaan ke tampilan 'company.joblisting'
-        return view('company.joblisting', compact('company', 'user', 'jobs'));
+        return view('company.listjob.joblisting', compact('company', 'user', 'jobs','jobCategories','jobTypes'));
+    }
+    // search
+    public function ajaxSearch(Request $request)
+    {
+        // Build the URL with the query parameters
+        $url = route('company.jobs');
+
+        // Add the query parameters to the URL
+        $queryParameters = http_build_query($request->all());
+        
+        // Redirect to the jobs page with the query string
+        return redirect($url . '?' . $queryParameters);
     }
     // Edit Job
     public function showEditJob($id)
@@ -68,36 +83,16 @@ class JobListingController extends Controller
         $jobTypes = JobType::all();
 
         // Tampilkan halaman edit dengan data yang diperlukan
-        return view('company.editjob', compact('company', 'user', 'job', 'jobCategories', 'jobTypes'));
+        return view('company.listjob.editjob', compact('company', 'user', 'job', 'jobCategories', 'jobTypes'));
     }
-        //show detail job
-        public function showJobDetail($id)
-        {
-            $user = Auth::user();
-        $job = Job::with(['company', 'category', 'jobType'])->findOrFail($id);
-        return view('company.detailjob', compact('job', 'user'));
-        }
-
-
-    // Show Add Job Form
-    public function showAddJob()
+    //show detail job
+    public function showJobDetail($id)
     {
-        // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
-        $company = Company::where('user_id', Auth::id())->first();
-        $user = User::where('id', Auth::id())->firstOrFail();
-        if (!$company) {
-            $company = new Company(); // Atau Anda bisa membuat data default
-            $company->user_id = Auth::id();
-            $company->company_name = 'Company';
-            $company->company_logo = 'Company';
-            // Set properti lainnya sesuai kebutuhan
-        }
-        $jobCategories = Category::all();
-        $jobTypes = JobType::all();
-
-        // Kirim data perusahaan ke tampilan 'company.profile'
-        return view('company.addjob', compact('company', 'user', 'jobCategories', 'jobTypes'));
+        $user = Auth::user();
+        $job = Job::with(['company', 'category', 'jobType'])->findOrFail($id);
+        return view('company.listjob.detailjob', compact('job', 'user'));
     }
+    // Show Add Job Form
     // Update Job
     public function updateStatus(Request $request, $id)
     {

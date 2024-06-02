@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
+use App\Models\Category;
+use App\Models\JobType;
 use App\Models\Job;
 use App\Models\FileJobSeeker;
 use App\Models\ApplyJob;
@@ -21,8 +23,10 @@ class ApplyJobController extends Controller
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $user = Auth::user();
         $company = Company::where('user_id', $user->id)->with('jobs.applyJobs')->firstOrFail();
+        $jobCategories = Category::all();
+        $jobTypes = JobType::all();
 
-        return view('company.jobapply.jobapply', compact('company', 'user'));
+        return view('company.jobapply.jobapply', compact('company', 'user','jobCategories','jobTypes'));
     }
     public function rejectLamaran($id)
     {

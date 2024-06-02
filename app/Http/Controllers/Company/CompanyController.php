@@ -22,7 +22,8 @@ class CompanyController extends Controller
     public function showRegistrationForm()
     {
         $industries = Industry::all();
-        return view('company.register', compact('industries'));    }
+        return view('company.register', compact('industries'));
+    }
 
     public function register(Request $request)
     {
@@ -53,7 +54,7 @@ class CompanyController extends Controller
         // Simpan data perusahaan
         $company = Company::create([
             'user_id' => $user->id,
-            'company_name' => $request->name, 
+            'company_name' => $request->name,
             'company_address' => $request->company_address,
             'company_website' => $request->company_website,
             'company_phone' => $request->company_phone,
@@ -70,7 +71,8 @@ class CompanyController extends Controller
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $company = Company::where('user_id', Auth::id())->first();
         $user = User::where('id', Auth::id())->firstOrFail();
-
+        $jobCategories = Category::all();
+        $jobTypes = JobType::all();
         // Jika tidak ada data perusahaan, buat data default atau biarkan sebagai null
         if (!$company) {
             $company = new Company(); // Atau Anda bisa membuat data default
@@ -79,10 +81,32 @@ class CompanyController extends Controller
             $company->company_logo = 'Company';
             // Set properti lainnya sesuai kebutuhan
         }
+        //jumlah pekerjaan yang masuk
+        $totalApplyJobs = $company->jobs->flatMap(function ($job) {
+            return $job->applyJobs;
+        })->count();
+
+        // Lamaran yang diterima berdasarkan status
+        $acceptedApplyJobs = $company->jobs->flatMap(function ($job) {
+            return $job->applyJobs->where('status', 'accepted');
+        })->count();
+
+        // Lamaran yang ditolak berdasarkan status
+        $rejectedApplyJobs = $company->jobs->flatMap(function ($job) {
+            return $job->applyJobs->where('status', 'rejected');
+        })->count();
+
+        $activeJobs = $company->jobs->where('job_status', 'active')->count();
+        $inactiveJobs = $company->jobs->where('job_status', 'inactive')->count();
+
+        // 10 data lamaran terbaru
+        $recentApplyJobs = $company->jobs->flatMap(function ($job) {
+            return $job->applyJobs;
+        })->sortByDesc('created_at')->take(10);
 
         // Kirim data perusahaan ke tampilan 'company.profile'
-        return view('company.dashboard', compact('company', 'user'));
+        return view('company.dashboard', compact('company', 'user','jobCategories','jobTypes', 'totalApplyJobs', 'acceptedApplyJobs', 'rejectedApplyJobs', 'recentApplyJobs','activeJobs','inactiveJobs'));
     }
     // Job Listings
-    
+
 }
