@@ -57,6 +57,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Routes for admin dashboard
     Route::get('/admin/dashboard', [KelCompanyController::class, 'showKelCompany'])->name('admin.dashboard');
     Route::get('/admin/datacompany', [KelCompanyController::class, 'showKelCompany'])->name('admin.companylist');
+    Route::get('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'showEditCompany'])->name('admin.companyedit');
+    Route::post('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'updateCompany'])->name('admin.editcompany');
+    Route::delete('/admin/{id}/delete', [KelCompanyController::class, 'deleteCompany'])->name('admin.deletecompany');
+
 });
 
 Route::middleware(['auth', 'company'])->group(function () {
