@@ -55,7 +55,7 @@
                 <a href="{{ route('loginCompany') }}" class="btn" rel="noreferrer">
                   <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
                   <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="red"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-factory-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21h18" /><path d="M5 21v-12l5 4v-4l5 4h4" /><path d="M19 21v-8l-1.436 -9.574a.5 .5 0 0 0 -.495 -.426h-1.145a.5 .5 0 0 0 -.494 .418l-1.43 8.582" /><path d="M9 17h1" /><path d="M14 17h1" /></svg>
-                  Company Area
+                  Untuk Perusahaan
                 </a>
               </div>
             </div>
@@ -186,35 +186,37 @@
         </div>
       </header>
       <header class="navbar-expand-md">
-  <div class="collapse navbar-collapse" id="navbar-menu">
-    <div class="navbar">
-      <div class="container-xl d-flex justify-content-between">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('front') }}" >
-              <span class="nav-link-icon d-md-none d-lg-inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="white" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-              </span>
-              <span class="nav-link-title">
-                Home
-              </span>
-            </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav" style="margin-left: auto; margin-right: auto;">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('jobs') }}">
-              <span class="nav-link-icon d-md-none d-lg-inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <path d="M12 8v4m-4 -2h8" />
-                </svg>
-              </span>
-              <span class="nav-link-title">
-                Find Jobs
-              </span>
-            </a>
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar">
+            <div class="container-xl">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('front') }}" >
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Home
+                    </span>
+                  </a>
+                </li>
+
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('jobs') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/briefcase -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <path d="M12 8v4m-4 -2h8" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title">
+                            Pekerjaan
+                        </span>
+                    </a>
+                          
                 </li>
 
 
@@ -256,6 +258,7 @@
       </header>
       <div class="page-wrapper">
 @yield('main')
+
 <footer class="footer footer-transparent d-print-none">
   <div class="container-xl">
     <div class="row text-center align-items-center flex-row-reverse">
@@ -288,6 +291,7 @@
 <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
 @yield('customjs')
 @stack('scripts')
+
 </body>
 </html>
 

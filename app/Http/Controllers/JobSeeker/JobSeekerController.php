@@ -168,6 +168,7 @@ class JobSeekerController extends Controller
         return redirect()->route('jobseeker.profile')->with('success', 'Profil berhasil diperbarui.');
     }
 
+
     //detail job seeker yang melamar
     public function show($id)
     {
