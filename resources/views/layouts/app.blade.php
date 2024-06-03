@@ -21,7 +21,8 @@
     <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+     <!-- Tambahkan Animate.css CDN di sini -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -30,7 +31,93 @@
       body {
       	font-feature-settings: "cv03", "cv04", "cv11";
       }
-      
+      footer {
+        background-color: #041533;
+        color: #ffffff;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    footer h5 {
+        margin-bottom: 20px;
+    }
+    footer ul {
+        padding-left: 0;
+    }
+    footer ul li {
+        list-style: none;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    footer ul li a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    footer ul li a:hover {
+        text-decoration: underline;
+    }
+    .me-2 {
+        margin-right: 0.5rem;
+    }
+    
+    /*thumbnail */
+    .news-v1 {
+      padding: 60px 0;
+      background-color: #f9f9f9;
+    }
+    .news-v1 .heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .news-v1 .heading h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .news-v1 .heading p {
+      font-size: 16px;
+      color: #777;
+    }
+    .news-v1 .news-carousel .item {
+      padding: 15px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    .news-v1 .news-carousel .item:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .news-v1 .news-carousel .thumb {
+      position: relative;
+      padding-top: 56.25%;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+    .news-v1 .news-carousel .photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+    .news-v1 .news-carousel .text h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .news-v1 .news-carousel .text h3 a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .news-v1 .news-carousel .text h3 a:hover {
+      color: #007bff;
+    }
+    .news-v1 .news-carousel .text p {
+      font-size: 14px;
+      color: #777;
+    }
+ 
     </style>
   </head>
   <body >
@@ -48,6 +135,68 @@
 </a>
 
           </h1>
+
+          <div class="collapse navbar-collapse" id="navbar-menu">
+    <div>
+      <div class="container-xl d-flex justify-content-between">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('front') }}" >
+              <span class="nav-link-icon d-md-none d-lg-inline-block">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="white" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+              </span>
+              <span class="nav-link-title">
+                Home
+              </span>
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav" style="margin-left: auto; margin-right: auto;">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('jobs') }}">
+              <span class="nav-link-icon d-md-none d-lg-inline-block">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <path d="M12 8v4m-4 -2h8" />
+                </svg>
+              </span>
+              <span class="nav-link-title">
+                Find Jobs
+              </span>
+            </a>
+                </li>
+
+
+                <li class="nav-item">
+  <a class="nav-link" href="{{ route('aboutUs') }}">
+    <span class="nav-link-icon d-md-none d-lg-inline-block">
+      <!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/>
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/>
+        <path d="M15 15l3.35 3.35"/>
+        <path d="M9 15l-3.35 3.35"/>
+        <path d="M5.65 5.65l3.35 3.35"/>
+        <path d="M18.35 5.65l-3.35 3.35"/>
+      </svg>
+    </span>
+    <span class="nav-link-title">
+      About Us
+    </span>
+  </a>
+</li>
+
+              </ul>
+
+              
+
+              
+            </div>
+          </div>
+        </div>
+
           <div class="navbar-nav flex-row order-md-last">
             @if (!Auth::check())
             <div class="nav-item d-none d-md-flex me-3">
@@ -185,77 +334,45 @@
           </div>
         </div>
       </header>
-      <header class="navbar-expand-md">
-  <div class="collapse navbar-collapse" id="navbar-menu">
-    <div class="navbar">
-      <div class="container-xl d-flex justify-content-between">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('front') }}" >
-              <span class="nav-link-icon d-md-none d-lg-inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="white" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-              </span>
-              <span class="nav-link-title">
-                Home
-              </span>
-            </a>
-          </li>
-        </ul>
-        <ul class="navbar-nav" style="margin-left: auto; margin-right: auto;">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('jobs') }}">
-              <span class="nav-link-icon d-md-none d-lg-inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <path d="M12 8v4m-4 -2h8" />
-                </svg>
-              </span>
-              <span class="nav-link-title">
-                Find Jobs
-              </span>
-            </a>
-                </li>
-
-
-                <li class="nav-item">
-  <a class="nav-link" href="{{ route('aboutUs') }}">
-    <span class="nav-link-icon d-md-none d-lg-inline-block">
-      <!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/>
-        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/>
-        <path d="M15 15l3.35 3.35"/>
-        <path d="M9 15l-3.35 3.35"/>
-        <path d="M5.65 5.65l3.35 3.35"/>
-        <path d="M18.35 5.65l-3.35 3.35"/>
-      </svg>
-    </span>
-    <span class="nav-link-title">
-      About Us
-    </span>
-  </a>
-</li>
-
-              </ul>
-
-              <div class="nav-item d-none d-md-flex me-3">
-              <div class="btn-list">
-                <a href="#" class="btn" rel="noreferrer">
-                  <i class="fas fa-bookmark me-2"></i> <!-- Icon for Saved Jobs -->
-                    Saved Jobs
-                </a>
-              </div>
-            </div>
-
-              
-            </div>
-          </div>
-        </div>
-      </header>
       <div class="page-wrapper">
 @yield('main')
+<footer class="pt-5 pb-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 animate__animated animate__fadeInLeft">
+                <h5>Contact Us</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-envelope me-2"></i>Email: inpoloker@gmail.com</li>
+                    <li><i class="fas fa-phone me-2"></i>Phone: 0895 6366 92246</li>
+                    <li><i class="fas fa-map-marker-alt me-2"></i>Address: Gamelab, Indonesia</li>
+                </ul>
+            </div>
+            <div class="col-md-3 animate__animated animate__fadeInLeft">
+                <h5>About Us</h5>
+                <p>Platform peyedia lowongan kerja resmi yang menyediakan lebih dari 1000 Pekerjaan.</p>
+            </div>
+            <div class="col-md-3 animate__animated animate__fadeInRight">
+                <h5>For Jobseekers</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white"><i class="fas fa-search me-2"></i>Search Jobs</a></li>
+                    <li><a href="#" class="text-white"><i class="fas fa-file-alt me-2"></i>Submit Resume</a></li>
+                    <li><a href="#" class="text-white"><i class="fas fa-bell me-2"></i>Job Alerts</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3 animate__animated animate__fadeInRight">
+                <h5>For Employers</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white"><i class="fas fa-briefcase me-2"></i>Post a Job</a></li>
+                    <li><a href="#" class="text-white"><i class="fas fa-search me-2"></i>Search Resumes</a></li>
+                    <li><a href="#" class="text-white"><i class="fas fa-tachometer-alt me-2"></i>Employer Dashboard</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
 <footer class="footer footer-transparent d-print-none">
   <div class="container-xl">
     <div class="row text-center align-items-center flex-row-reverse">
@@ -286,6 +403,26 @@
 <!-- Tabler Core -->
 <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
 <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const footer = document.querySelector('footer');
+        
+        // Mendeteksi saat kursor masuk ke area footer
+        footer.addEventListener('mouseenter', function () {
+            footer.classList.add('animate__fadeInLeft');
+            footer.classList.add('animate__fadeInRight');
+        });
+
+        // Mendeteksi saat kursor meninggalkan area footer
+        footer.addEventListener('mouseleave', function () {
+            footer.classList.remove('animate__fadeInLeft');
+            footer.classList.remove('animate__fadeInRight');
+        });
+    });
+</script>
+
+
+
 @yield('customjs')
 @stack('scripts')
 </body>

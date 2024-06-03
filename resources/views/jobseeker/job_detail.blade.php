@@ -105,7 +105,14 @@
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="btn btn-primary">Apply Now</button>
+                                    <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary">Apply Now</button>
+                                        <a href="#" class="btn btn-warning ms-auto" rel="noreferrer">
+                                            <i class="fas fa-bookmark me-2"></i> <!-- Icon for Saved Jobs -->
+                                            Save This Job
+                                        </a>
+                                    </div>
+
                                 </form>
                             </div>
                         @else
@@ -156,5 +163,7 @@
             cvInput.disabled = initialChecked;
             certificateInput.disabled = initialChecked;
         });
+
+        
     </script>
 @endpush

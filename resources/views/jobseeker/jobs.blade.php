@@ -8,12 +8,14 @@
                     <h2>Find Jobs</h2>
                 </div>
                 <div class="col-6 col-md-2">
-                    <div class="align-end">
-                        <select name="sort" id="sort" class="form-control">
-                            <option value="1" {{ (Request::get('sort') == '1') ? 'selected' : '' }}>Latest</option>
-                            <option value="0" {{ (Request::get('sort') == '0') ? 'selected' : '' }}>Oldest</option>
-                        </select>
-                    </div>
+                <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <a href="#" class="btn" rel="noreferrer">
+                  <i class="fas fa-bookmark me-2"></i> <!-- Icon for Saved Jobs -->
+                    Saved Jobs
+                </a>
+              </div>
+            </div>
                 </div>
             </div>
 
