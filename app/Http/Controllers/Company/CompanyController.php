@@ -10,6 +10,7 @@ use App\Models\Company;
 use App\Models\Job;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\ApplyJob;
 use App\Models\JobType;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Industry;
@@ -157,6 +158,9 @@ class CompanyController extends Controller
         $rejectedApplyJobs = $company->jobs->flatMap(function ($job) {
             return $job->applyJobs->where('status', 'rejected');
         })->count();
+        $inprogressApplyJobs = $company->jobs->flatMap(function ($job) {
+            return $job->applyJobs->where('status', 'inprogress');
+        })->count();
 
         $activeJobs = $company->jobs->where('job_status', 'active')->count();
         $inactiveJobs = $company->jobs->where('job_status', 'inactive')->count();
@@ -167,9 +171,41 @@ class CompanyController extends Controller
         })->sortByDesc('created_at')->take(10);
 
         // Kirim data perusahaan ke tampilan 'company.dashboard'
-        return view('company.dashboard', compact('company', 'user','jobCategories','jobTypes', 'totalApplyJobs', 'acceptedApplyJobs', 'rejectedApplyJobs', 'recentApplyJobs','activeJobs','inactiveJobs'));
+        return view('company.dashboard', compact('company', 'user','jobCategories','jobTypes', 'totalApplyJobs', 'acceptedApplyJobs', 'rejectedApplyJobs','inprogressApplyJobs', 'recentApplyJobs','activeJobs','inactiveJobs'));
     }
-    // Job Listings
+
+    //chart
+    public function getApplyJobData()
+    {
+        // Ambil company yang terkait dengan user yang sedang login
+        $company = Company::where('user_id', Auth::id())->first();
+        
+        if (!$company) {
+            return response()->json([
+                'dates' => [],
+                'apply_job_data' => []
+            ]);
+        }
+
+        // Ambil job yang terkait dengan company tersebut
+        $jobIds = Job::where('company_id', $company->id)->pluck('id');
+
+        // Ambil data aplikasi pekerjaan yang terkait dengan job-job tersebut
+        $data = ApplyJob::whereIn('job_id', $jobIds)
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get();
+        
+        // Siapkan format data untuk chart
+        $dates = $data->pluck('date')->toArray();
+        $applyJobData = $data->pluck('count')->toArray();
+
+        return response()->json([
+            'dates' => $dates,
+            'apply_job_data' => $applyJobData
+        ]);
+    }
     public function showJobs()
     {
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
