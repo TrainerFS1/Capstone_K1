@@ -3,7 +3,7 @@
 
 <!-- Page body -->
 <style>
- .carousel-caption.custom-caption {
+  .carousel-caption.custom-caption {
       top: 45%;
       transform: translateY(-20%);
   }
@@ -26,6 +26,56 @@
       color: #007bff; /* Adjust icon color as needed */
   }
 
+  .thumbnails {
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      margin: 40px 0;
+  }
+
+  .thumbnail-wrapper {
+      display: flex;
+      transition: transform 0.5s ease;
+  }
+
+  .thumbnail {
+      flex: 0 0 200px;
+      margin: 0 10px;
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+      background-color: #fff;
+  }
+
+  .thumbnail img {
+      width: 100%;
+      border-radius: 8px;
+  }
+
+  .news-carousel .item {
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .news-carousel .thumb {
+      position: relative;
+      overflow: hidden;
+    }
+    .news-carousel .photo {
+      width: 100%;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+    }
+    .news-carousel .text {
+      padding: 10px;
+      background: #fff;
+    }
+    .news-carousel .text h3 {
+      margin: 0;
+    }
+
 </style>
 
 <section>
@@ -41,7 +91,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-12 col-xl-8">
-                              <h1 class="huruf mb-4">Temukan Pekerjaan</h1>
+                                <h1 class="huruf mb-4">Temukan Pekerjaan</h1>
                                 <h1 class="huruf">Impian Anda</h1>
                                 <p>Berbagai macam pekerjaan tersedia di sini.</p>
                                 <div class="banner-btn mt-5">
@@ -66,6 +116,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -80,8 +132,6 @@
 </section>
 
 <section>
-    </div>
-    <!-- Section for icons with descriptions -->
     <div class="container icon-section mt-5">
         <div class="row text-center">
             <div class="col-md-4">
@@ -106,18 +156,8 @@
                 </div>
             </div>
         </div>
-  
+    </div>
 </section>
 
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    var carouselElement = document.getElementById('carouselExampleCaptions');
-    var carousel = new bootstrap.Carousel(carouselElement, {
-        interval: 3000, // waktu dalam milidetik, disini 5000ms = 5 detik
-        pause: 'hover', // menghentikan autoplay saat mouse hover
-    });
-});
-</script>
 
 @endsection

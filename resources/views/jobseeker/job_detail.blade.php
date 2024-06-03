@@ -168,5 +168,7 @@
             cvInput.disabled = initialChecked;
             certificateInput.disabled = initialChecked;
         });
+
+        
     </script>
 @endpush

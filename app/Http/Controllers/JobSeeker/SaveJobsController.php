@@ -43,23 +43,28 @@ class SaveJobsController extends Controller
     public function savedJobs()
     {
         $user = Auth::user();
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+
         $savedJobs = SavedJob::where('job_seeker_id', $user->jobSeeker->id)
             ->with('job.company') // Eager load the job and company relation
             ->get();
     
-        return view('jobseeker.savedjobs.saved_jobs', compact('savedJobs'));
+        return view('jobseeker.savedjobs.saved_jobs', compact('savedJobs','jobSeeker'));
     }
     
 
     // Method to show details of a saved job
     public function showSavedJob($savedJobId)
     {
+
         $savedJob = SavedJob::findOrFail($savedJobId);
+        // Mengambil JobSeeker berdasarkan user_id yang sedang login
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
 
         // Check if the job has already been applied by the user
         $alreadyApplied = $savedJob->job->applyJobs()->where('job_seeker_id', Auth::user()->jobSeeker->id)->exists();
 
-        return view('jobseeker.savedjobs.show_saved_job', compact('savedJob', 'alreadyApplied'));
+        return view('jobseeker.savedjobs.show_saved_job', compact('savedJob', 'alreadyApplied','jobSeeker'));
     }
 
 
