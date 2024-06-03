@@ -176,7 +176,7 @@ class JobSeekerController extends Controller
         
         // $jobSeeker = JobSeeker::findOrFail($id);
         $jobSeeker = JobSeeker::with('fileJobSeekers')->findOrFail($id);
-        return view('company.jobseeker-detail', compact('jobSeeker', 'user'));
+        return view('company.listjob.jobseeker-detail', compact('jobSeeker', 'user'));
     }
 
 }

@@ -8,43 +8,39 @@
                     <nav aria-label="breadcrumb" class="rounded-3 p-3">
                         <ol class="breadcrumb mb-0">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('jobs') }}">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Kembali ke Daftar Pekerjaan
+                                <a href="{{ route('savedJobs') }}">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Kembali
                                 </a>
                             </li>
                         </ol>
                     </nav>
                 </div>
             </div>
-        </div>
 
-        <div class="container-xl">
             <div class="row">
                 <div class="col-md-8">
-                    @include('jobseeker.message')
-
                     <div class="card shadow border-0 p-3 position-relative">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="company_logo mb-3">
-                                        @if (!empty($job->company->company_logo))
-                                            <img src="{{ asset('storage/' . $job->company->logo) }}" class="img-fluid" alt="Company Logo">
+                                        @if (!empty($savedJob->job->company->company_logo))
+                                            <img src="{{ asset('storage/' . $savedJob->job->company->company_logo) }}" class="img-fluid" alt="Company Logo">
                                         @else
                                             <img src="{{ asset('images/default-logo.png') }}" class="img-fluid" alt="Company Logo">
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <h2>{{ $job->job_title }}</h2>
+                                    <h2>{{ $savedJob->job->job_title }}</h2>
                                     <div class="d-flex mb-5">
                                         <div class="location me-3">
                                             <i class="fa fa-map-marker"></i>
-                                            <span>{{ $job->job_location }}</span>
+                                            <span>{{ $savedJob->job->job_location }}</span>
                                         </div>
                                         <div class="location">
                                             <i class="fa fa-clock"></i>
-                                            <span>{{ $job->jobType->job_type_name }}</span>
+                                            <span>{{ $savedJob->job->jobType->job_type_name }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -53,25 +49,25 @@
                             <div class="card shadow border-0 ">
                                 <div class="row mb-3">
                                     <h4 class="mb-1">Nama Instansi/Perusahaan</h4>
-                                    <p>{!! nl2br($job->company->company_name) !!}</p>
+                                    <p>{!! nl2br($savedJob->job->company->company_name) !!}</p>
                                 </div>
 
                                 <div class="row mb-3">
                                     <h4 class="mb-1">Deskripsi Pekerjaan</h4>
-                                    <p>{!! nl2br($job->job_description) !!}</p>
+                                    <p>{!! nl2br($savedJob->job->job_description) !!}</p>
                                 </div>
 
-                                @if (!empty($job->job_salary))
+                                @if (!empty($savedJob->job->job_salary))
                                     <div class="row mb-3">
                                         <h4 class="mb-1">Gaji</h4>
-                                        <p>{{ $job->job_salary }}</p>
+                                        <p>{{ $savedJob->job->job_salary }}</p>
                                     </div>
                                 @endif
 
-                                @if (!empty($job->job_skills))
+                                @if (!empty($savedJob->job->job_skills))
                                     <div class="row mb-3">
                                         <h4 class="mb-1">Keterampilan yang dibutuhkan</h4>
-                                        <p>{{ $job->job_skills }}</p>
+                                        <p>{{ $savedJob->job->job_skills }}</p>
                                     </div>
                                 @endif
                             </div>
@@ -81,7 +77,7 @@
                                     <div class="apply_job_area">
                                         <h3>Lamar Pekerjaan Ini</h3>
                                         @if(!isset($alreadyApplied) || !$alreadyApplied) <!-- Periksa jika pengguna belum melamar -->
-                                            <form action="{{ route('applyJob', $job->id) }}" method="POST" enctype="multipart/form-data" id="applyJobForm">
+                                            <form action="{{ route('applyJob', $savedJob->job->id) }}" method="POST" enctype="multipart/form-data" id="applyJobForm">
                                                 @csrf
 
                                                 <div class="mb-3 form-check">
@@ -116,7 +112,7 @@
                                 </div>
 
                                 <div class="position-absolute top-0 end-0 m-3">
-                                    <form action="{{ route('saveJob', $job->id) }}" method="POST">
+                                    <form action="{{ route('saveJob', $savedJob->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-outline-primary">
                                             <i class="fa fa-bookmark"></i>
@@ -137,9 +133,9 @@
                         <div class="job_summary">
                             <h3>Ringkasan Pekerjaan</h3>
                             <ul class="list-unstyled">
-                                <li>Kategori: <span>{{ $job->category->category_name }}</span></li>
-                                <li>Tipe Pekerjaan: <span>{{ $job->jobType->job_type_name }}</span></li>
-                                <li>Lokasi: <span>{{ $job->job_location }}</span></li>
+                                <li>Kategori: <span>{{ $savedJob->job->category->category_name }}</span></li>
+                                <li>Tipe Pekerjaan: <span>{{ $savedJob->job->jobType->job_type_name }}</span></li>
+                                <li>Lokasi: <span>{{ $savedJob->job->job_location }}</span></li>
                             </ul>
                         </div>
                     </div>

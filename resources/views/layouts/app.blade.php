@@ -44,7 +44,7 @@
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
           <a href="{{ route('front') }}">
-  <img src="images/Logo-Brand-2.png" width="110" height="32" alt="InpoLoker Logo" class="navbar-brand-image">
+          <img src="{{ asset('images/Logo-Brand-2.png') }}" alt="Logo Brand 2" class="navbar-brand-image">
 </a>
 
           </h1>
@@ -244,7 +244,7 @@
 
               <div class="nav-item d-none d-md-flex me-3">
               <div class="btn-list">
-                <a href="#" class="btn" rel="noreferrer">
+                <a href="{{ route('savedJobs') }}" class="btn" rel="noreferrer">
                   <i class="fas fa-bookmark me-2"></i> <!-- Icon for Saved Jobs -->
                     Saved Jobs
                 </a>

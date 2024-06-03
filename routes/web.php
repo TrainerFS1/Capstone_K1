@@ -12,6 +12,7 @@ use App\Http\Controllers\Job\JobController;
 use App\Http\Controllers\Admin\KelCompanyController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\JobSeeker\SaveJobsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,12 +102,13 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
         return view('jobseeker.setting');
     })->name('jobseeker.setting');
 
-    // Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-    // Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
-    // Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
-
     //ini tambahan
     Route::post('/job/{id}/apply', [JobSeekerApplyJobController::class, 'applyJob'])->name('applyJob');
+    Route::post('/saveJob/{id}', [SaveJobsController::class, 'saveJob'])->name('saveJob');
+    Route::get('/job/{id}/check-saved', [SaveJobsController::class, 'checkSavedJob'])->name('checkSavedJob');
+    Route::get('/saved-jobs', [SaveJobsController::class, 'savedJobs'])->name('savedJobs');
+    Route::get('/saved-jobs/{id}', [SaveJobsController::class, 'showSavedJob'])->name('showSavedJob');
+    Route::delete('/saved-jobs/{savedJob}', [SaveJobsController::class, 'deleteSavedJob'])->name('deleteSavedJob');
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
