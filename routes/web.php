@@ -70,6 +70,7 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/dashboard', [CompanyController::class, 'showDashboard'])->name('company.dashboard');
     Route::get('/company/setting', [CompanyController::class, 'showSetting'])->name('company.setting');
     Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.profile');
+    Route::get('/api/apply-job-data', [CompanyController::class, 'getApplyJobData']);
     Route::post('/company/updateprofile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
 
     // Routes for managing jobs
