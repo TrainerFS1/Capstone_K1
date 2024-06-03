@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('main')    
+
 <!-- Page body -->
 <style>
  .carousel-caption.custom-caption {

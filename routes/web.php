@@ -14,6 +14,8 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\JobSeeker\SaveJobsController;
 
+use App\Http\Controllers\PasswordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +28,6 @@ use App\Http\Controllers\JobSeeker\SaveJobsController;
 */
 
 Route::get('/', [FrontController::class, 'index'])->name('front');
-
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
 Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
@@ -51,10 +52,10 @@ Route::middleware('guest')->group(function () {
     Route::get('/jobseeker/register', [JobSeekerController::class, 'showRegistrationForm'])->name('jobseeker.register');
     Route::post('/jobseeker/register', [JobSeekerController::class, 'register'])->name('jobseeker.register.submit');
 
-
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 
@@ -65,12 +66,26 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'showEditCompany'])->name('admin.companyedit');
     Route::post('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'updateCompany'])->name('admin.editcompany');
     Route::delete('/admin/{id}/delete', [KelCompanyController::class, 'deleteCompany'])->name('admin.deletecompany');
+    // Tambahkan rute admin di sini jika ada
 });
 
 Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/dashboard', [CompanyController::class, 'showDashboard'])->name('company.dashboard');
     Route::get('/company/setting', [CompanyController::class, 'showSetting'])->name('company.setting');
     Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.profile');
+    Route::post('/company/profile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
+    Route::get('/company/editprofile', [CompanyController::class, 'editProfile'])->name('company.editprofile');
+    // Halaman list lowongan kerja
+    Route::get('/company/jobs', [CompanyController::class, 'showJobs'])->name('company.jobs');
+    // Tambah lowongan
+    Route::get('/company/addjob', [CompanyController::class, 'showAddJob'])->name('company.showaddjob');
+    Route::post('/company/addjob', [CompanyController::class, 'addJob'])->name('company.addjob');
+    // Edit lowongan kerja
+    Route::get('/company/{id}/edit', [CompanyController::class, 'showEditJob'])->name('company.showeditjob');
+    Route::post('/company/{id}/edit', [CompanyController::class, 'updateJob'])->name('company.editjob');
+    // Hapus lowongan kerja
+    Route::delete('/company/{id}/delete', [CompanyController::class, 'deleteJob'])->name('company.deletejob');
+
     Route::post('/company/updateprofile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
 
     // Routes for managing jobs
@@ -93,7 +108,6 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/job-seeker/{id}', [JobSeekerController::class, 'show'])->name('company.jobseeker.detail');
 });
 
-
 Route::middleware(['auth', 'job_seeker'])->group(function () {
     Route::get('/jobseeker/profile', [JobSeekerController::class, 'showProfile'])->name('jobseeker.profile');
     Route::post('/jobseeker/profile', [JobSeekerController::class, 'updateProfile'])->name('jobseeker.profile.update');
@@ -112,3 +126,9 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+// Rute untuk menampilkan formulir perubahan kata sandi
+Route::get('password/change', [PasswordController::class, 'showChangePasswordForm'])->name('password.change');
+
+// Rute untuk menangani permintaan perubahan kata sandi
+Route::post('password/change', [PasswordController::class, 'changePassword'])->name('password.update');

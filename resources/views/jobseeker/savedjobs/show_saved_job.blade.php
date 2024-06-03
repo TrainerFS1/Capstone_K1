@@ -111,14 +111,7 @@
                                     </div>
                                 </div>
 
-                                <div class="position-absolute top-0 end-0 m-3">
-                                    <form action="{{ route('saveJob', $savedJob->id) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-primary">
-                                            <i class="fa fa-bookmark"></i>
-                                        </button>
-                                    </form>
-                                </div>
+                      
                             @else
                                 <div class="alert alert-info mt-4" role="alert">
                                     Silakan <a href="{{ route('loginJobSeeker') }}">login</a> untuk melamar pekerjaan.
