@@ -66,10 +66,10 @@ class ApplyJobController extends Controller
         }
 
         $applyJob = ApplyJob::where('job_seeker_id', $id)->where('job_id', $jobId)->first();
-        $idFile = $applyJob->file_jobseeker_id;
-        // $fileJobseeker = FileJobSeeker::find($idfile);
-        // $cv = $fileJobseeker->cv;
-        // $certificate = $fileJobseeker->certificate;
+        $idfile = $applyJob->file_jobseeker_id;
+        $fileJobseeker = FileJobSeeker::find($idfile);
+        $cv = $fileJobseeker->cv;
+        $certificate = $fileJobseeker->certificate;
 
         // Mengembalikan detail jobseeker dalam format JSON
         return response()->json([
@@ -78,9 +78,9 @@ class ApplyJobController extends Controller
             'job_seeker_address' => $jobseeker->job_seeker_address, // Asumsikan ada atribut address
             'job_seeker_phone' => $jobseeker->job_seeker_phone, // Asumsikan ada atribut phone
             'job_seeker_resume' => $jobseeker->job_seeker_resume, // Asumsikan ada atribut resume
-            'id_file' => $idFile,
-            // 'job_seeker_cv' => $cv, // Asumsikan ada atribut CV
-            // 'job_seeker_certificate' => $certificate, // Asumsikan ada atribut Certificate
+            // 'id_file' => $idFile,
+            'job_seeker_cv' => $cv, // Asumsikan ada atribut CV
+            'job_seeker_certificate' => $certificate, // Asumsikan ada atribut Certificate
         ]);
     }
 

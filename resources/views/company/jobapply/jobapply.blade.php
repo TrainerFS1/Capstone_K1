@@ -207,8 +207,10 @@
         success: function(response) {
           // Asumsi respons adalah objek JSON dengan atribut yang diperlukan
           var profilePictureUrl = "{{ asset('storage/profile_pictures') }}" + '/' + response.profile_picture;
-          var cvUrl = '{{ route('company.lamaranmasuk.cv', ':id') }}'.replace(':id', response.id_file);
-          var certificateUrl = '{{ route('company.lamaranmasuk.certificate', ':id') }}'.replace(':id', response.id_file);
+          // var cvUrl = '{{ route('company.lamaranmasuk.cv', ':id') }}'.replace(':id', response.id_file);
+          // var certificateUrl = '{{ route('company.lamaranmasuk.certificate', ':id') }}'.replace(':id', response.id_file);
+          var cvUrl = '{{ asset('storage/' . ':cv') }}'.replace(':cv', response.job_seeker_cv);
+          var certificateUrl = '{{ asset('storage/' . ':certificate') }}'.replace(':certificate', response.job_seeker_certificate);
 
           $('#profile_picture').attr('src', profilePictureUrl);
           $('#job_seeker_name').text(response.job_seeker_name);
