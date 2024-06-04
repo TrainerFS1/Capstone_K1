@@ -44,4 +44,8 @@ class Company extends Model
     {
         return $this->hasMany(Job::class);
     }
+    public function applyJobs()
+    {
+        return $this->hasMany(ApplyJob::class);
+    }
 }

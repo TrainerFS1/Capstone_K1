@@ -10,13 +10,6 @@
                         List Lowongan Kerja
                     </h2>
                 </div>
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
-                        <a href="{{ route('company.showaddjob') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            Tambah Lowongan Kerja
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -26,14 +19,38 @@
             <div class="card">
                 <div class="col-lg-12">
                     <div class="card">
-                        <div class="col-4 card-body border-bottom ms-auto text-secondary">
-                            <form action="{{ route('jobs.search') }}" method="GET" class="d-flex justify-content-end">
-                                <div class="input-group input-group-smo">
-                                    <input type="text" name="search" value="{{ request('search') }}" class="form-control p-2" aria-label="Search jobs" placeholder="search...">
-                                    <button class="btn btn-primary" type="submit">Search</button>
+                        <div class="card-header border-bottom text-secondary d-flex flex-wrap justify-content-between align-items-center">
+                            <div class="col-12 col-sm-6 col-md-4 mb-2 mb-sm-0">
+                              <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="icon"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="2"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                  <path d="M12 5l0 14" />
+                                  <path d="M5 12l14 0" />
+                                </svg>
+                                Tambah Lowongan Kerja
+                              </button>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4">
+                              <form action="{{ route('company.jobs.search') }}" method="GET" class="d-flex">
+                                <div class="input-group">
+                                  <input type="text" name="search" value="{{ request('search') }}" class="form-control" aria-label="Search jobs" placeholder="search...">
+                                  <button class="btn btn-primary" type="submit">Search</button>
                                 </div>
-                            </form>
-                        </div>
+                              </form>
+                            </div>
+                          </div>
+                          
                         @if(session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -75,6 +92,7 @@
                                                 <td>
                                                     <a class="btn btn-warning btn-sm" href="{{ route('company.showjobdetail', $jobListing->id) }}">Detail</a> /
                                                     <a class="btn btn-primary btn-sm" href="{{ route('company.showeditjob', $jobListing->id) }}">Edit</a> /
+                                                    {{-- <a class="btn btn-primary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#editModal{{ $jobListing->id }}">Edit</a> / --}}
                                                     <form action="{{  route('company.deletejob', $jobListing->id) }}" method="POST" style="display: inline">
                                                         @csrf
                                                         @method('DELETE')
@@ -110,4 +128,8 @@
             </div>
         </div>
     </div>
+    @include('company.layouts.modaladdjob')
+@endsection
+@section('customjs')
+
 @endsection

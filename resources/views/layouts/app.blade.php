@@ -117,6 +117,11 @@
       font-size: 14px;
       color: #777;
     }
+
+    
+
+
+    
  
     </style>
   </head>
@@ -124,14 +129,14 @@
     <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
     <div class="page">
       <!-- Navbar -->
-      <header class="navbar navbar-expand-md d-print-none" >
+      <header class="navbar navbar-expand-md d-print-none">
         <div class="container-xl">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
           <a href="{{ route('front') }}">
-  <img src="images/Logo-Brand-2.png" width="110" height="32" alt="InpoLoker Logo" class="navbar-brand-image">
+          <img src="{{ asset('images/Logo-Brand-2.png') }}" alt="Logo Brand 2" class="navbar-brand-image">
 </a>
 
           </h1>
@@ -143,7 +148,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('front') }}" >
               <span class="nav-link-icon d-md-none d-lg-inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="white" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
               </span>
               <span class="nav-link-title">
                 Home
@@ -204,7 +209,7 @@
                 <a href="{{ route('loginCompany') }}" class="btn" rel="noreferrer">
                   <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
                   <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="red"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-building-factory-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21h18" /><path d="M5 21v-12l5 4v-4l5 4h4" /><path d="M19 21v-8l-1.436 -9.574a.5 .5 0 0 0 -.495 -.426h-1.145a.5 .5 0 0 0 -.494 .418l-1.43 8.582" /><path d="M9 17h1" /><path d="M14 17h1" /></svg>
-                  Company Area
+                  Untuk Perusahaan
                 </a>
               </div>
             </div>
@@ -322,7 +327,7 @@
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 @if (Auth::check())
                   <a href="{{ route('jobseeker.profile') }}" class="dropdown-item">Profile</a>
-                  <a href="{{ route('jobseeker.setting') }}" class="dropdown-item">Settings</a>
+                  <a href="{{ route('password.change') }}" class="dropdown-item">Settings</a>
                   <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                 @else
                   <a href="{{ route('loginJobSeeker') }}" class="dropdown-item">Login</a>
@@ -425,6 +430,7 @@
 
 @yield('customjs')
 @stack('scripts')
+
 </body>
 </html>
 

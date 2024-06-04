@@ -72,100 +72,102 @@ class JobSeekerController extends Controller
     }
 
     // Mengupdate profil job seeker
-public function updateProfile(Request $request)
-{
-    // Validasi input
-    $request->validate([
-        'job_seeker_name' => 'required|string|max:255',
-        'job_seeker_phone' => 'nullable|string|max:255',
-        'job_seeker_address' => 'nullable|string|max:255',
-        'job_seeker_resume' => 'nullable|string',
-        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // maksimal 2MB
-        'cv' => 'nullable|file|mimes:pdf,doc,docx|max:5120', // maksimal 5MB untuk CV
-        'certificate' => 'nullable|file|mimes:pdf,doc,docx|max:5120', // maksimal 5MB untuk sertifikat
-    ], [
-        'cv.required' => 'File CV wajib diunggah.',
-        'certificate.required' => 'File sertifikat wajib diunggah.',
-    ]);
+  
+    public function updateProfile(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'job_seeker_name' => 'required|string|max:255',
+            'job_seeker_phone' => 'nullable|string|max:255',
+            'job_seeker_address' => 'nullable|string|max:255',
+            'job_seeker_resume' => 'nullable|string',
+            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+            'certificate' => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+        ], [
+            'cv.required' => 'File CV wajib diunggah.',
+            'certificate.required' => 'File sertifikat wajib diunggah.',
+        ]);
 
-    // Ambil data job seeker berdasarkan user_id
-    $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+        // Ambil data job seeker berdasarkan user_id
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
 
-    // Perbarui data job seeker
-    $jobSeeker->job_seeker_name = $request->job_seeker_name;
-    $jobSeeker->job_seeker_phone = $request->job_seeker_phone;
-    $jobSeeker->job_seeker_address = $request->job_seeker_address;
-    $jobSeeker->job_seeker_resume = $request->job_seeker_resume;
+        // Perbarui data job seeker
+        $jobSeeker->job_seeker_name = $request->job_seeker_name;
+        $jobSeeker->job_seeker_phone = $request->job_seeker_phone;
+        $jobSeeker->job_seeker_address = $request->job_seeker_address;
+        $jobSeeker->job_seeker_resume = $request->job_seeker_resume;
 
-    // Handle unggah gambar profil
-    if ($request->hasFile('profile_picture')) {
-        // Hapus gambar profil sebelumnya jika ada
-        if ($jobSeeker->profile_picture) {
-            Storage::delete('public/profile_pictures/' . $jobSeeker->profile_picture);
+        // Handle unggah gambar profil
+        if ($request->hasFile('profile_picture')) {
+            // Hapus gambar profil sebelumnya jika ada
+            if ($jobSeeker->profile_picture) {
+                Storage::delete('public/profile_pictures/' . $jobSeeker->profile_picture);
+            }
+
+            // Simpan gambar profil yang baru
+            $profilePictureName = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
+            $request->file('profile_picture')->storeAs('public/profile_pictures', $profilePictureName);
+            $jobSeeker->profile_picture = $profilePictureName;
         }
 
-        // Simpan gambar profil yang baru
-        $profilePictureName = time() . '_' . $request->file('profile_picture')->getClientOriginalName();
-        $request->file('profile_picture')->storeAs('public/profile_pictures', $profilePictureName);
-        $jobSeeker->profile_picture = $profilePictureName;
-    }
+        // Handle unggah CV
+        if ($request->hasFile('cv')) {
+            // Ambil atau buat entri FileJobSeeker
+            $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew([]);
 
-    // Handle unggah CV
-    if ($request->hasFile('cv')) {
-        // Ambil atau buat entri FileJobSeeker
-        $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew([]);
+            // Hapus CV sebelumnya jika ada
+            if ($fileJobSeeker->cv) {
+                Storage::delete($fileJobSeeker->cv);
+            }
 
-        // Hapus CV sebelumnya jika ada
-        if ($fileJobSeeker->cv) {
-            Storage::delete($fileJobSeeker->cv);
+            // Simpan CV yang baru
+            $cvFile = $request->file('cv');
+            $cvName = 'cv_' . time() . '.' . $cvFile->getClientOriginalExtension();
+            $cvPath = $cvFile->storeAs('cv', $cvName, 'public');
+
+            // Assign path CV ke FileJobSeeker
+            $fileJobSeeker->cv = $cvPath;
+
+            // Simpan relasi FileJobSeeker
+            $jobSeeker->fileJobSeekers()->save($fileJobSeeker);
+        } elseif (!$jobSeeker->fileJobSeekers()->exists()) {
+            // Handle jika CV diperlukan tetapi tidak diunggah
+            return back()->with('error', 'File CV wajib diunggah.');
         }
 
-        // Simpan CV yang baru
-        $cvFile = $request->file('cv');
-        $cvName = 'cv_' . time() . '.' . $cvFile->getClientOriginalExtension();
-        $cvPath = $cvFile->storeAs('cv', $cvName, 'public');
+        // Handle unggah sertifikat
+        if ($request->hasFile('certificate')) {
+            // Ambil atau buat entri FileJobSeeker
+            $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew([]);
 
-        // Assign path CV ke FileJobSeeker
-        $fileJobSeeker->cv = $cvPath;
+            // Hapus sertifikat sebelumnya jika ada
+            if ($fileJobSeeker->certificate) {
+                Storage::delete($fileJobSeeker->certificate);
+            }
 
-        // Simpan relasi FileJobSeeker
-        $jobSeeker->fileJobSeekers()->save($fileJobSeeker);
-    } elseif (!$jobSeeker->fileJobSeekers()->exists()) {
-        // Handle jika CV diperlukan tetapi tidak diunggah
-        return back()->with('error', 'File CV wajib diunggah.');
-    }
+            // Simpan sertifikat yang baru
+            $certificateFile = $request->file('certificate');
+            $certificateName = 'certificate_' . time() . '.' . $certificateFile->getClientOriginalExtension();
+            $certificatePath = $certificateFile->storeAs('certificates', $certificateName, 'public');
 
-    // Handle unggah sertifikat
-    if ($request->hasFile('certificate')) {
-        // Ambil atau buat entri FileJobSeeker
-        $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew([]);
+            // Assign path sertifikat ke FileJobSeeker
+            $fileJobSeeker->certificate = $certificatePath;
 
-        // Hapus sertifikat sebelumnya jika ada
-        if ($fileJobSeeker->certificate) {
-            Storage::delete($fileJobSeeker->certificate);
+            // Simpan relasi FileJobSeeker
+            $jobSeeker->fileJobSeekers()->save($fileJobSeeker);
+        } elseif (!$jobSeeker->fileJobSeekers()->exists()) {
+            // Handle jika sertifikat diperlukan tetapi tidak diunggah
+            return back()->with('error', 'File sertifikat wajib diunggah.');
         }
 
-        // Simpan sertifikat yang baru
-        $certificateFile = $request->file('certificate');
-        $certificateName = 'certificate_' . time() . '.' . $certificateFile->getClientOriginalExtension();
-        $certificatePath = $certificateFile->storeAs('certificates', $certificateName, 'public');
+        // Simpan job seeker
+        $jobSeeker->save();
 
-        // Assign path sertifikat ke FileJobSeeker
-        $fileJobSeeker->certificate = $certificatePath;
-
-        // Simpan relasi FileJobSeeker
-        $jobSeeker->fileJobSeekers()->save($fileJobSeeker);
-    } elseif (!$jobSeeker->fileJobSeekers()->exists()) {
-        // Handle jika sertifikat diperlukan tetapi tidak diunggah
-        return back()->with('error', 'File sertifikat wajib diunggah.');
+        // Redirect kembali ke halaman profil dengan pesan sukses
+        return redirect()->route('jobseeker.profile')->with('success', 'Profil berhasil diperbarui.');
     }
 
-    // Simpan job seeker
-    $jobSeeker->save();
-
-    // Redirect kembali ke halaman profil dengan pesan sukses
-    return redirect()->route('jobseeker.profile')->with('success', 'Profil berhasil diperbarui.');
-}
 
     //detail job seeker yang melamar
     public function show($id)
@@ -174,7 +176,7 @@ public function updateProfile(Request $request)
         
         // $jobSeeker = JobSeeker::findOrFail($id);
         $jobSeeker = JobSeeker::with('fileJobSeekers')->findOrFail($id);
-        return view('company.jobseeker-detail', compact('jobSeeker', 'user'));
+        return view('company.listjob.jobseeker-detail', compact('jobSeeker', 'user'));
     }
 
 }

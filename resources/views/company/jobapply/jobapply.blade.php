@@ -12,11 +12,25 @@
           <!-- Page title actions -->
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
-              <a href="{{ route('company.showaddjob') }}" class="btn btn-primary d-none d-sm-inline-block">
-                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 5l0 14" />
+                    <path d="M5 12l14 0" />
+                </svg>
                 Tambah Lowongan Kerja
-              </a>
+            </button>
             </div>
           </div>
         </div>
@@ -29,9 +43,9 @@
           <div class="col-lg-12">
               <div id="faq-1" class="accordion" role="tablist" aria-multiselectable="true">
                 @foreach ($company->jobs as $job)
-                <div class="accordion-item">
-                  <div class="accordion-header" role="tab">
-                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq-1-{{ $loop->iteration }}">{{ $job->job_title }}</button>
+                <div class="accordion-item ">
+                  <div class="bg-success accordion-header rounded" role="tab">
+                    <button class="accordion-button collapsed  dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#faq-1-{{ $loop->iteration }}">{{ $job->job_title }}</button>
                   </div>
                   <div id="faq-1-{{ $loop->iteration }}" class="accordion-collapse collapse" role="tabpanel" data-bs-parent="#faq-{{ $loop->iteration }}">
                     <div class="accordion-body pt-0">
@@ -39,7 +53,7 @@
                         @if ($job->applyJobs->isEmpty())
                           <p>No applications found for this job.</p>
                           @else
-                          <div class="row row-cards">
+                          <div class="row row-cards pt-4">
                         @foreach ($job->applyJobs as $applyJob)
                               <div class="col-md-6 col-lg-3">
                                 <div class="card col-12">
@@ -101,6 +115,8 @@
         </div>
       </div>
     </div>
+
+    @include('company.layouts.modaladdjob')
 @endsection
 @section('customjs')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
