@@ -13,7 +13,7 @@ use App\Http\Controllers\Admin\KelCompanyController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\JobSeeker\SaveJobsController;
-
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PasswordController;
 
 /*
@@ -31,6 +31,11 @@ Route::get('/', [FrontController::class, 'index'])->name('front');
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
 Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
 Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
+
+
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('forgot-password');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
 
 
 Route::get('/login-jobseeker', [LoginController::class, 'showLoginFormJobSeeker'])->name('loginJobseeker');
