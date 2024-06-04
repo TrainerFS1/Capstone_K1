@@ -36,5 +36,4 @@ class JobSeeker extends Model
     {
         return $this->hasMany(FileJobSeeker::class);
     }
-    
 }

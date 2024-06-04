@@ -90,7 +90,9 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::post('/company/lamaranmasuk/{id}/reject', [ApplyJobController::class, 'rejectLamaran'])->name('company.lamaranmasuk.reject');
     Route::post('/company/lamaranmasuk/{id}/accept', [ApplyJobController::class, 'acceptLamaran'])->name('company.lamaranmasuk.accept');
     // Route::get('/company/lamaranmasuk/{id}/detail', [ApplyJobController::class, 'showDetail'])->name('company.lamaranmasuk.detail');
-    Route::get('/company/lamaranmasuk/detail/{id}', [ApplyJobController::class, 'showDetailModal'])->name('company.lamaranmasuk.detail');
+    Route::get('/company/lamaranmasuk/detail/{id}/{job_id}', [ApplyJobController::class, 'showDetailModal'])->name('company.lamaranmasuk.detail');
+    Route::get('/company/lamaranmasuk/preview/cv/{id}', [ApplyJobController::class, 'showCv'])->name('company.lamaranmasuk.cv');
+    Route::get('/company/lamaranmasuk/preview/certificate/{id}', [ApplyJobController::class, 'showCertificate'])->name('company.lamaranmasuk.certificate');
 });
 
 
