@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\ApplyJob;
 use App\Models\JobType;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Industry;
@@ -109,7 +110,7 @@ class CompanyController extends Controller
         })->sortByDesc('created_at')->take(10);
 
         // Kirim data perusahaan ke tampilan 'company.profile'
-        return view('company.dashboard', compact('company', 'user','jobCategories','jobTypes', 'totalApplyJobs', 'acceptedApplyJobs', 'rejectedApplyJobs','inprogressApplyJobs', 'recentApplyJobs','activeJobs','inactiveJobs'));
+        return view('company.dashboard', compact('company', 'user', 'jobCategories', 'jobTypes', 'totalApplyJobs', 'acceptedApplyJobs', 'rejectedApplyJobs', 'inprogressApplyJobs', 'recentApplyJobs', 'activeJobs', 'inactiveJobs'));
     }
 
     //chart
@@ -117,7 +118,7 @@ class CompanyController extends Controller
     {
         // Ambil company yang terkait dengan user yang sedang login
         $company = Company::where('user_id', Auth::id())->first();
-        
+
         if (!$company) {
             return response()->json([
                 'dates' => [],
@@ -134,7 +135,7 @@ class CompanyController extends Controller
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get();
-        
+
         // Siapkan format data untuk chart
         $dates = $data->pluck('date')->toArray();
         $applyJobData = $data->pluck('count')->toArray();
@@ -214,5 +215,38 @@ class CompanyController extends Controller
 
         // Redirect ke halaman tertentu setelah berhasil menghapus logo
         return redirect()->route('company.profile')->with('success', 'Company logo deleted successfully');
+    }
+    public function setNewPassword(Request $request)
+    {
+        // Ambil user yang sedang login
+        $user = User::where('id', Auth::id())->firstOrFail();
+
+        // Validasi input
+        $validatedData = $request->validate([
+            'password' => 'required|string',
+            'new_password' => [
+                'required',
+                'string',
+                'min:5',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+            ],
+        ], [
+            'new_password.min' => 'Password must be at least 5 characters.',
+            'new_password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, and one number.',
+        ]);
+
+        // Pastikan password lama sesuai
+        if (!Hash::check($request->password, $user->password)) {
+            return redirect()->route('company.profile')->with('error', 'Password tidak sesuai!');
+        }
+
+        // Update password baru
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('company.profile')->with('success', 'Password updated successfully!');
     }
 }

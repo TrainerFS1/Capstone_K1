@@ -75,6 +75,7 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.profile');
     Route::post('/company/updateprofile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
     Route::delete('/company/deletelogo', [CompanyController::class, 'deleteLogo'])->name('company.deleteLogo');
+    Route::post('/company/updatepassword', [CompanyController::class, 'setNewPassword'])->name('company.setNewPassword');
 
     // Routes for managing jobs
     Route::get('/company/jobs', [JobListingController::class, 'showJobs'])->name('company.jobs');

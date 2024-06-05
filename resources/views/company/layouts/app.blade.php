@@ -175,7 +175,7 @@
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
 								<?php $logo = $company->company_logo ?? '' ?>
-                <span class="avatar avatar-sm" style="background-image: url({{ asset('storage/company/logo/' . $logo) }})"></span>
+                <img class="avatar avatar-sm" src="{{ $company->company_logo ? asset('storage/company_logo/' . $company->company_logo) : '' }}" >
                 <div class="d-none d-xl-block ps-2">
                   <div>{{ $company->company_name ?? 'company'}}</div>
                   <div class="mt-1 small text-secondary">{{ $user->user_type }}</div>

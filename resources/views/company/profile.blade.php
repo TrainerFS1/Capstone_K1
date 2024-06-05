@@ -14,6 +14,7 @@
 <!-- Page body -->
 <div class="page-body">
   <div class="container-xl">
+    @include('layouts.message')
     <div class="card">
       <div class="row g-0">
         <div class="col-12 col-md-12 d-flex flex-column">
@@ -62,16 +63,15 @@
                 </div>
               </div>
               <h3 class="card-title mt-4">Password</h3>
-              <p class="card-subtitle">You can set a permanent password if you don't want to use temporary login codes.</p>
               <div>
-                <a href="#" class="btn">
+                <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#setNewPassword" data-id="{{ $company->id }}">
                   Set new password
-                </a>
+                </button>
               </div>
             </div>
             <div class="card-footer bg-transparent mt-auto">
               <div class="btn-list justify-content-end">
-                <a href="#" class="btn">
+                <a href="{{ route('company.dashboard') }}" class="btn">
                   Cancel
                 </a>
                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -87,6 +87,7 @@
     </div>
   </div>
 </div>
+@include('company.layouts.modalSetPassword')
 @endsection @section('customjs')
 <script>
 document.getElementById('company-logo-input').onchange = function (evt) {
@@ -104,5 +105,29 @@ document.getElementById('company-logo-input').onchange = function (evt) {
         document.getElementById('company-logo-preview').src = '{{ asset('storage/company_logo/' . $company->company_logo) }}';
     }
 };
+
+// show hide password
+function togglePasswordVisibility(inputId, button) {
+    var input = document.getElementById(inputId);
+    if (input.type === "password") {
+        input.type = "text";
+        button.innerText = "Hide";
+    } else {
+        input.type = "password";
+        button.innerText = "Show";
+    }
+}
+
+// cek confirm password
+function validatePassword() {
+        var newPassword = document.getElementById("new-password").value;
+        var confirmPassword = document.getElementById("confirm-new-password").value;
+
+        if (newPassword !== confirmPassword) {
+            alert("New password and confirm password do not match.");
+            return false;
+        }
+        return true;
+    }
 </script>
 @endsection
