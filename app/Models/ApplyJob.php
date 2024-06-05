@@ -13,6 +13,7 @@ class ApplyJob extends Model
         'job_id',
         'status',
         'file_jobseeker_id',
+        'read_at',
     ];
 
     public function JobSeeker()

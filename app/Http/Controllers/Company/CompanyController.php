@@ -250,4 +250,43 @@ class CompanyController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('company.profile')->with('success', 'Password updated successfully!');
     }
+
+    // NOTIFIKASI
+    public function getNotifications()
+    {
+        $company = Company::where('user_id', Auth::id())->firstOrFail();
+        $jobs = $company->jobs->pluck('id'); // Mengambil ID dari semua job yang dimiliki oleh perusahaan tersebut
+
+        // Mengambil lima data terbaru yang read_at tidak null
+        $recentReadNotifications = ApplyJob::with(['jobSeeker', 'job'])
+            ->whereIn('job_id', $jobs)
+            ->whereNotNull('read_at')
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        // Mengambil semua data yang read_at masih null
+        $unreadNotifications = ApplyJob::with(['jobSeeker', 'job'])
+            ->whereIn('job_id', $jobs)
+            ->whereNull('read_at')
+            ->get();
+
+        // Mengisi data yang masih kurang dengan data dari $recentReadNotifications
+        $notifications = $unreadNotifications->merge($recentReadNotifications->take(5 - $unreadNotifications->count()));
+
+        // Format the notifications data
+        $formattedNotifications = $notifications->map(function ($notification) {
+            return [
+                'job_seeker_name' => $notification->jobSeeker->job_seeker_name,
+                'created_at' => $notification->created_at->format('Y-m-d H:i:s'),
+            ];
+        });
+
+        // Tandai notifikasi sebagai sudah dibaca
+        foreach ($unreadNotifications as $notification) {
+            $notification->update(['read_at' => now()]);
+        }
+
+        return response()->json($formattedNotifications);
+    }
 }

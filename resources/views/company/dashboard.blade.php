@@ -707,12 +707,7 @@
       });
     });
   });
-      function showLoadingIndicator() {
-        $('.progress').show(); // Reset dan tampilkan indikator kemajuan
-      }
-      function hideLoadingIndicator() {
-        $('.progress').hide();
-      }
+      
       function hideText() {
           $('#profile_picture').attr('src', '');
         $('#job_seeker_name').text('');
