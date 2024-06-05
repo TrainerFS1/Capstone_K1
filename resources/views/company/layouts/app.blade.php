@@ -182,11 +182,7 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="#" class="dropdown-item">Status</a>
                 <a href="{{ route('company.profile') }}" class="dropdown-item">Profile</a>
-                {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
-                {{-- <div class="dropdown-divider"></div> --}}
-                <a href="{{ route('company.setting') }}" class="dropdown-item">Settings</a>
                 <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
               </div>
             </div>

@@ -145,4 +145,74 @@ class CompanyController extends Controller
         ]);
     }
 
+    // 
+    public function showProfile()
+    {
+        // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
+        $company = Company::where('user_id', Auth::id())->first();
+        $user = User::where('id', Auth::id())->firstOrFail();
+
+        // Kirim data perusahaan ke tampilan 'company.profile'
+        return view('company.profile', compact('company', 'user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $company = Company::where('user_id', Auth::id())->first();
+        $user = User::where('id', Auth::id())->firstOrFail();
+        // Validasi input Comapny
+        $validatedData = $request->validate([
+            'company_name' => 'required|max:255',
+            'company_website' => 'nullable',
+            'company_address' => 'nullable',
+            'company_phone' => 'nullable',
+            'company_description' => 'nullable',
+            'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
+        // Jika ada file logo yang di-upload, simpan dan update path logo
+        if ($request->hasFile('company_logo')) {
+            // Hapus logo lama jika ada
+            if ($company->company_logo) {
+                Storage::delete('public/company_logo/' . $company->company_logo);
+            }
+            $file = $request->file('company_logo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->storeAs('public/company_logo', $filename);
+            $validatedData['company_logo'] = $filename;
+        } else {
+            // Jangan ubah logo jika tidak ada file yang diunggah
+            unset($validatedData['company_logo']);
+        }
+
+        $company->update($validatedData);
+
+        // Validasi Email
+        $validateEmail = $request->validate([
+            'email' => 'required|email',
+        ]);
+        // update Email
+        $user->update([
+            'email' => $validateEmail['email'],
+        ]);
+        // Redirect ke halaman tertentu setelah berhasil memperbarui data
+
+        return redirect()->route('company.profile')->with('success', 'Company Updated successfully.');
+    }
+
+    public function deleteLogo()
+    {
+        // Ambil data perusahaan yang akan diperbarui
+        $company = Company::where('user_id', Auth::id())->first();
+
+
+        // Hapus logo lama jika ada
+        if ($company->company_logo) {
+            Storage::delete('public/company_logo/' . $company->company_logo);
+            $company->company_logo = null;
+            $company->save();
+        }
+
+        // Redirect ke halaman tertentu setelah berhasil menghapus logo
+        return redirect()->route('company.profile')->with('success', 'Company logo deleted successfully');
+    }
 }
