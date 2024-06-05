@@ -152,9 +152,9 @@ class CompanyController extends Controller
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $company = Company::where('user_id', Auth::id())->first();
         $user = User::where('id', Auth::id())->firstOrFail();
-
+        $industries = Industry::all();
         // Kirim data perusahaan ke tampilan 'company.profile'
-        return view('company.profile', compact('company', 'user'));
+        return view('company.profile', compact('company', 'user', 'industries'));
     }
 
     public function updateProfile(Request $request)
@@ -168,6 +168,7 @@ class CompanyController extends Controller
             'company_address' => 'nullable',
             'company_phone' => 'nullable',
             'company_description' => 'nullable',
+            'industry_id' => 'nullable|int',
             'company_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
         // Jika ada file logo yang di-upload, simpan dan update path logo

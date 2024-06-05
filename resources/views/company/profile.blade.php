@@ -42,6 +42,22 @@
                   <input type="text" name="company_name" class="form-control" value="{{ $company->company_name }}">
                 </div>
                 <div class="col-md-6">
+                  <label class="form-label">
+                    Industry
+                  </label>
+                  <select name="industry_id" class="form-select @error('industry_id') is-invalid @enderror">
+                    <option value="">Select Industry</option>
+                      @foreach($industries as $industry)
+                      <option value="{{ $industry->id }}" {{ $company->industry_id == $industry->id ? 'selected' : '' }}>
+                        {{ $industry->industry_name }}
+                      </option>
+                      @endforeach
+                  </select>
+                  @error('industry_id')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
+                </div>
+                <div class="col-md-6">
                   <div class="form-label">Company Website</div>
                   <input type="text" name="company_website" class="form-control" value="{{ $company->company_website }}">
                 </div>
