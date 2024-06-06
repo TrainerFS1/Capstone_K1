@@ -13,6 +13,7 @@ class ApplyJob extends Model
         'job_id',
         'status',
         'file_jobseeker_id',
+        'read_at',
     ];
 
     public function JobSeeker()
@@ -23,5 +24,9 @@ class ApplyJob extends Model
     public function job()
     {
         return $this->belongsTo(Job::class);
+    }
+    public function fileJobSeeker()
+    {
+        return $this->belongsTo(FileJobSeeker::class);
     }
 }

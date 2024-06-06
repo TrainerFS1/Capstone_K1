@@ -88,9 +88,12 @@ class JobListingController extends Controller
     //show detail job
     public function showJobDetail($id)
     {
-        $user = Auth::user();
+    
+        // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
+        $company = Company::where('user_id', Auth::id())->firstOrFail();
+        $user = User::where('id', Auth::id())->firstOrFail();
         $job = Job::with(['company', 'category', 'jobType'])->findOrFail($id);
-        return view('company.listjob.detailjob', compact('job', 'user'));
+        return view('company.listjob.detailjob', compact('company','job', 'user'));
     }
     // Show Add Job Form
     // Update Job

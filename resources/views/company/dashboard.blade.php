@@ -548,7 +548,9 @@
                                     {{ $applyJob->created_at->format('d M Y') }}
                                 </td>
                                 <td>
-                                    <a class="btn btn-sm btn-warning" href="#">Detail</a>
+                                    <button type="button" class="btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#detailModal" data-job-id="{{ $applyJob->job->id }}" data-seeker-id="{{ $applyJob->jobSeeker->id }}">
+                                        Detail
+                                      </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -560,6 +562,7 @@
     </div>
 </div>
 @include('company.layouts.modaladdjob')
+@include('company.layouts.modaldetailjobseeker')
 @endsection @section('customjs')
 <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -649,5 +652,106 @@
       }
     });
   });
+
+
+  $(document).ready(function() {
+      function showLoadingIndicator() {
+        $('.progress').show(); // Reset dan tampilkan indikator kemajuan
+      }
+      function hideLoadingIndicator() {
+        $('.progress').hide();
+      }
+      function hideText() {
+          $('#profile_picture').attr('src', '');
+        $('#job_seeker_name').text('');
+          $('#job_seeker_address').text('');
+          $('#job_seeker_phone').text('');
+          $('#job_seeker_resume').text('');
+      }
+
+      $('#detailModal').on('show.bs.modal', function (event) {
+        hideText();
+      showLoadingIndicator();
+      var button = $(event.relatedTarget); // Tombol yang memicu modal
+      var jobSeekerId = button.data('seeker-id');
+      var jobId = button.data('job-id');
+
+      // Lakukan permintaan AJAX untuk mengambil detail job seeker
+      $.ajax({
+        url: '/company/lamaranmasuk/detail/' + jobSeekerId + '/' + jobId,
+        method: 'GET',
+        success: function(response) {
+          // Asumsi respons adalah objek JSON dengan atribut yang diperlukan
+          var profilePictureUrl = "{{ asset('storage/profile_pictures') }}" + '/' + response.profile_picture;
+          // var cvUrl = '{{ route('company.lamaranmasuk.cv', ':id') }}'.replace(':id', response.id_file);
+          // var certificateUrl = '{{ route('company.lamaranmasuk.certificate', ':id') }}'.replace(':id', response.id_file);
+          var cvUrl = '{{ asset('storage/' . ':cv') }}'.replace(':cv', response.job_seeker_cv);
+          var certificateUrl = '{{ asset('storage/' . ':certificate') }}'.replace(':certificate', response.job_seeker_certificate);
+
+          $('#profile_picture').attr('src', profilePictureUrl);
+          $('#job_seeker_name').text(response.job_seeker_name);
+          $('#job_seeker_address').text(response.job_seeker_address);
+          $('#job_seeker_phone').text(response.job_seeker_phone);
+          $('#job_seeker_resume').text(response.job_seeker_resume);
+          $('#job_seeker_cv').attr('href', cvUrl);
+          $('#job_seeker_certificate').attr('href', certificateUrl);
+          hideLoadingIndicator();
+        },
+        error: function() {
+          $('#profile_picture').attr('src', '');
+          $('#job_seeker_name').text('Unable to load details.');
+          $('#job_seeker_address').text('Unable to load details.');
+          $('#job_seeker_phone').text('Unable to load details.');
+          $('#job_seeker_resume').text('Unable to load details.');
+        }
+      });
+    });
+  });
+      
+      function hideText() {
+          $('#profile_picture').attr('src', '');
+        $('#job_seeker_name').text('');
+          $('#job_seeker_address').text('');
+          $('#job_seeker_phone').text('');
+          $('#job_seeker_resume').text('');
+      }
+
+      $('#detailModal').on('show.bs.modal', function (event) {
+        hideText();
+      showLoadingIndicator();
+      var button = $(event.relatedTarget); // Tombol yang memicu modal
+      var jobSeekerId = button.data('seeker-id');
+      var jobId = button.data('job-id');
+
+      // Lakukan permintaan AJAX untuk mengambil detail job seeker
+      $.ajax({
+        url: '/company/lamaranmasuk/detail/' + jobSeekerId + '/' + jobId,
+        method: 'GET',
+        success: function(response) {
+          // Asumsi respons adalah objek JSON dengan atribut yang diperlukan
+          var profilePictureUrl = "{{ asset('storage/profile_pictures') }}" + '/' + response.profile_picture;
+          // var cvUrl = '{{ route('company.lamaranmasuk.cv', ':id') }}'.replace(':id', response.id_file);
+          // var certificateUrl = '{{ route('company.lamaranmasuk.certificate', ':id') }}'.replace(':id', response.id_file);
+          var cvUrl = '{{ asset('storage/' . ':cv') }}'.replace(':cv', response.job_seeker_cv);
+          var certificateUrl = '{{ asset('storage/' . ':certificate') }}'.replace(':certificate', response.job_seeker_certificate);
+
+          $('#profile_picture').attr('src', profilePictureUrl);
+          $('#job_seeker_name').text(response.job_seeker_name);
+          $('#job_seeker_address').text(response.job_seeker_address);
+          $('#job_seeker_phone').text(response.job_seeker_phone);
+          $('#job_seeker_resume').text(response.job_seeker_resume);
+          $('#job_seeker_cv').attr('href', cvUrl);
+          $('#job_seeker_certificate').attr('href', certificateUrl);
+          hideLoadingIndicator();
+        },
+        error: function() {
+          $('#profile_picture').attr('src', '');
+          $('#job_seeker_name').text('Unable to load details.');
+          $('#job_seeker_address').text('Unable to load details.');
+          $('#job_seeker_phone').text('Unable to load details.');
+          $('#job_seeker_resume').text('Unable to load details.');
+        }
+      });
+    });
 </script>
 @endsection

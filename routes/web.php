@@ -83,8 +83,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/dashboard', [CompanyController::class, 'showDashboard'])->name('company.dashboard');
     Route::get('/company/setting', [CompanyController::class, 'showSetting'])->name('company.setting');
+    Route::get('/api/apply-job-data', [CompanyController::class, 'getApplyJobData']); //chart
+    Route::get('/api/notification', [CompanyController::class, 'getNotifications'])->name('notifications');; //chart
+    
+    //profile
     Route::get('/company/profile', [CompanyController::class, 'showProfile'])->name('company.profile');
-    Route::get('/api/apply-job-data', [CompanyController::class, 'getApplyJobData']);
     Route::post('/company/profile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
     Route::get('/company/editprofile', [CompanyController::class, 'editProfile'])->name('company.editprofile');
     // Halaman list lowongan kerja
@@ -99,6 +102,8 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::delete('/company/{id}/delete', [CompanyController::class, 'deleteJob'])->name('company.deletejob');
 
     Route::post('/company/updateprofile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
+    Route::delete('/company/deletelogo', [CompanyController::class, 'deleteLogo'])->name('company.deleteLogo');
+    Route::post('/company/updatepassword', [CompanyController::class, 'setNewPassword'])->name('company.setNewPassword');
 
     // Routes for managing jobs
     Route::get('/company/jobs', [JobListingController::class, 'showJobs'])->name('company.jobs');
@@ -117,7 +122,9 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::post('/company/lamaranmasuk/{id}/reject', [ApplyJobController::class, 'rejectLamaran'])->name('company.lamaranmasuk.reject');
     Route::post('/company/lamaranmasuk/{id}/accept', [ApplyJobController::class, 'acceptLamaran'])->name('company.lamaranmasuk.accept');
     // Route::get('/company/lamaranmasuk/{id}/detail', [ApplyJobController::class, 'showDetail'])->name('company.lamaranmasuk.detail');
-    Route::get('/company/lamaranmasuk/detail/{id}', [ApplyJobController::class, 'showDetailModal'])->name('company.lamaranmasuk.detail');
+    Route::get('/company/lamaranmasuk/detail/{id}/{job_id}', [ApplyJobController::class, 'showDetailModal'])->name('company.lamaranmasuk.detail');
+    Route::get('/company/lamaranmasuk/preview/cv/{id}', [ApplyJobController::class, 'showCv'])->name('company.lamaranmasuk.cv');
+    Route::get('/company/lamaranmasuk/preview/certificate/{id}', [ApplyJobController::class, 'showCertificate'])->name('company.lamaranmasuk.certificate');
 });
 
 Route::middleware(['auth', 'job_seeker'])->group(function () {

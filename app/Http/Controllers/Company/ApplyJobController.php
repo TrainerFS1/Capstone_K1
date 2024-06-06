@@ -57,36 +57,39 @@ class ApplyJobController extends Controller
 
         return response()->json(['message' => 'Application Accepted successfully']);
     }
-    public function showDetailModal($id)
-{
-    $jobseeker = JobSeeker::find($id);
-
-    if (!$jobseeker) {
-        return response()->json(['message' => 'JobSeeker not found'], 404);
-    }
-
-    // Mengembalikan detail jobseeker dalam format JSON
-    return response()->json([
-        'profile_picture' => $jobseeker->profile_picture, // Asumsikan ada atribut profile_picture
-        'job_seeker_name' => $jobseeker->job_seeker_name, // Asumsikan ada atribut name
-        'job_seeker_address' => $jobseeker->job_seeker_address, // Asumsikan ada atribut address
-        'job_seeker_phone' => $jobseeker->job_seeker_phone, // Asumsikan ada atribut phone
-        'job_seeker_resume' => $jobseeker->job_seeker_resume, // Asumsikan ada atribut resume
-    ]);
-}
-
-
-
-
-    public function showDetail($id)
+    public function showDetailModal(Request $request, $id, $jobId)
     {
-        $user = Auth::user();
-        $company = Company::where('user_id', Auth::id())->first();
         $jobseeker = JobSeeker::find($id);
 
         if (!$jobseeker) {
-            return redirect(route('company.lamaranmasuk'));
+            return response()->json(['message' => 'JobSeeker /ApplyJob not found'], 404);
         }
-        return view('company.jobapply.detailapply', compact('company', 'user', 'jobseeker'));
+
+        $applyJob = ApplyJob::where('job_seeker_id', $id)->where('job_id', $jobId)->first();
+        $idfile = $applyJob->file_jobseeker_id;
+        $fileJobseeker = FileJobSeeker::find($idfile);
+        $cv = $fileJobseeker->cv;
+        $certificate = $fileJobseeker->certificate;
+
+        // Mengembalikan detail jobseeker dalam format JSON
+        return response()->json([
+            'profile_picture' => $jobseeker->profile_picture, // Asumsikan ada atribut profile_picture
+            'job_seeker_name' => $jobseeker->job_seeker_name, // Asumsikan ada atribut name
+            'job_seeker_address' => $jobseeker->job_seeker_address, // Asumsikan ada atribut address
+            'job_seeker_phone' => $jobseeker->job_seeker_phone, // Asumsikan ada atribut phone
+            'job_seeker_resume' => $jobseeker->job_seeker_resume, // Asumsikan ada atribut resume
+            // 'id_file' => $idFile,
+            'job_seeker_cv' => $cv, // Asumsikan ada atribut CV
+            'job_seeker_certificate' => $certificate, // Asumsikan ada atribut Certificate
+        ]);
+    }
+
+    public function showCv($id)
+    {
+        $file = FileJobSeeker::find($id);
+        $cv = $file->cv;
+
+        return view('company.jobapply.previewPdf', compact('cv'));
+
     }
 }

@@ -119,13 +119,9 @@
                                 <div class="position-absolute top-0 end-0 m-3">
                                     <form action="{{ route('saveJob', $job->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-outline-primary">
-                                            <i class="fa fa-bookmark"></i>
-                                        </button>
-                                            <a href="#" class="btn btn-warning ms-auto" rel="noreferrer">
-                                            <i class="fas fa-bookmark me-2"></i> <!-- Icon for Saved Jobs -->
-                                            Save This Job
-                                        </a>
+                                        <button type="submit" class="btn btn-warning ms-auto" >
+                                            <i class="fas fa-bookmark me-2"></i>Save This Job
+                                       
                                     </div>
 
                                 </form>

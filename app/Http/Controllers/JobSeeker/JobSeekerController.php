@@ -169,14 +169,6 @@ class JobSeekerController extends Controller
     }
 
 
-    //detail job seeker yang melamar
-    public function show($id)
-    {
-        $user = Auth::user();
-        
-        // $jobSeeker = JobSeeker::findOrFail($id);
-        $jobSeeker = JobSeeker::with('fileJobSeekers')->findOrFail($id);
-        return view('company.listjob.jobseeker-detail', compact('jobSeeker', 'user'));
-    }
+
 
 }

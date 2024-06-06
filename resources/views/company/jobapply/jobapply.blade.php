@@ -59,13 +59,13 @@
                                 <div class="card col-12">
                                   <div class="card-body p-4 text-center">
                                     <span class="avatar avatar-xl mb-3 rounded" style="background-image: url('{{ asset('storage/profile_pictures/' . $applyJob->jobSeeker->profile_picture) }}')"></span>
-                                    <h3 class="m-0 mb-1"><a href="#">{{ $applyJob->jobSeeker->job_seeker_name }}</a></h3>
+                                    <h3 class="m-0 mb-1">{{ $applyJob->jobSeeker->job_seeker_name}} </h3>
                                     <div class="text-secondary">Phone: {{ $applyJob->jobSeeker->job_seeker_phone }}</div>
                                     <div class="mt-3">
                                     <!-- Tombol untuk memunculkan modal -->
                                     {{-- <span class="badge bg-purple-lt"><a href="{{ route('company.lamaranmasuk.detail', $applyJob->jobSeeker->id) }}">Detail</a></span> --}}
                                     <span class="">
-                                      <button type="button" class="btn btn-md btn-cyan" data-bs-toggle="modal" data-bs-target="#detailModal" data-id="{{ $applyJob->jobSeeker->id }}">
+                                      <button type="button" class="btn btn-md btn-cyan" data-bs-toggle="modal" data-bs-target="#detailModal" data-job-id="{{ $job->id }}" data-seeker-id="{{ $applyJob->jobSeeker->id }}">
                                         Detail
                                       </button>
                                     </span>
@@ -179,29 +179,54 @@
     });
     // modal detail job
     $(document).ready(function() {
-    $('#detailModal').on('show.bs.modal', function (event) {
+      function showLoadingIndicator() {
+        $('.progress').show(); // Reset dan tampilkan indikator kemajuan
+      }
+      function hideLoadingIndicator() {
+        $('.progress').hide();
+      }
+      function hideText() {
+          $('#profile_picture').attr('src', '');
+        $('#job_seeker_name').text('');
+          $('#job_seeker_address').text('');
+          $('#job_seeker_phone').text('');
+          $('#job_seeker_resume').text('');
+      }
+
+      $('#detailModal').on('show.bs.modal', function (event) {
+        hideText();
+      showLoadingIndicator();
       var button = $(event.relatedTarget); // Tombol yang memicu modal
-      var jobSeekerId = button.data('id'); // Ambil data-id dari tombol
+      var jobSeekerId = button.data('seeker-id');
+      var jobId = button.data('job-id');
 
       // Lakukan permintaan AJAX untuk mengambil detail job seeker
       $.ajax({
-        url: '/company/lamaranmasuk/detail/' + jobSeekerId,
+        url: '/company/lamaranmasuk/detail/' + jobSeekerId + '/' + jobId,
         method: 'GET',
         success: function(response) {
           // Asumsi respons adalah objek JSON dengan atribut yang diperlukan
           var profilePictureUrl = "{{ asset('storage/profile_pictures') }}" + '/' + response.profile_picture;
+          // var cvUrl = '{{ route('company.lamaranmasuk.cv', ':id') }}'.replace(':id', response.id_file);
+          // var certificateUrl = '{{ route('company.lamaranmasuk.certificate', ':id') }}'.replace(':id', response.id_file);
+          var cvUrl = '{{ asset('storage/' . ':cv') }}'.replace(':cv', response.job_seeker_cv);
+          var certificateUrl = '{{ asset('storage/' . ':certificate') }}'.replace(':certificate', response.job_seeker_certificate);
+
           $('#profile_picture').attr('src', profilePictureUrl);
           $('#job_seeker_name').text(response.job_seeker_name);
           $('#job_seeker_address').text(response.job_seeker_address);
           $('#job_seeker_phone').text(response.job_seeker_phone);
           $('#job_seeker_resume').text(response.job_seeker_resume);
+          $('#job_seeker_cv').attr('href', cvUrl);
+          $('#job_seeker_certificate').attr('href', certificateUrl);
+          hideLoadingIndicator();
         },
         error: function() {
           $('#profile_picture').attr('src', '');
           $('#job_seeker_name').text('Unable to load details.');
-          $('#job_seeker_address').text('');
-          $('#job_seeker_phone').text('');
-          $('#job_seeker_resume').text('');
+          $('#job_seeker_address').text('Unable to load details.');
+          $('#job_seeker_phone').text('Unable to load details.');
+          $('#job_seeker_resume').text('Unable to load details.');
         }
       });
     });
