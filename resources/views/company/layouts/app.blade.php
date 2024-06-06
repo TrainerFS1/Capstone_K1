@@ -17,10 +17,10 @@
 <?php $notifications = [] ?>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('dist/css/tabler-flags.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet"/>
+    {{-- <link href="{{ asset('dist/css/tabler-flags.min.css') }}" rel="stylesheet"/> --}}
+    {{-- <link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet"/> --}}
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
+    {{-- <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/> --}}
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -229,13 +229,14 @@
     </div>
     @yield('modal')
     <!-- Libs JS -->
-    <script src="{{ asset('dist/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script>
-    <script src="{{ asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js') }}" defer></script>
-    <script src="{{ asset('dist/libs/jsvectormap/dist/maps/world.js') }}" defer></script> 
-    <script src="{{ asset('dist/libs/jsvectormap/dist/maps/world-merc.js') }}" defer></script>
+    {{-- <script src="{{ asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js') }}" defer></script>
+    <script src="{{ asset('dist/libs/jsvectormap/dist/maps/world.js') }}" defer></script>  --}}
+    {{-- <script src="{{ asset('dist/libs/jsvectormap/dist/maps/world-merc.js') }}" defer></script> --}}
     <!-- Tabler Core -->
     <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
-    <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
+    {{-- <script src="{{ asset('dist/js/demo.min.js') }}" defer></script> --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script>
       function showLoadingIndicator() {
         $('.progress').hide().show(); // Reset dan tampilkan indikator kemajuan
