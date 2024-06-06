@@ -61,11 +61,14 @@
                                     <span class="avatar avatar-xl mb-3 rounded" style="background-image: url('{{ asset('storage/profile_pictures/' . $applyJob->jobSeeker->profile_picture) }}')"></span>
                                     <h3 class="m-0 mb-1"><a href="#">{{ $applyJob->jobSeeker->job_seeker_name }}</a></h3>
                                     <div class="text-secondary">Phone: {{ $applyJob->jobSeeker->job_seeker_phone }}</div>
-                                    {{-- <div class="mt-3">
-                                      <span class="badge bg-purple-lt">{{ $applyJob->jobSeeker->user->user_type  == 'job_seeker' ? 'Job Seeker' : ''}}</span>
-                                    </div> --}}
                                     <div class="mt-3">
-                                    <span class="badge bg-purple-lt"><a href="{{ route('company.jobseeker.detail', $applyJob->jobSeeker->id) }}">Detail</a></span>
+                                    <!-- Tombol untuk memunculkan modal -->
+                                    {{-- <span class="badge bg-purple-lt"><a href="{{ route('company.lamaranmasuk.detail', $applyJob->jobSeeker->id) }}">Detail</a></span> --}}
+                                    <span class="">
+                                      <button type="button" class="btn btn-md btn-cyan" data-bs-toggle="modal" data-bs-target="#detailModal" data-id="{{ $applyJob->jobSeeker->id }}">
+                                        Detail
+                                      </button>
+                                    </span>
                                     </div>
                                   </div>
                                   @if ($applyJob->status == 'inprogress')
@@ -116,7 +119,8 @@
       </div>
     </div>
 
-    @include('company.layouts.modaladdjob')
+@include('company.layouts.modaladdjob')
+@include('company.layouts.modaldetailjobseeker')
 @endsection
 @section('customjs')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -173,5 +177,34 @@
             }
         });
     });
+    // modal detail job
+    $(document).ready(function() {
+    $('#detailModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget); // Tombol yang memicu modal
+      var jobSeekerId = button.data('id'); // Ambil data-id dari tombol
+
+      // Lakukan permintaan AJAX untuk mengambil detail job seeker
+      $.ajax({
+        url: '/company/lamaranmasuk/detail/' + jobSeekerId,
+        method: 'GET',
+        success: function(response) {
+          // Asumsi respons adalah objek JSON dengan atribut yang diperlukan
+          var profilePictureUrl = "{{ asset('storage/profile_pictures') }}" + '/' + response.profile_picture;
+          $('#profile_picture').attr('src', profilePictureUrl);
+          $('#job_seeker_name').text(response.job_seeker_name);
+          $('#job_seeker_address').text(response.job_seeker_address);
+          $('#job_seeker_phone').text(response.job_seeker_phone);
+          $('#job_seeker_resume').text(response.job_seeker_resume);
+        },
+        error: function() {
+          $('#profile_picture').attr('src', '');
+          $('#job_seeker_name').text('Unable to load details.');
+          $('#job_seeker_address').text('');
+          $('#job_seeker_phone').text('');
+          $('#job_seeker_resume').text('');
+        }
+      });
+    });
+  });
 </script>
 @endsection
