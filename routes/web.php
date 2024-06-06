@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\KelJobController;
 use App\Http\Controllers\JobSeeker\SaveJobsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\Admin\KelJobSeekerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,9 +75,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/datacompany/{id}/delete', [KelCompanyController::class, 'deleteCompany'])->name('admin.deletecompany');
 
     Route::get('/admin/datajob', [KelJobController::class, 'index'])->name('admin.joblisting');
-    Route::get('/admin/datajob/{id}/edit', [KelJobController::class, 'edit'])->name('admin.jobedit');
-    Route::post('/admin/datajob/{id}/edit', [KelJobController::class, 'update'])->name('admin.editjob');
+    Route::get('/admin/datajob/{id}/detail', [KelJobController::class, 'ShowdetailJobAdmin'])->name('admin.jobdetail');
     Route::delete('/admin/datajob/{id}/delete', [KelJobController::class, 'destroy'])->name('admin.deletejob');
+    Route::put('/admin/datajob/{id}/updatestatus', [KelJobController::class, 'updateStatus'])->name('admin.updatestatus');
+
+    Route::get('jobseekers', [KelJobSeekerController::class, 'index'])->name('admin.jobseekers.index');
+    Route::get('jobseekers/{jobseeker}', [KelJobSeekerController::class, 'show'])->name('admin.jobseekers.show');
 });
 
 
