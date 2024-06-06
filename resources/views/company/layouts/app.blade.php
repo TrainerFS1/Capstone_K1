@@ -184,7 +184,7 @@
                 <a href="{{ route('company.profile') }}" class="dropdown-item">Profile</a>
                 {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                 {{-- <div class="dropdown-divider"></div> --}}
-                <a href="{{ route('company.setting') }}" class="dropdown-item">Settings</a>
+                <a href="{{ route('password.change') }}" class="dropdown-item">Settings</a>
                 <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
               </div>
             </div>

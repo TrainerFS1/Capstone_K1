@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('main')    
+@section('main')
 
 <!-- Page body -->
 <style>
@@ -103,11 +103,11 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="{{ asset('images/bg.png') }}" class="d-block w-100" alt="...">
+                <img src="{{ asset('images/bg2.png') }}" class="d-block w-100" alt="...">
                 <div class="carousel-caption d-none d-md-block text-start custom-caption">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 col-xl-8">
+                            <div class="col-12 col-xl-8 ml-1">
                                 <h1 class="huruf mb-4">Ciptakan Lowongan</h1>
                                 <h1 class="huruf">Di Sini</h1>
                                 <p>Lebih dari 1000 karyawan mencari pekerjaan disini.</p>

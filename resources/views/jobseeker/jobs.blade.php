@@ -1,31 +1,31 @@
 @extends('layouts.app')
 
 @section('main')
-    <section class="section-3 py-5 bg-2">
+    <section class="section-3 py-5 bg-2"">
         <div class="container">
-            <div class="row">
-                <div class="col-6 col-md-10">
-                    <h2>Find Jobs</h2>
-                </div>
-            </div>
+        <img src="{{ asset('images/bg.png') }}" class="d-block w-100" alt="...">
+
 
             <div class="row pt-5">
 
                 <div class="col-md-4 col-lg-3 sidebar mb-4">
                 <form action="{{ route('jobs.search') }}" name="searchForm" id="searchForm" method="GET">
-                        <div class="card border-0 shadow p-4">
+                <div class="card border-0 shadow p-4" style="background-color:#fdc344; color:white;">
+                    <h2>Find Jobs</h2>
+            </div>
+                        <div class="card border-0 shadow p-4" style="background-color:#042445; color:white;">
                             <div class="mb-4">
-                                <h2>Keywords</h2>
-                                <input value="{{ Request::get('keyword') }}" type="text" name="keyword" id="keyword" placeholder="Keywords" class="form-control">
+                                <h3 class="mb-1">Cari Pekerjaan</h3>
+                                <input value="{{ Request::get('keyword') }}" type="text" name="keyword" id="keyword" placeholder="Cari pekerjaan..." class="form-control">
                             </div>
 
                             <div class="mb-4">
-                                <h2>Location</h2>
+                                <h3 class="mb-1">Location</h3>
                                 <input value="{{ Request::get('location') }}" type="text" name="location" id="location" placeholder="Location" class="form-control">
                             </div>
 
                             <div class="mb-4">
-                                <h2>Category</h2>
+                                <h3 class="mb-1">Category</h3>
                                 <select name="category" id="category" class="form-control">
                                     <option value="">all categories</option>
                                     @foreach ($categories as $category)
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="mb-4">
-                                <h2>Job Type</h2>
+                                <h3 class="mb-1">Job Type</h3>
                                 @foreach ($jobTypes as $jobType)
                                     <div class="form-check mb-2">
                                         <input {{ (in_array($jobType->id, $jobTypeArray)) ? 'checked' : '' }} class="form-check-input" name="job_type[]" type="checkbox" value="{{ $jobType->id }}" id="job-type-{{ $jobType->id }}">
@@ -162,5 +162,3 @@
 </script>
 
 @endsection
-
-

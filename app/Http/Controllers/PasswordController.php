@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\JobSeeker;
 class PasswordController extends Controller
 {
     public function showChangePasswordForm()
     {
-        return view('auth.change-password');
+        // Mengambil JobSeeker berdasarkan user_id yang sedang login
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+
+        return view('auth.change-password',['jobSeeker' => $jobSeeker]);
     }
 
     public function changePassword(Request $request)

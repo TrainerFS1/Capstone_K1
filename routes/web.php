@@ -12,6 +12,7 @@ use App\Http\Controllers\Job\JobController;
 use App\Http\Controllers\Admin\KelCompanyController;
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\KelJobController;
 use App\Http\Controllers\JobSeeker\SaveJobsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PasswordController;
@@ -65,14 +66,19 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    // Routes for admin dashboard
+    // Routes untuk dashboard admin
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/datacompany', [KelCompanyController::class, 'showKelCompany'])->name('admin.companylist');
     Route::get('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'showEditCompany'])->name('admin.companyedit');
     Route::post('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'updateCompany'])->name('admin.editcompany');
-    Route::delete('/admin/{id}/delete', [KelCompanyController::class, 'deleteCompany'])->name('admin.deletecompany');
-    // Tambahkan rute admin di sini jika ada
+    Route::delete('/admin/datacompany/{id}/delete', [KelCompanyController::class, 'deleteCompany'])->name('admin.deletecompany');
+
+    Route::get('/admin/datajob', [KelJobController::class, 'index'])->name('admin.joblisting');
+    Route::get('/admin/datajob/{id}/edit', [KelJobController::class, 'edit'])->name('admin.jobedit');
+    Route::post('/admin/datajob/{id}/edit', [KelJobController::class, 'update'])->name('admin.editjob');
+    Route::delete('/admin/datajob/{id}/delete', [KelJobController::class, 'destroy'])->name('admin.deletejob');
 });
+
 
 Route::middleware(['auth', 'company'])->group(function () {
     Route::get('/company/dashboard', [CompanyController::class, 'showDashboard'])->name('company.dashboard');

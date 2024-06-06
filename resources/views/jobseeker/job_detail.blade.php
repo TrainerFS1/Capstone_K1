@@ -105,7 +105,8 @@
                                                     @enderror
                                                 </div>
 
-                                                <button type="submit" class="btn btn-primary">
+                                                <div class="d-flex">
+                                        <button type="submit" class="btn btn-primary">
                                                     <i class="fa fa-paper-plane"></i>&nbsp; Lamar Sekarang
                                                 </button>
                                             </form>
@@ -121,7 +122,13 @@
                                         <button type="submit" class="btn btn-outline-primary">
                                             <i class="fa fa-bookmark"></i>
                                         </button>
-                                    </form>
+                                            <a href="#" class="btn btn-warning ms-auto" rel="noreferrer">
+                                            <i class="fas fa-bookmark me-2"></i> <!-- Icon for Saved Jobs -->
+                                            Save This Job
+                                        </a>
+                                    </div>
+
+                                </form>
                                 </div>
                             @else
                                 <div class="alert alert-info mt-4" role="alert">
