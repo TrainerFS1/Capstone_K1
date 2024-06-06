@@ -26,10 +26,10 @@
                     <div class="card shadow border-0 p-3 position-relative">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 mb-5">
                                     <div class="company_logo mb-3">
                                         @if (!empty($job->company->company_logo))
-                                            <img src="{{ asset('storage/' . $job->company->logo) }}" class="img-fluid" alt="Company Logo">
+                                            <img src="{{ asset('storage/company_logo/' . $job->company->company_logo) }}" class="img-fluid" alt="Company Logo">
                                         @else
                                             <img src="{{ asset('images/default-logo.png') }}" class="img-fluid" alt="Company Logo">
                                         @endif
@@ -106,9 +106,10 @@
                                                 </div>
 
                                                 <div class="d-flex">
-                                        <button type="submit" class="btn btn-primary">
-                                                    <i class="fa fa-paper-plane"></i>&nbsp; Lamar Sekarang
-                                                </button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        <i class="fa fa-paper-plane"></i>&nbsp; Lamar Sekarang
+                                                    </button>
+                                                </div>
                                             </form>
                                         @else
                                             <p>Anda sudah melamar pekerjaan ini.</p>
@@ -119,12 +120,10 @@
                                 <div class="position-absolute top-0 end-0 m-3">
                                     <form action="{{ route('saveJob', $job->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-warning ms-auto" >
+                                        <button type="submit" class="btn btn-warning ms-auto">
                                             <i class="fas fa-bookmark me-2"></i>Save This Job
-                                       
-                                    </div>
-
-                                </form>
+                                        </button>
+                                    </form>
                                 </div>
                             @else
                                 <div class="alert alert-info mt-4" role="alert">
@@ -171,7 +170,5 @@
             cvInput.disabled = initialChecked;
             certificateInput.disabled = initialChecked;
         });
-
-        
     </script>
 @endpush

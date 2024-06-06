@@ -23,9 +23,9 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
-                                    <div class="company_logo mb-3">
+                                    <div class="company_logo mb-5">
                                         @if (!empty($savedJob->job->company->company_logo))
-                                            <img src="{{ asset('storage/' . $savedJob->job->company->company_logo) }}" class="img-fluid" alt="Company Logo">
+                                            <img src="{{ asset('storage/company_logo/' . $savedJob->job->company->company_logo) }}" class="img-fluid" alt="Company Logo">
                                         @else
                                             <img src="{{ asset('images/default-logo.png') }}" class="img-fluid" alt="Company Logo">
                                         @endif
