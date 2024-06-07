@@ -67,7 +67,6 @@ Route::middleware('guest')->group(function () {
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-
 Route::middleware(['auth', 'admin'])->group(function () {
     // Routes untuk dashboard admin
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
@@ -150,6 +149,7 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
     Route::delete('/saved-jobs/{savedJob}', [SaveJobsController::class, 'deleteSavedJob'])->name('deleteSavedJob');
 
     Route::get('/jobseeker/history', [JobSeekerApplyJobController::class, 'history'])->name('jobseeker.history');
+    Route::get('/jobs/{id}', [JobSeekerApplyJobController::class, 'jobDetail'])->name('jobs.show');
 
 
 });

@@ -105,4 +105,20 @@ class JobSeekerApplyJobController extends Controller
     
         return view('jobseeker.jobs.history', compact('jobSeeker', 'appliedJobs'));
     }
+    public function jobDetail($id)
+    {
+        $job = Job::with(['jobType', 'category', 'company'])->findOrFail($id);
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+        $appliedJob = ApplyJob::where('job_seeker_id', $jobSeeker->id)
+                              ->where('job_id', $id)
+                              ->first();
+    
+        if (!$appliedJob) {
+            return response()->json(['error' => 'You have not applied for this job.'], 404);
+        }
+    
+        return view('jobseeker.jobs.partials.detailhistory', compact('job', 'appliedJob'));
+    }
+    
+
 }

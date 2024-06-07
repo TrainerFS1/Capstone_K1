@@ -36,7 +36,7 @@
                                 @case('inprogress')
                                     <span class="badge rounded-pill text-bg-info">{{ $appliedJob->status }}</span>
                                     @break
-                                @case('accept')
+                                @case('accepted')
                                     <span class="badge rounded-pill text-bg-success">{{ $appliedJob->status }}</span>
                                     @break
                                 @default
@@ -44,7 +44,7 @@
                             @endswitch
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary">View Job</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#jobDetailModal" data-job-id="{{ $appliedJob->job->id }}">Detail</button>
                         </td>
                     </tr>
                 @endforeach
@@ -56,4 +56,47 @@
     <p>No jobs applied yet.</p>
     @endif
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="jobDetailModal" tabindex="-1" aria-labelledby="jobDetailModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="jobDetailModalLabel">Job Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Job details will be loaded here via AJAX -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var jobDetailModal = document.getElementById('jobDetailModal');
+
+    jobDetailModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var jobId = button.getAttribute('data-job-id');
+
+        var modalBody = jobDetailModal.querySelector('.modal-body');
+        modalBody.innerHTML = 'Loading...';
+
+        fetch(`/jobs/${jobId}`)
+            .then(response => response.text())
+            .then(data => {
+                modalBody.innerHTML = data;
+            })
+            .catch(error => {
+                modalBody.innerHTML = 'Error loading job details';
+            });
+    });
+});
+</script>
+@endpush
