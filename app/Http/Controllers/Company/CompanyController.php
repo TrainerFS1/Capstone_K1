@@ -71,7 +71,7 @@ class CompanyController extends Controller
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $company = Company::where('user_id', Auth::id())->firstOrFail();
         $user = User::where('id', Auth::id())->firstOrFail();
-        
+
         // Ambil data industries
         $industries = Industry::all();
 
@@ -200,15 +200,30 @@ class CompanyController extends Controller
             ->orderBy('date', 'ASC')
             ->get();
 
-        // Siapkan format data untuk chart
-        $dates = $data->pluck('date')->toArray();
-        $applyJobData = $data->pluck('count')->toArray();
+        // Inisialisasi rentang tanggal (misalnya 30 hari terakhir)
+        $start = now()->subDays(30);
+        $end = now();
+        $dates = [];
+        $applyJobData = [];
+
+        // Siapkan format data dengan mengisi tanggal yang hilang
+        while ($start->lte($end)) {
+            $dateStr = $start->format('Y-m-d');
+            $dates[] = $dateStr;
+
+            // Cari data untuk tanggal ini
+            $dateData = $data->firstWhere('date', $dateStr);
+            $applyJobData[] = $dateData ? $dateData->count : 0;
+
+            $start->addDay();
+        }
 
         return response()->json([
             'dates' => $dates,
             'apply_job_data' => $applyJobData
         ]);
     }
+
 
     public function showJobs()
     {
@@ -412,7 +427,4 @@ class CompanyController extends Controller
 
         return response()->json($formattedNotifications);
     }
-
-    
 }
-
