@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Job;
 use App\Models\FileJobSeeker;
 use App\Models\ApplyJob;
+use App\Models\JobSeeker;
+use App\Models\Company;
 use Illuminate\Support\Facades\Validator;
 
 class JobSeekerApplyJobController extends Controller
@@ -90,5 +92,17 @@ class JobSeekerApplyJobController extends Controller
                      ->with('alreadyApplied', $alreadyApplied);
     }
     
-
+    public function history()
+    {
+        // Get the logged in job seeker
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+        
+        // Fetch the job applications for the logged in job seeker
+        $appliedJobs = ApplyJob::where('job_seeker_id', $jobSeeker->id)
+                               ->with('job')
+                               ->orderBy('created_at', 'desc')
+                               ->paginate(10);
+    
+        return view('jobseeker.jobs.history', compact('jobSeeker', 'appliedJobs'));
+    }
 }

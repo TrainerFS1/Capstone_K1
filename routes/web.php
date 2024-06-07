@@ -148,6 +148,10 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
     Route::get('/saved-jobs', [SaveJobsController::class, 'savedJobs'])->name('savedJobs');
     Route::get('/saved-jobs/{id}', [SaveJobsController::class, 'showSavedJob'])->name('showSavedJob');
     Route::delete('/saved-jobs/{savedJob}', [SaveJobsController::class, 'deleteSavedJob'])->name('deleteSavedJob');
+
+    Route::get('/jobseeker/history', [JobSeekerApplyJobController::class, 'history'])->name('jobseeker.history');
+
+
 });
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');

@@ -333,6 +333,7 @@
                   <a href="{{ route('jobseeker.profile') }}" class="dropdown-item">Profile</a>
                   <a href="{{ route('password.change') }}" class="dropdown-item">Settings</a>
                   <a href="{{ route('savedJobs') }}" class="dropdown-item">Saved Jobs</a>
+                  <a href="{{ route('jobseeker.history') }}" class="dropdown-item">History Apply Job</a>
                   <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                 @else
                   <a href="{{ route('loginJobSeeker') }}" class="dropdown-item">Login</a>
@@ -415,6 +416,7 @@
 <!-- Tabler Core -->
 <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
 <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const footer = document.querySelector('footer');
