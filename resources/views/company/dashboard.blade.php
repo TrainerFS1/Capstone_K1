@@ -564,8 +564,9 @@
 @include('company.layouts.modaladdjob')
 @include('company.layouts.modaldetailjobseeker')
 @endsection @section('customjs')
-<script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ asset('dist/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script>
+
+{{-- <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/libs/apexcharts/dist/apexcharts.min.js" defer></script> --}}
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Fetch data from the server
