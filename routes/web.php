@@ -31,8 +31,10 @@ use App\Http\Controllers\Admin\KelJobSeekerController;
 
 Route::get('/', [FrontController::class, 'index'])->name('front');
 Route::get('/jobs', [JobController::class, 'index'])->name('jobs');
-Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
+Route::get('/jobs/search/ajax', [JobController::class, 'searchJobsAjax'])->name('jobs.search.ajax');
 Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
+
+
 
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('forgot-password');
