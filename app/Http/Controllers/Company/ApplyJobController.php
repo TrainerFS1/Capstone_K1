@@ -59,6 +59,16 @@ class ApplyJobController extends Controller
     }
     public function showDetailModal(Request $request, $id, $jobId)
     {
+        // cek apakah company id yang ada di table jobs sesuai dengan id company yang sedang login
+        $company = Company::where('user_id', Auth::id())->firstOrFail();
+        $job = Job::where('id', $jobId)
+        ->where('company_id', $company->id)
+        ->first();
+        if (!$job) {
+            // Job tidak ditemukan dan company_id tidak sesuai
+            return response()->json(['message' => 'Job ID tidak valid'], 404);
+        }
+
         $jobseeker = JobSeeker::find($id);
 
         if (!$jobseeker) {
