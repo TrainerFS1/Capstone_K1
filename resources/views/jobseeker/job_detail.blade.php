@@ -116,12 +116,15 @@
                                         @endif
                                     </div>
                                 </div>
+                                @php
+                                    $alreadySaved = $jobSeeker->savedJobs->contains('job_id', $job->id);
+                                @endphp
 
                                 <div class="position-absolute top-0 end-0 m-3">
                                     <form action="{{ route('saveJob', $job->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-warning ms-auto">
-                                            <i class="fas fa-bookmark me-2"></i>Save This Job
+                                        <button type="submit" class="btn btn-{{ $alreadySaved ? 'success' : 'warning' }} ms-auto">
+                                            <i class="fas fa-bookmark me-2"></i>{{ $alreadySaved ? 'Saved' : 'Save This Job' }}
                                         </button>
                                     </form>
                                 </div>
