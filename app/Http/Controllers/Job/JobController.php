@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Job;
 use App\Models\Category;
+use App\Models\ApplyJob;
 use App\Models\JobSeeker;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +41,6 @@ class JobController extends Controller
         }
 
         $jobs = $jobsQuery->paginate(10)->withQueryString();
-
         $categories = Category::all();
         $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
 
@@ -83,12 +83,28 @@ class JobController extends Controller
 
     public function jobDetail($id)
     {
+        // Retrieve job details
         $job = Job::with(['jobType', 'category', 'company'])->findOrFail($id);
-        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
 
-        return view('jobseeker.job_detail', compact('jobSeeker','job'));
+        // Check if the user is authenticated
+        $user = Auth::user();
+        $jobSeeker = null;
+        $alreadyApplied = false;
+
+        if ($user) {
+            // Retrieve job seeker profile if user is authenticated
+            $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+
+            // Check if the job has been applied
+            if ($jobSeeker) {
+                $alreadyApplied = ApplyJob::where('job_id', $job->id)
+                    ->where('job_seeker_id', $jobSeeker->id)
+                    ->exists();
+            }
+        }
+
+        return view('jobseeker.job_detail', compact('jobSeeker', 'job', 'alreadyApplied'));
     }
-
-
-
+    
 }
+

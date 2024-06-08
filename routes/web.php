@@ -82,6 +82,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
     Route::get('jobseekers', [KelJobSeekerController::class, 'index'])->name('admin.jobseekers.index');
     Route::get('jobseekers/{jobseeker}', [KelJobSeekerController::class, 'show'])->name('admin.jobseekers.show');
+    Route::get('/admin/jobs/search', [JobController::class, 'search'])->name('jobs.search');
 });
 
 
@@ -145,7 +146,6 @@ Route::middleware(['auth', 'job_seeker'])->group(function () {
     Route::post('/saveJob/{id}', [SaveJobsController::class, 'saveJob'])->name('saveJob');
     Route::get('/job/{id}/check-saved', [SaveJobsController::class, 'checkSavedJob'])->name('checkSavedJob');
     Route::get('/saved-jobs', [SaveJobsController::class, 'savedJobs'])->name('savedJobs');
-    Route::get('/saved-jobs/{id}', [SaveJobsController::class, 'showSavedJob'])->name('showSavedJob');
     Route::delete('/saved-jobs/{savedJob}', [SaveJobsController::class, 'deleteSavedJob'])->name('deleteSavedJob');
 
     Route::get('/jobseeker/history', [JobSeekerApplyJobController::class, 'history'])->name('jobseeker.history');

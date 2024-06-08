@@ -27,7 +27,7 @@
                                     <td>{{ $job->company->company_name }}</td>
                                     <td>{{ $job->category->category_name }}</td>
                                     <td>
-                                        <span class="badge badge-{{ $job->job_status == 'active' ? 'success' : 'danger' }}">
+                                        <span class="badge rounded-pill text-bg-{{ $job->job_status == 'active' ? 'success' : 'danger' }}">
                                             {{ $job->job_status }}
                                         </span>
                                     </td>

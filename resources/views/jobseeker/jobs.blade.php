@@ -11,9 +11,9 @@
 
     <section class="section-1 py-5">
         <div class="container">
-            <div class="card border-0 shadow p-5">
+            <div class="card border-1 shadow p-5">
                 <form id="searchForm" action="#" method="GET">
-                    <div class="card border-0 shadow p-4 mt-1">
+                    <div class="card border-1 shadow p-4 mt-1">
                         <div class="row">
                             <div class="col-md-3 mb-3 mb-sm-3 mb-lg-0">
                                 <input value="{{ Request::get('keyword') }}" type="text" name="keyword" id="keyword" placeholder="Cari pekerjaan..." class="form-control">
@@ -46,8 +46,8 @@
             <div class="row" id="jobResults">
                 @if ($jobs->isNotEmpty())
                     @foreach ($jobs as $job)
-                        <div class="col-md-6 mb-4">
-                            <div class="card border-0 p-1 shadow">
+                        <div class="col-md-4 mb-4">
+                            <div class="card border-1 p-1 shadow">
                                 <a href="{{ route('jobDetail', $job->id) }}" class="card-body d-flex align-items-center text-decoration-none">
                                     <div class="avatar avatar-xl me-4 rounded">
                                         @if (!empty($job->company->company_logo))

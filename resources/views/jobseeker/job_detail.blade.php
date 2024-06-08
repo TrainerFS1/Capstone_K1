@@ -7,11 +7,11 @@
                 <div class="col">
                     <nav aria-label="breadcrumb" class="rounded-3 p-3">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item">
-                                <a href="{{ route('jobs') }}">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Kembali ke Daftar Pekerjaan
+                        <li class="breadcrumb-item">
+                                <a href="javascript:void(0);" onclick="goBack()">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Kembali
                                 </a>
-                            </li>
+                        </li>
                         </ol>
                     </nav>
                 </div>
@@ -171,4 +171,12 @@
             certificateInput.disabled = initialChecked;
         });
     </script>
+
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
 @endpush
