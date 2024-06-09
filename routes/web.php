@@ -80,8 +80,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/admin/datajob/{id}/delete', [KelJobController::class, 'destroy'])->name('admin.deletejob');
     Route::put('/admin/datajob/{id}/updatestatus', [KelJobController::class, 'updateStatus'])->name('admin.updatestatus');
 
-    Route::get('jobseekers', [KelJobSeekerController::class, 'index'])->name('admin.jobseekers.index');
-    Route::get('jobseekers/{jobseeker}', [KelJobSeekerController::class, 'show'])->name('admin.jobseekers.show');
+    Route::get('/admin/jobseekers', [KelJobSeekerController::class, 'index'])->name('admin.jobseekers.index');
+    Route::get('/admin/jobseekers/{jobseeker}/details', [KelJobSeekerController::class, 'getJobSeekerDetails'])->name('admin.jobseekers.details');
     Route::get('/admin/jobs/search', [JobController::class, 'search'])->name('jobs.search');
 });
 

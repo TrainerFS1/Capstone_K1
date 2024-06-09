@@ -22,10 +22,8 @@ class KelJobSeekerController extends Controller
         return view('admin.datajobseeker.jobseekerlist', compact('user','jobseekers'));
     }
 
-
-    public function show(JobSeeker $jobseeker)
+    public function getJobSeekerDetails(JobSeeker $jobseeker)
     {
-        $user = Auth::user();
-        return view('admin.datajobseeker.jobseekershow', compact('user','jobseeker'));
+        return view('admin.datajobseeker.partials.jobseekerdetails', compact('jobseeker'));
     }
 }
