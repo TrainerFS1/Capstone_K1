@@ -17,6 +17,7 @@ use App\Http\Controllers\JobSeeker\SaveJobsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\Admin\KelJobSeekerController;
+use App\Http\Controllers\GuestCompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,9 @@ Route::get('/jobs/search/ajax', [JobController::class, 'searchJobsAjax'])->name(
 Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
 
 
-
+Route::get('/companies/search', [GuestCompanyController::class, 'search'])->name('guest.companies.search');
+Route::get('/companies/{company}', [GuestCompanyController::class, 'show'])->name('guest.companies.show');
+Route::get('/companies', [GuestCompanyController::class, 'searchCompany'])->name('guest.companies.searchCompany');
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('forgot-password');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
