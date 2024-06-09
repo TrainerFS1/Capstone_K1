@@ -104,6 +104,7 @@ class JobSeekerApplyJobController extends Controller
                                ->paginate(10);
     
         return view('jobseeker.jobs.history', compact('jobSeeker', 'appliedJobs'));
+
     }
     public function jobDetail($id)
     {

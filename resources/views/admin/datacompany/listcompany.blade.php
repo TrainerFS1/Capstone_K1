@@ -10,7 +10,7 @@
             </h2>
           </div>
           <!-- Page title actions -->
-          <div class="col-auto ms-auto d-print-none">
+          {{-- <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
               <a href="" class="btn btn-primary d-none d-sm-inline-block">
                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
@@ -18,7 +18,7 @@
                 Tambah Company
               </a>
             </div>
-          </div>
+          </div> --}}
         </div>
       </div>
     </div>
@@ -28,18 +28,6 @@
         <div class="card">
           <div class="col-lg-12">
             <div class="card">
-              {{-- <div class="card-header">
-                <h3 class="card-title"></h3>
-              </div> --}}
-              <div class="col-4 card-body border-bottom ms-auto text-secondary">
-                <form action="{{ route('jobs.search') }}" method="GET" class="d-flex justify-content-end">
-                    <div class="input-group input-group-smo">
-                        {{-- <span class="input-group-text text-secondary">Search:</span> --}}
-                        <input type="text" name="search" value="{{ request('search') }}" class="form-control p-2" aria-label="Search jobs" placeholder="search...">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </div>
-                </form>
-            </div>
               @if(session('success'))
               <div class="alert alert-success">
                   {{ session('success') }}
@@ -67,7 +55,7 @@
                                       <td><span class="text-secondary">{{ $loop->iteration }}</span></td>
                                       <td>
                                         <div class="d-flex py-1 align-items-center">
-                                          <span class="avatar me-2" style="background-image: url(./static/avatars/{{ $companyList->company_logo ?? '' }})"></span>
+                                          <img src="{{ asset('/storage/company_logo/'. $companyList->company_logo ) }}" class="avatar me-2" alt="">
                                         </div>
                                       </td>
                                       <td>{{ $companyList->company_name }}</td>

@@ -347,10 +347,8 @@
       </header>
 
       @yield('main')
-      <div class="page-wrapper">
-
 <footer class="pt-5 pb-5">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-3 animate__animated animate__fadeInLeft">
                 <h5>Contact Us</h5>
