@@ -97,7 +97,6 @@ Route::middleware(['auth', 'company'])->group(function () {
     Route::post('/company/profile', [CompanyController::class, 'updateProfile'])->name('company.updateprofile');
     Route::get('/company/editprofile', [CompanyController::class, 'editProfile'])->name('company.editprofile');
     // Halaman list lowongan kerja
-    Route::get('/company/jobs', [CompanyController::class, 'showJobs'])->name('company.jobs');
     // Tambah lowongan
     Route::get('/company/addjob', [CompanyController::class, 'showAddJob'])->name('company.showaddjob');
     Route::post('/company/addjob', [CompanyController::class, 'addJob'])->name('company.addjob');

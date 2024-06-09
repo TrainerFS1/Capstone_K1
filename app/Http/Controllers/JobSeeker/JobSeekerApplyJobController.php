@@ -85,7 +85,7 @@ class JobSeekerApplyJobController extends Controller
                                ->with('job')
                                ->orderBy('created_at', 'desc')
                                ->paginate(10);
-
+                               
         return view('jobseeker.jobs.history', compact('jobSeeker', 'appliedJobs'));
 
     }
