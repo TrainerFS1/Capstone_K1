@@ -42,7 +42,8 @@ class CompanyController extends Controller
             'password.min' => 'Password must be at least 5 characters.',
             'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, and one number.',
         ]);
-
+       
+        
         // Simpan data user
         $user = User::create([
             'name' => $request->name,
@@ -50,7 +51,6 @@ class CompanyController extends Controller
             'password' => Hash::make($request->password),
             'user_type' => 'company',
         ]);
-
         // Simpan data perusahaan
         $company = Company::create([
             'user_id' => $user->id,
@@ -95,7 +95,7 @@ class CompanyController extends Controller
         // Validasi input
         $request->validate([
             'company_name' => 'required|string|max:255',
-            'company_phone' => 'required|string|max:255',
+            'company_phone' => 'nullable|string|max:255',
             'company_address' => 'nullable|string|max:255',
             'company_website' => 'nullable|string|max:255',
             'company_description' => 'nullable|string',
@@ -222,19 +222,6 @@ class CompanyController extends Controller
             'dates' => $dates,
             'apply_job_data' => $applyJobData
         ]);
-    }
-
-
-    public function showJobs()
-    {
-        // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
-        $company = Company::where('user_id', Auth::id())->firstOrFail();
-        $user = User::where('id', Auth::id())->firstOrFail();
-
-        $jobs = Job::where('company_id', $company->id)->get();
-
-        // Kirim data perusahaan ke tampilan 'company.joblisting'
-        return view('company.joblisting', compact('company', 'user', 'jobs'));
     }
 
     // Edit Job

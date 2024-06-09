@@ -92,12 +92,9 @@
                                                 <td>
                                                     <a class="btn btn-warning btn-sm" href="{{ route('company.showjobdetail', $jobListing->id) }}">Detail</a> /
                                                     <a class="btn btn-primary btn-sm" href="{{ route('company.showeditjob', $jobListing->id) }}">Edit</a> /
-                                                    {{-- <a class="btn btn-primary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#editModal{{ $jobListing->id }}">Edit</a> / --}}
-                                                    <form action="{{  route('company.deletejob', $jobListing->id) }}" method="POST" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
-                                                    </form>
+                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Delete</a>
+                                                    @include('company.layouts.modaldeletelist')
+
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -128,6 +125,7 @@
             </div>
         </div>
     </div>
+
     @include('company.layouts.modaladdjob')
 @endsection
 @section('customjs')

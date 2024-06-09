@@ -38,11 +38,11 @@
               <h3 class="card-title mt-4">Company Profile</h3>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <div class="form-label">Company Name</div>
+                  <div class="form-label required">Company Name</div>
                   <input type="text" name="company_name" class="form-control" value="{{ $company->company_name }}">
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label">
+                  <label class="form-label required">
                     Industry
                   </label>
                   <select name="industry_id" class="form-select @error('industry_id') is-invalid @enderror">
@@ -70,7 +70,7 @@
                   <input type="text" name="company_phone" class="form-control" value="{{ $company->company_phone }}">
                 </div>
                 <div class="col-md-12">
-                  <div class="form-label">Email</div>
+                  <div class="form-label required">Email</div>
                   <input type="email" name="email" class="form-control" value="{{ $user->email}}">
                 </div>
                 <div class="col-md-12">

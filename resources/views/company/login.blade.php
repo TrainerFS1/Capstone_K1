@@ -14,11 +14,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Company Login</title>
     <!-- CSS files -->
-    <link href="./dist/css/tabler.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-flags.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-payments.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/tabler-vendors.min.css?1692870487" rel="stylesheet"/>
-    <link href="./dist/css/demo.min.css?1692870487" rel="stylesheet"/>
+    <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -30,17 +27,13 @@
     </style>
   </head>
   <body  class=" d-flex flex-column">
-    <script src="./dist/js/demo-theme.min.js?1692870487"></script>
+    <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
     <div class="page page-center">
       <div class="container container-tight py-4">
-        <div class="text-center mb-4">
-          <a href="." class="navbar-brand navbar-brand-autodark">
-            InpoLoker
-          </a>
-        </div>
         <div class="card card-md">
           <div class="card-body">
-            <h2 class="h2 text-center mb-4">Login Company Area</h2>
+            <h2 class="h2 text-center mb-4"><a href="{{ route('front') }}">Login Company Area</a></h2>
+            @include('layouts.message')
             <form action="{{ route('cekloginadmin') }}" method="post" autocomplete="off" novalidate>
               @csrf
               <div class="mb-3">
@@ -50,9 +43,9 @@
               <div class="mb-2">
                 <label class="form-label">
                   Password
-                  <span class="form-label-description">
+                  {{-- <span class="form-label-description">
                     <a href="#">I forgot password</a>
-                  </span>
+                  </span> --}}
                 </label>
                 <div class="input-group input-group-flat">
                   <input type="password" name="password" id="password" class="form-control"  placeholder="Your password"  autocomplete="off">
@@ -63,12 +56,12 @@
                   </span>
                 </div>
               </div>
-              <div class="mb-2">
+              {{-- <div class="mb-2">
                 <label class="form-check">
                   <input type="checkbox" class="form-check-input"/>
                   <span class="form-check-label">Remember me on this device</span>
                 </label>
-              </div>
+              </div> --}}
               <div class="form-footer">
                 <button type="submit" class="btn btn-primary w-100">Sign in</button>
               </div>
@@ -82,8 +75,9 @@
     </div>
     <!-- Libs JS -->
     <!-- Tabler Core -->
-    <script src="./dist/js/tabler.min.js?1692870487" defer></script>
-    <script src="./dist/js/demo.min.js?1692870487" defer></script>
+    <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
+
+    {{-- <script src="./dist/js/demo.min.js?1692870487" defer></script> --}}
     <script>
       const togglePassword = document.querySelector('#togglePassword');
       const password = document.querySelector('#password');

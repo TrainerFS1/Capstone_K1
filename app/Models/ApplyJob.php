@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class ApplyJob extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     protected $fillable = [
         'job_seeker_id',
         'job_id',
@@ -15,6 +19,7 @@ class ApplyJob extends Model
         'file_jobseeker_id',
         'read_at',
     ];
+    protected $dates = ['deleted_at'];
 
     public function JobSeeker()
     {

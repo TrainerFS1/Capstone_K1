@@ -17,10 +17,7 @@
 <?php $notifications = [] ?>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
-    {{-- <link href="{{ asset('dist/css/tabler-flags.min.css') }}" rel="stylesheet"/> --}}
-    {{-- <link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet"/> --}}
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
-    {{-- <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/> --}}
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -46,7 +43,7 @@
               InpoLoker
             </a>
           </h1>
-          <div class="dropdown d-flex">
+          <div class="dropdown d-flex gap-2">
           <a href="?theme=dark" class="nav-link px-0 hide-theme-dark d-sm-inline d-lg-none"  title="Enable dark mode" data-bs-toggle="tooltip"
             data-bs-placement="bottom">
             <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
@@ -64,7 +61,7 @@
                   <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
                   <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
               </svg>
-              <span class="badge bg-red notificationBadge" id="notificationBadge"></span>
+              {{-- <span class="badge bg-red notificationBadge" id="notificationBadge"></span> --}}
           </a>
           <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
             <div class="card" style="width: 250px;">
@@ -78,64 +75,78 @@
                     <!-- Notifications will be appended here -->
                 </div>
             </div>
-        </div>
-        </div>
-          <div class="collapse navbar-collapse" id="sidebar-menu">
-            <ul class="navbar-nav pt-lg-3">
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('company.dashboard') }}" >
-                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
-                  </span>
-                  <span class="nav-link-title">
-                    Home
-                  </span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('company.jobs') }}" >
-                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
-                  </span>
-                  <span class="nav-link-title">
-                    List Lowongan Kerja
-                  </span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('company.lamaranmasuk') }}" >
-                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
-                  </span>
-                  <span class="nav-link-title">
-                    Lamaran Masuk
-                  </span>
-                </a>
-              </li>
-              <li class="nav-item d-sm-inline d-md-none">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="icon"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      stroke-width="2"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                  >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M12 5l0 14" />
-                      <path d="M5 12l14 0" />
-                  </svg>
-                  Tambah Lowongan Kerja
-              </button>
-              </li>
-            </ul>
           </div>
+          {{-- profile --}}
+          <div class="nav-item dropdown nav-link px-0 d-sm-inline d-lg-none">
+            <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+              <img class="avatar avatar-sm" src="{{ $company->company_logo ? asset('storage/company_logo/'.$company->company_logo) : '' }}" >
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+              <a href="{{ route('company.profile') }}" class="dropdown-item">Profile</a>
+              {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
+              {{-- <div class="dropdown-divider"></div> --}}
+              <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+            </div>
+          </div>
+          
+
         </div>
+        <div class="collapse navbar-collapse" id="sidebar-menu">
+          <ul class="navbar-nav pt-lg-3">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('company.dashboard') }}" >
+                <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                </span>
+                <span class="nav-link-title">
+                  Home
+                </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('company.jobs') }}" >
+                <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
+                </span>
+                <span class="nav-link-title">
+                  List Lowongan Kerja
+                </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('company.lamaranmasuk') }}" >
+                <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/checkbox -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
+                </span>
+                <span class="nav-link-title">
+                  Lamaran Masuk
+                </span>
+              </a>
+            </li>
+            <li class="nav-item d-sm-inline d-md-none">
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M12 5l0 14" />
+                    <path d="M5 12l14 0" />
+                </svg>
+                Tambah Lowongan Kerja
+            </button>
+            </li>
+          </ul>
+        </div>
+      </div>
       </aside>
       <!-- Navbar -->
       <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none" >
@@ -163,7 +174,7 @@
                         <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />
                         <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
                     </svg>
-                    <span class="badge bg-red notificationBadge" id="notificationBadge"></span>
+                    {{-- <span class="badge bg-red notificationBadge" id="notificationBadge"></span> --}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
                     <div class="card" style="width: 400px;">

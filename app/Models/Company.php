@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Company extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
         'id',
@@ -20,6 +23,8 @@ class Company extends Model
         'industry_id',
         'company_logo',
     ];
+    protected $dates = ['deleted_at'];
+
 
     /**
      * Get the user that owns the company.
