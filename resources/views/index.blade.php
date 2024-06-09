@@ -90,7 +90,7 @@
                 <div class="carousel-caption d-none d-md-block text-start custom-caption">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 col-xl-8">
+                            <div class="col-12 col-xl-8 text-white">
                                 <h1 class="huruf mb-4">Temukan Pekerjaan</h1>
                                 <h1 class="huruf">Impian Anda</h1>
                                 <p>Berbagai macam pekerjaan tersedia di sini.</p>
@@ -107,8 +107,8 @@
                 <div class="carousel-caption d-none d-md-block text-start custom-caption">
                     <div class="container">
                         <div class="row">
-                            <div class="col-12 col-xl-8 ml-1">
-                                <h1 class="huruf mb-4">Ciptakan Lowongan</h1>
+                            <div class="col-12 col-xl-8 ml-1 text-white">
+                                <h1 class="huruf mb-4 ">Ciptakan Lowongan</h1>
                                 <h1 class="huruf">Di Sini</h1>
                                 <p>Lebih dari 1000 karyawan mencari pekerjaan disini.</p>
                                 <div class="banner-btn mt-5">

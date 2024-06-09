@@ -20,20 +20,25 @@ class SaveJobsController extends Controller
 
         // Get authenticated user (job seeker)
         $user = Auth::user();
+        $jobSeeker = $user->jobSeeker;
 
         // Check if job is already saved
         $alreadySaved = SavedJob::where('job_id', $job->id)
-            ->where('job_seeker_id', $user->jobSeeker->id)
+            ->where('job_seeker_id', $jobSeeker->id)
             ->exists();
 
         if ($alreadySaved) {
-            return back()->with('error', 'Anda sudah menyimpan pekerjaan ini.');
+            // Job already saved, delete it (unsave)
+            SavedJob::where('job_id', $job->id)
+                ->where('job_seeker_id', $jobSeeker->id)
+                ->delete();
+            return back()->with('success', 'Pekerjaan berhasil dihapus dari simpanan.');
         }
 
         // Save job to saved jobs list
         SavedJob::create([
             'job_id' => $job->id,
-            'job_seeker_id' => $user->jobSeeker->id,
+            'job_seeker_id' => $jobSeeker->id,
         ]);
 
         return back()->with('success', 'Pekerjaan berhasil disimpan.');
@@ -52,20 +57,6 @@ class SaveJobsController extends Controller
         return view('jobseeker.savedjobs.saved_jobs', compact('savedJobs','jobSeeker'));
     }
     
-
-    // Method to show details of a saved job
-    public function showSavedJob($savedJobId)
-    {
-
-        $savedJob = SavedJob::findOrFail($savedJobId);
-        // Mengambil JobSeeker berdasarkan user_id yang sedang login
-        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
-
-        // Check if the job has already been applied by the user
-        $alreadyApplied = $savedJob->job->applyJobs()->where('job_seeker_id', Auth::user()->jobSeeker->id)->exists();
-
-        return view('jobseeker.savedjobs.show_saved_job', compact('savedJob', 'alreadyApplied','jobSeeker'));
-    }
 
 
 

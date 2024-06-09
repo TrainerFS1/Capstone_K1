@@ -347,6 +347,8 @@
       </header>
 
       @yield('main')
+   
+
 <footer class="pt-5 pb-5">
     <div class="container">
         <div class="row">
@@ -408,7 +410,7 @@
     </div>
   </div>
 </footer>
-</div>
+
 </div>
 <!-- Libs JS -->
 <!-- Tabler Core -->

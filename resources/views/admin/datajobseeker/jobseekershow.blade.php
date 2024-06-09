@@ -6,7 +6,7 @@
             <h4>Detail Jobseeker</h4>
         </div>
         <div class="card-body">
-        <span class="avatar avatar-xl mb-3 rounded" style="background-image: url('{{ asset('storage/profile_pictures/' . $jobseeker->profile_picture) }}')"></span>
+            <span class="avatar avatar-xl mb-3 rounded" style="background-image: url('{{ asset('storage/profile_pictures/' . $jobseeker->profile_picture) }}')"></span>
 
             <div class="form-group">
                 <label for="name">Nama:</label>
@@ -15,6 +15,14 @@
             <div class="form-group">
                 <label for="email">Email:</label>
                 <p>{{ $jobseeker->user->email }}</p>
+            </div>
+            <div class="form-group">
+                <label for="birthdate">Tanggal Lahir:</label>
+                <p>{{ $jobseeker->job_seeker_birthdate ?: '-' }}</p>
+            </div>
+            <div class="form-group">
+                <label for="gender">Jenis Kelamin:</label>
+                <p>{{ ucfirst($jobseeker->job_seeker_gender) ?: '-' }}</p>
             </div>
             <div class="form-group">
                 <label for="address">Alamat:</label>
@@ -28,9 +36,10 @@
                 <label for="resume">Resume:</label>
                 <p>{{ $jobseeker->job_seeker_resume ?: '-' }}</p>
             </div>
+
             <div class="col-12 text-end">
-            <a href="{{ route('admin.jobseekers.index') }}" class="btn btn-primary">Kembali</a>
+                <a href="{{ route('admin.jobseekers.index') }}" class="btn btn-primary">Kembali</a>
+            </div>
         </div>
-</div>
     </div>
 @endsection

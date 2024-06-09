@@ -26,7 +26,7 @@
                                         <div class="col-md-9">
                                             <h5 class="card-title">{{ $savedJob->job->job_title }}</h5>
                                             <p class="card-text">{{ Str::limit($savedJob->job->job_description, 150) }}</p>
-                                            <a href="{{ route('showSavedJob', $savedJob->id) }}" class="btn btn-primary">Lihat Detail</a>
+                                            <a href="{{ route('jobDetail', $savedJob->job->id) }}" class="btn btn-primary">Lihat Detail</a>
                                             <form action="{{ route('deleteSavedJob', $savedJob->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')

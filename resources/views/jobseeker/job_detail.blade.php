@@ -7,11 +7,11 @@
                 <div class="col">
                     <nav aria-label="breadcrumb" class="rounded-3 p-3">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item">
-                                <a href="{{ route('jobs') }}">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Kembali ke Daftar Pekerjaan
+                        <li class="breadcrumb-item">
+                                <a href="javascript:void(0);" onclick="goBack()">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i> &nbsp;Kembali
                                 </a>
-                            </li>
+                        </li>
                         </ol>
                     </nav>
                 </div>
@@ -116,12 +116,15 @@
                                         @endif
                                     </div>
                                 </div>
+                                @php
+                                    $alreadySaved = $jobSeeker->savedJobs->contains('job_id', $job->id);
+                                @endphp
 
                                 <div class="position-absolute top-0 end-0 m-3">
                                     <form action="{{ route('saveJob', $job->id) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-warning ms-auto">
-                                            <i class="fas fa-bookmark me-2"></i>Save This Job
+                                        <button type="submit" class="btn btn-{{ $alreadySaved ? 'success' : 'warning' }} ms-auto">
+                                            <i class="fas fa-bookmark me-2"></i>{{ $alreadySaved ? 'Saved' : 'Save This Job' }}
                                         </button>
                                     </form>
                                 </div>
@@ -171,4 +174,12 @@
             certificateInput.disabled = initialChecked;
         });
     </script>
+
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
 @endpush
