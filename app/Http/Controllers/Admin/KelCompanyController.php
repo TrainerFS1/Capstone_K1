@@ -10,6 +10,7 @@ use App\Models\Company;
 use App\Models\Industry;
 use App\Models\Job;
 use App\Models\User;
+use App\Models\SavedJob;
 use App\Models\Category;
 use App\Models\JobType;
 use Illuminate\Auth\Events\Validated;
@@ -22,11 +23,14 @@ class KelCompanyController extends Controller
     {
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $user = Auth::user(); // Dapatkan user yang sedang login
-        $company = Company::paginate(10);
+
+        // Ambil semua perusahaan, termasuk yang telah di-soft delete
+        $company = Company::withTrashed()->paginate(10);
 
         // Kirim data perusahaan ke tampilan 'admin.listcompany'
         return view('admin.datacompany.listcompany', compact('company', 'user'));
     }
+
 
     public function showEditCompany($id)
     {
@@ -75,21 +79,59 @@ class KelCompanyController extends Controller
 
     public function deleteCompany($id)
     {
-        // Cari company berdasarkan ID
-        $company = Company::findOrFail($id);
-        if (!$company) {
-            return redirect()->route('admin.companylist')->with('error', 'Company not found');
+        try {
+            // Cari company berdasarkan ID
+            $company = Company::findOrFail($id);
+
+            // Ambil user_id yang terkait dengan company ini
+            $userId = $company->user_id;
+
+            // Hapus saved jobs terkait, jika ada
+            foreach ($company->jobs as $job) {
+                SavedJob::where('job_id', $job->id)->delete();
+            }
+
+            // Hapus jobs terkait
+            $company->jobs()->delete();
+
+            // Hapus company
+            $company->delete();
+
+            // Hapus user yang terkait
+            User::findOrFail($userId)->delete();
+
+            // Redirect ke halaman yang diinginkan dengan pesan sukses
+            return redirect()->route('admin.companylist')->with('success', 'Company and associated user deleted successfully');
+        } catch (\Exception $e) {
+            // Tangani error dan redirect dengan pesan error
+            return redirect()->route('admin.companylist')->with('error', 'An error occurred: ' . $e->getMessage());
         }
-        // Ambil user_id yang terkait dengan company ini
-        $userId = $company->user_id;
+    }
+    public function restoreCompany($id)
+    {
+        try {
+            // Cari company yang dihapus berdasarkan ID
+            $company = Company::withTrashed()->findOrFail($id);
+            // Restore company
+            $company->restore();
+            $user = User::withTrashed()->findOrFail($company->user_id);
+            $user->restore();
+            // Restore jobs terkait
+            $company->jobs()->withTrashed()->restore();
 
-        // Hapus company
-        $company->delete();
+            return redirect()->route('admin.companylist')->with('success', 'Company restored successfully');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.companylist')->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+    }
+    public function showDetail(Request $request, $id)
+    {
+        $company = Company::find($id);
+        $industries  = Industry::all();
+        $user = User::find($company->user_id);
+        dd($user);
+        // Mengembalikan detail jobseeker dalam format JSON
+        return view('admin.datacompany.detailcompany', compact('company','industries','user'));
 
-        // Hapus user yang terkait
-        User::findOrFail($userId)->delete();
-
-        // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('admin.companylist')->with('success', 'Company and associated user deleted successfully');
     }
 }

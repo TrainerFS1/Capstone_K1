@@ -34,7 +34,7 @@
               </div>
               @endif
               @if($company->isEmpty())
-                  <p>Belum ada lowongan yang dibuat.</p>
+                  <p>Belum ada Data Company.</p>
               @else
                   <div class="table-responsive">
                       <table class="table card-table table-vcenter text-nowrap datatable">
@@ -46,6 +46,7 @@
                                   <th>Logo</th>
                                   <th>Nama Company</th>
                                   <th>Industry</th>
+                                  <th>Status</th>
                                   <th>Action</th>
                               </tr>
                           </thead>
@@ -61,19 +62,36 @@
                                       <td>{{ $companyList->company_name }}</td>
                                       <td>{{ $companyList->industry->industry_name }}</td>
                                       <td>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('company.showeditjob', $companyList->id) }}">
-                                          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-details"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11.999 3l.001 17" /><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z" /></svg>
-                                          Detail</a> /
-                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.companyedit', $companyList->id) }}">
-                                          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
-                                          Edit</a> /
-                                        <form action="{{  route('admin.deletecompany', $companyList->id) }}" method="POST" style="display: inline">
-                                          @csrf
-                                          @method('DELETE')
-                                          <button class="btn btn-danger btn-sm" type="submit">
-                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                            Delete</button>
+                                        @if($companyList->trashed())
+                                        <span class="btn btn-sm btn-danger">Deleted</span>
+                                    @else
+                                        <span class="btn btn-sm btn-success">Active</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($companyList->trashed())
+                                        <form action="{{ route('admin.restorecompany', $companyList->id) }}" method="POST" style="display: inline">
+                                            @csrf
+                                            @method('PUT')
+                                            <button class="btn btn-success btn-sm" type="submit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-rotate-ccw">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" /><path d="M12 12a8.1 8.1 0 0 0 4.2 7.3" /><path d="M12 12v1" /><path d="M12 3v9" />
+                                                </svg>
+                                                Restore
+                                            </button>
                                         </form>
+                                    @else
+                                      {{-- <a class="btn btn-sm btn-warning" href="{{ route('admin.company.detail',$companyList->id) }}">Detail</a> --}}
+                                        {{-- / --}}
+                                        <a class="btn btn-primary btn-sm" href="{{ route('admin.companyedit', $companyList->id) }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-outline icon-tabler-edit">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" />
+                                            </svg>
+                                            Edit
+                                        </a> /
+                                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Delete</a>
+                                        @include('admin.layouts.modaldeletelist')
+                                    @endif
                                       </td>
                                   </tr>
                               @endforeach

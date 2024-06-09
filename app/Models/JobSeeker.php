@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class JobSeeker extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     
     protected $fillable = [
         'user_id',
@@ -19,6 +22,8 @@ class JobSeeker extends Model
         'job_seeker_gender',
         'job_seeker_birthdate',
     ];
+    protected $dates = ['deleted_at'];
+
 
     public function user()
     {

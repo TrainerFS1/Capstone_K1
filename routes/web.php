@@ -73,7 +73,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/datacompany', [KelCompanyController::class, 'showKelCompany'])->name('admin.companylist');
     Route::get('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'showEditCompany'])->name('admin.companyedit');
     Route::post('/admin/datacompany/{id}/edit', [KelCompanyController::class, 'updateCompany'])->name('admin.editcompany');
+    Route::get('/admin/company/detail/{id}', [KelCompanyController::class, 'showDetail'])->name('admin.company.detail');
+
+
     Route::delete('/admin/datacompany/{id}/delete', [KelCompanyController::class, 'deleteCompany'])->name('admin.deletecompany');
+    Route::put('/admin/restorecompany/{id}', [KelCompanyController::class, 'restoreCompany'])->name('admin.restorecompany');
 
     Route::get('/admin/datajob', [KelJobController::class, 'index'])->name('admin.joblisting');
     Route::get('/admin/datajob/{id}/detail', [KelJobController::class, 'ShowdetailJobAdmin'])->name('admin.jobdetail');
