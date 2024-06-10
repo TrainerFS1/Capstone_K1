@@ -13,7 +13,7 @@ class GuestCompanyController extends Controller
     public function search(Company $company)
     {
     
-        $companies = Company::where('id', $company->id)->get();
+        $companies = Company::all();
         $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
     
         return view('guest.companies.search', compact('companies', 'jobSeeker'));
