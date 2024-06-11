@@ -76,9 +76,19 @@
                         </div>
                     @endforeach
                     
-                    <div class="col-md-12">
-                        {{ $jobs->withQueryString()->links() }}
-                    </div>
+                    <ul class="pagination m-0 ms-auto">
+                                <li class="page-item {{ $jobs->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $jobs->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $jobs->onFirstPage() }}">prev</a>
+                                </li>
+                                @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $page == $jobs->currentPage() ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                                <li class="page-item {{ $jobs->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $jobs->nextPageUrl() }}" aria-disabled="{{ !$jobs->hasMorePages() }}">next</a>
+                                </li>
+                    </ul>
                 @else
                     <div class="col-md-12">
                         <p>Pekerjaan tidak ditemukan</p>

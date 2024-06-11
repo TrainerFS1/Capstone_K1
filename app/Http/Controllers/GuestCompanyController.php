@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Company;
@@ -12,8 +11,7 @@ class GuestCompanyController extends Controller
 {
     public function search(Company $company)
     {
-    
-        $companies = Company::all();
+        $companies = Company::paginate(9);  // Paginate with 9 items per page
         $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
     
         return view('guest.companies.search', compact('companies', 'jobSeeker'));
@@ -32,11 +30,10 @@ class GuestCompanyController extends Controller
         $keyword = $request->input('keyword');
         $companies = Company::where('company_name', 'like', "%$keyword%")
                             ->orWhere('company_description', 'like', "%$keyword%")
-                            ->get();
+                            ->paginate(9);  // Paginate with 9 items per page
         $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
     
         return view('guest.companies.results', compact('companies', 'keyword', 'jobSeeker'));
     }
-    
 }
 

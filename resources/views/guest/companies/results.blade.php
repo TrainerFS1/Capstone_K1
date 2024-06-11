@@ -35,7 +35,7 @@
                                 @if (!empty($company->company_logo))
                                     <img src="{{ asset('storage/company_logo/' . $company->company_logo) }}" class="img-fluid" alt="Company Logo">
                                 @else
-                                    <img src="{{ asset('images/default-logo.png') }}" class="img-fluid" alt="Company Logo">
+                                    <img src="{{ asset('images/default-logo-company.png') }}" class="img-fluid" alt="Company Logo">
                                 @endif
                             </div>
                             <div>
@@ -50,6 +50,20 @@
                 </div>
             @endforeach
         </div>
+        <ul class="pagination m-0 ms-auto mb-4">
+                                <li class="page-item {{ $companies->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $companies->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $companies->onFirstPage() }}">prev</a>
+                                </li>
+                                @foreach ($companies->getUrlRange(1, $companies->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $page == $companies->currentPage() ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                                <li class="page-item {{ $companies->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $companies->nextPageUrl() }}" aria-disabled="{{ !$companies->hasMorePages() }}">next</a>
+                                </li>
+                            </ul>
+
     @endif
 </div>
 @endsection
