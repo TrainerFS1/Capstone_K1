@@ -119,6 +119,16 @@
       font-size: 14px;
       color: #777;
     }
+    @media (max-width: 767px) {
+      .navbar-nav {
+        text-align: center;
+      }
+      .navbar-nav .nav-item {
+        display: inline-block;
+        margin: 0 10px; /* Sesuaikan margin sesuai kebutuhan */
+      }
+    }
+
 
     
 
@@ -158,44 +168,48 @@
             </a>
           </li>
         </ul>
-        <ul class="navbar-nav" style="margin-left: auto; margin-right: auto;">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('jobs') }}">
-              <span class="nav-link-icon d-md-none d-lg-inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                  <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <path d="M12 8v4m-4 -2h8" />
+        <ul class="navbar-nav">
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('jobs') }}">
+      <span class="nav-link-icon d-md-none d-lg-inline-block">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-briefcase" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <rect x="4" y="4" width="16" height="16" rx="2" />
+          <path d="M12 8v4m-4 -2h8" />
+        </svg>
+      </span>
+      <span class="nav-link-title">
+        Find Jobs
+      </span>
+    </a>
+  </li>
+</ul>
+
+
+
+<ul class="navbar-nav" style="margin-right: auto;">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('aboutUs') }}">
+            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                <!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/>
+                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/>
+                    <path d="M15 15l3.35 3.35"/>
+                    <path d="M9 15l-3.35 3.35"/>
+                    <path d="M5.65 5.65l3.35 3.35"/>
+                    <path d="M18.35 5.65l-3.35 3.35"/>
                 </svg>
-              </span>
-              <span class="nav-link-title">
-                Find Jobs
-              </span>
-            </a>
-                </li>
-
-
-                <li class="nav-item">
-                <a class="nav-link" href="{{ route('aboutUs') }}">
-                  <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <!-- Download SVG icon from http://tabler-icons.io/i/lifebuoy -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                      <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/>
-                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/>
-                      <path d="M15 15l3.35 3.35"/>
-                      <path d="M9 15l-3.35 3.35"/>
-                      <path d="M5.65 5.65l3.35 3.35"/>
-                      <path d="M18.35 5.65l-3.35 3.35"/>
-                    </svg>
-                  </span>
-                  <span class="nav-link-title">
-                    About Us
-                  </span>
-                </a>
-              </li>
-
-              <li class="nav-item">
+            </span>
+            <span class="nav-link-title">
+                About Us
+            </span>
+        </a>
+    </li>
+</ul>
+<ul class="navbar-nav" style="margin-right: auto;">
+<li class="nav-item">
                 <a class="nav-link" href="{{ route('guest.companies.search') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <!-- SVG icon for company search, you can choose any icon you prefer -->
