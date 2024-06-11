@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('company.layouts.app')
 
 @section('main')
     <!-- Page header -->

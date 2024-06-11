@@ -5,7 +5,7 @@
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
-                    <h2 class="page-title">Ubah Kata Sandi</h2>
+                    <h2 class="page-title">Setting Password</h2>
                 </div>
             </div>
         </div>

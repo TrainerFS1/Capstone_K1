@@ -22,11 +22,11 @@
               @csrf
               <div class="card-body row">
                 <div class="col-12 mb-3">
-                  <label class="form-label">Job Title</label>
-                  <input type="text" name="job_title" class="form-control" placeholder="Fullstack Laravel Developer" value="{{ $job->job_title }}" required>
+                  <label class="form-label required">Job Title</label>
+                  <input type="text" name="job_title" class="form-control" placeholder="Fullstack Laravel Developer" value="{{ $job->job_title }}" autofocus required>
                 </div>
                 <div class="col-md-6 col-sm-12 mb-3 row">
-                  <label class="col-md-3 col-sm-12 col-form-label">Job Category</label>
+                  <label class="col-md-3 col-sm-12 col-form-label required">Job Category</label>
                   <div class="col-md-9 col-sm-12">
                     <select name="category_id" class="form-select" required>
                         @foreach($jobCategories as $category)
@@ -38,7 +38,7 @@
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 mb-3 row">
-                  <label class="col-md-3 col-form-label">Job Type</label>
+                  <label class="col-md-3 col-form-label required">Job Type</label>
                   <div class="col-md-9 col-sm-12">
                     <select name="job_type_id" class="form-select" required>
                         @foreach($jobTypes as $type)
@@ -50,19 +50,19 @@
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-12 mb-3">
-                  <label class="form-label">Job Location</label>
+                  <label class="form-label required">Job Location</label>
                   <input type="text" name="job_location" class="form-control" placeholder="Lamongan" value="{{ $job->job_location }}" required>
                 </div>
                 <div class="col-md-6 col-sm-12 mb-3">
-                  <label class="form-label">Salary Range</label>
+                  <label class="form-label required">Salary Range</label>
                   <input type="text" name="job_salary" class="form-control" placeholder="4.000.000 - 5.000.000" value="{{ $job->job_salary }}" required>
                 </div>
                 <div class="col-12 mb-3">
-                  <label class="form-label">Job Skills</label>
+                  <label class="form-label required">Job Skills</label>
                   <input type="text" name="job_skills" class="form-control" placeholder="HTML,CSS,PHP,Laravel" value="{{ $job->job_skills }}" required>
                 </div>
                 <div class="col-12 mb-3">
-                  <label class="form-label">Job Description</label>
+                  <label class="form-label required">Job Description</label>
                   <textarea name="job_description" class="form-control" rows="5" required>{{ $job->job_description }}</textarea>
                 </div>
               </div>

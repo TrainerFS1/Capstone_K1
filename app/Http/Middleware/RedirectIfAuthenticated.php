@@ -29,6 +29,7 @@ class RedirectIfAuthenticated
                 default:
                     return redirect('/');
             }
+
         }
 
         return $next($request);
