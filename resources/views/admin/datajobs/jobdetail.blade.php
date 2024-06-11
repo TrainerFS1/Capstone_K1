@@ -12,11 +12,7 @@
                 </div>
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
-                        <a href="{{ route('company.jobs') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            Kembali ke Daftar Lowongan Kerja
-                        </a>
-                    </div>
+
                 </div>
             </div>
         </div>

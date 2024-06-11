@@ -1,9 +1,15 @@
 @extends('admin.layouts.app')
 
 @section('main')
+<div class="container-xl">
+<div class="row g-2 align-items-center">
     <div class="card">
-        <div class="card-header">
-            <h4>Daftar Jobseeker</h4>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2>Daftar Jobseeker</h2>
+            <form class="d-flex" action="{{ route('admin.jobseekers.index') }}" method="GET">
+                <input class="form-control me-2" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Cari nama atau email">
+                <button class="btn btn-outline-primary" type="submit">Cari</button>
+            </form>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -20,9 +26,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($jobseekers as $jobseeker)
+                        @forelse ($jobseekers as $jobseeker)
                             <tr>
-                                <td><span class="text-secondary">{{ $loop->iteration }}</span></td>
+                                <td><span class="text-secondary">{{ $loop->iteration + ($jobseekers->currentPage() - 1) * $jobseekers->perPage() }}</span></td>
                                 <td>
                                     <div class="d-flex py-1 align-items-center">
                                         <span class="avatar me-2" style="background-image: url('{{ asset('storage/profile_pictures/' . $jobseeker->profile_picture) }}')"></span>
@@ -53,17 +59,35 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="7">Tidak ada jobseeker ditemukan</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
-            <div class="mt-3">
-                {{ $jobseekers->links() }}
+            <div class="card-footer d-flex align-items-center">
+                <p class="m-0 text-secondary">
+                    Showing <span>{{ $jobseekers->firstItem() }}</span> to <span>{{ $jobseekers->lastItem() }}</span> of <span>{{ $jobseekers->total() }}</span> entries
+                </p>
+                <ul class="pagination m-0 ms-auto">
+                    <li class="page-item {{ $jobseekers->onFirstPage() ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $jobseekers->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $jobseekers->onFirstPage() }}">prev</a>
+                    </li>
+                    @foreach ($jobseekers->getUrlRange(1, $jobseekers->lastPage()) as $page => $url)
+                        <li class="page-item {{ $page == $jobseekers->currentPage() ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                        </li>
+                    @endforeach
+                    <li class="page-item {{ $jobseekers->hasMorePages() ? '' : 'disabled' }}">
+                        <a class="page-link" href="{{ $jobseekers->nextPageUrl() }}" aria-disabled="{{ !$jobseekers->hasMorePages() }}">next</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 @endsection
-
 
 @push('scripts')
 <script>

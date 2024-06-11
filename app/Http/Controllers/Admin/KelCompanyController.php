@@ -24,11 +24,26 @@ class KelCompanyController extends Controller
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $user = Auth::user(); // Dapatkan user yang sedang login
 
-        // Ambil semua perusahaan, termasuk yang telah di-soft delete
-        $company = Company::withTrashed()->paginate(10);
+        // Ambil query pencarian
+        $search = $request->input('search');
 
-        // Kirim data perusahaan ke tampilan 'admin.listcompany'
-        return view('admin.datacompany.listcompany', compact('company', 'user'));
+        // Query perusahaan
+        $query = Company::withTrashed();
+
+        // Jika ada pencarian, tambahkan ke query
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('company_name', 'like', "%$search%")
+                  ->orWhere('company_address', 'like', "%$search%")
+                  ->orWhere('company_phone', 'like', "%$search%");
+            });
+        }
+
+        // Ambil data perusahaan dengan pagination
+        $company = $query->paginate(10);
+
+        // Kirim data perusahaan ke tampilan 'admin.datacompany.listcompany'
+        return view('admin.datacompany.listcompany', compact('company', 'user', 'search'));
     }
 
 
