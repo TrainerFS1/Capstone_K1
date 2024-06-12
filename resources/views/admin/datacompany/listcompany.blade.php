@@ -49,7 +49,7 @@
                                                 <td>{{ $companyList->industry->industry_name }}</td>
                                                 <td>
                                                     @if($companyList->trashed())
-                                                        <span class="btn btn-sm btn-danger">Deleted</span>
+                                                    <span class="btn btn-sm btn-danger">Deleted</span>
                                                     @else
                                                         <span class="btn btn-sm btn-success">Active</span>
                                                     @endif

@@ -432,6 +432,8 @@
 </footer>
 
 </div>
+
+@include('sweetalert::alert')
 <!-- Libs JS -->
 <!-- Tabler Core -->
 <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
@@ -454,7 +456,6 @@
         });
     });
 </script>
-
 
 
 @yield('customjs')
