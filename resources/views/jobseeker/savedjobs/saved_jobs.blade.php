@@ -27,10 +27,10 @@
                                             <h5 class="card-title">{{ $savedJob->job->job_title }}</h5>
                                             <p class="card-text">{{ Str::limit($savedJob->job->job_description, 150) }}</p>
                                             <a href="{{ route('jobDetail', $savedJob->job->id) }}" class="btn btn-primary">Lihat Detail</a>
-                                                <form action="{{ route('deleteSavedJob', $savedJob->id) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('deleteSavedJob', $savedJob->id) }}" method="POST" class="d-inline delete-job-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger" onclick="return confirmDelete(this)">
+                                                <button type="button" class="btn btn-danger btn-delete" data-id="{{ $savedJob->id }}">
                                                     <i class="fa fa-trash"></i>&nbsp; Hapus
                                                 </button>
                                             </form>
@@ -44,5 +44,34 @@
             </div>
         </div>
     </section>
-@endsection
 
+    <!-- SweetAlert2 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const form = this.closest('form');
+                    const jobId = this.getAttribute('data-id');
+
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: "Anda tidak akan dapat mengembalikan ini!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    })
+                });
+            });
+        });
+    </script>
+@endsection

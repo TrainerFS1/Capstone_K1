@@ -239,6 +239,7 @@
       </footer>
       </div>
     </div>
+    @include('sweetalert::alert')
     @yield('modal')
     <!-- Libs JS -->
     {{-- <script src="{{ asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js') }}" defer></script>

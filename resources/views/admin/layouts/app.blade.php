@@ -217,6 +217,7 @@
       </footer>
       </div>
     </div>
+    @include('sweetalert::alert')
     @yield('modal')
     <!-- Libs JS -->
     <script src="{{ asset('dist/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script>

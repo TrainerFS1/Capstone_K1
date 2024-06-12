@@ -122,7 +122,7 @@ class JobListingController extends Controller
         $job->save();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job status has been updated successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Status lowongan berhasil diperbarui');
     }
 
     public function updateJob(Request $request, $id)
@@ -152,7 +152,7 @@ class JobListingController extends Controller
         $job->save();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job has been updated successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan berhasil diperbarui');
     }
 
     // Delete Job
@@ -166,7 +166,7 @@ class JobListingController extends Controller
         $job->delete();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job has been deleted successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan berhasil di hapus');
     }
 
     // Create Job
@@ -198,6 +198,6 @@ class JobListingController extends Controller
         ]);
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'The job has been created successfully. Please activate the status from show to jobseeker.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan baru berhasil dibuat');
     }
 }
