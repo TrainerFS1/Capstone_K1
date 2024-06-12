@@ -260,46 +260,64 @@
     </script>
     @yield('customjs')
     <script>
-      $(document).ready(function() {
-        $('.notificationDropdown').on('click', function() {
-            showLoadingIndicator()
-              $.ajax({
-                  url: '{{ route("notifications") }}',
-                  type: 'GET',
-                  dataType: 'json',
-                  success: function(response) {
-                      $('.notifications-container').empty();
-                      if (response.length > 0) {
-                          $('.notificationBadge').text(response.length);
-                          $.each(response, function(index, notification) {
-                              $('.notifications-container').append(
-                                  '<div class="list-group-item">' +
-                                      '<div class="row align-items-center">' +
-                                          '<div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>' +
-                                          '<div class="col text-truncate">' +
-                                              '<a href="#" class="text-body d-block">' + notification.job_seeker_name + '</a>' +
-                                              '<div class="d-block text-secondary text-truncate mt-n1">' + notification.created_at + '</div>' +
-                                          '</div>' +
-                                      '</div>' +
-                                  '</div>'
-                              );
-                          });
-                      } else {
-                          $('.notifications-container').append('<div class="list-group-item">No new notifications</div>');
-                      }
-                      hideLoadingIndicator()
-                  },
-                  error: function(xhr, status, error) {
-                      console.error(error);
-                  }
-              });
-          });
-          $('.notificationDropdown').on('hidden.bs.dropdown', function () {
-              $('.list-group-item').hide(); // Ganti '.list-group-item' dengan selektor yang sesuai dengan notifikasi Anda
-              $('.notificationBadge').hide();
-          });
-      });
-      </script>
+  function showLoadingIndicator() {
+    $('.progress').hide().show(); // Reset dan tampilkan indikator kemajuan
+  }
+
+  function hideLoadingIndicator() {
+    $('.progress').hide();
+  }
+
+  $(document).ready(function() {
+    $('.notificationDropdown').on('click', function() {
+        showLoadingIndicator();
+        $.ajax({
+            url: '{{ route("notifications") }}',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $('.notifications-container').empty();
+                if (response.length > 0) {
+                    $('.notificationBadge').text(response.length);
+                    $.each(response, function(index, notification) {
+                        var notificationItem = $(
+                            '<div class="list-group-item">' +
+                                '<div class="row align-items-center">' +
+                                    '<div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>' +
+                                    '<div class="col text-truncate">' +
+                                        '<a href="#" class="text-body d-block notification-link" data-id="' + notification.id + '">' + 
+                                            '<strong>' + notification.job_seeker_name + '</strong> melamar lowongan ' + notification.job_title +
+                                        '</a>' +
+                                        '<div class="d-block text-secondary text-truncate mt-n1">' + notification.created_at + '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                        notificationItem.find('.notification-link').on('click', function(e) {
+                            e.preventDefault();
+                            window.location.href = '{{ route("company.lamaranmasuk") }}';
+                        });
+                        $('.notifications-container').append(notificationItem);
+                    });
+                } else {
+                    $('.notifications-container').append('<div class="list-group-item">No new notifications</div>');
+                }
+                hideLoadingIndicator();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+    $('.notificationDropdown').on('hidden.bs.dropdown', function () {
+        $('.list-group-item').hide(); // Ganti '.list-group-item' dengan selektor yang sesuai dengan notifikasi Anda
+        $('.notificationBadge').hide();
+    });
+});
+
+</script>
+
   </body>
 </html>
 

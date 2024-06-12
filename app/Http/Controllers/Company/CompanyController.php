@@ -381,7 +381,7 @@ class CompanyController extends Controller
     {
         $company = Company::where('user_id', Auth::id())->firstOrFail();
         $jobs = $company->jobs->pluck('id'); // Mengambil ID dari semua job yang dimiliki oleh perusahaan tersebut
-
+    
         // Mengambil lima data terbaru yang read_at tidak null
         $recentReadNotifications = ApplyJob::with(['jobSeeker', 'job'])
             ->whereIn('job_id', $jobs)
@@ -389,29 +389,31 @@ class CompanyController extends Controller
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
-
+    
         // Mengambil semua data yang read_at masih null
         $unreadNotifications = ApplyJob::with(['jobSeeker', 'job'])
             ->whereIn('job_id', $jobs)
             ->whereNull('read_at')
             ->get();
-
+    
         // Mengisi data yang masih kurang dengan data dari $recentReadNotifications
         $notifications = $unreadNotifications->merge($recentReadNotifications->take(5 - $unreadNotifications->count()));
-
+    
         // Format the notifications data
         $formattedNotifications = $notifications->map(function ($notification) {
             return [
                 'job_seeker_name' => $notification->jobSeeker->job_seeker_name,
                 'created_at' => $notification->created_at->format('Y-m-d H:i:s'),
+                'job_title' => $notification->job->job_title, // Menambahkan informasi lowongan yang dilamar
             ];
         });
-
+    
         // Tandai notifikasi sebagai sudah dibaca
         foreach ($unreadNotifications as $notification) {
             $notification->update(['read_at' => now()]);
         }
-
+    
         return response()->json($formattedNotifications);
     }
+    
 }
