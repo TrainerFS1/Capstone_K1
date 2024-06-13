@@ -39,8 +39,8 @@ class CompanyController extends Controller
                 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
             ],
         ], [
-            'password.min' => 'Password must be at least 5 characters.',
-            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, and one number.',
+            'password.min' => 'Password harus minimal 5 karakter.',
+            'password.regex' => 'Password harus mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka.',
         ]);
        
         
@@ -62,7 +62,7 @@ class CompanyController extends Controller
         ]);
 
         // Redirect ke halaman login perusahaan dengan pesan sukses
-        return redirect()->route('loginCompany')->with('success', 'Company registered successfully. Please login.');
+        return redirect()->route('loginCompany')->with('success', 'Registrasi berhasil. Silakan Masuk.');
     }
 
     // Show Profile
@@ -135,7 +135,7 @@ class CompanyController extends Controller
         $user->save();
 
         // Redirect ke halaman profil dengan pesan sukses
-        return redirect()->route('company.profile')->with('success', 'Profile updated successfully.');
+        return redirect()->route('company.profile')->with('success', 'Profil perusahaan berhasil di perbarui.');
     }
 
     // Dashboard
@@ -285,7 +285,7 @@ class CompanyController extends Controller
         ]);
 
         // Redirect ke halaman job listing dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job added successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan Pekerjaan berhasil ditambah.');
     }
 
     // Edit Job
@@ -322,7 +322,7 @@ class CompanyController extends Controller
         ]);
 
         // Redirect ke halaman job listing dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job updated successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan Pekerjaan berhasil di perbarui.');
     }
 
     // Delete Logo
@@ -339,7 +339,7 @@ class CompanyController extends Controller
         }
 
         // Redirect ke halaman tertentu setelah berhasil menghapus logo
-        return redirect()->route('company.profile')->with('success', 'Company logo deleted successfully');
+        return redirect()->route('company.profile')->with('success', 'Logo Perusahaan berhasil dihapus');
     }
 
     public function setNewPassword(Request $request)
@@ -373,7 +373,7 @@ class CompanyController extends Controller
         ]);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('company.profile')->with('success', 'Password updated successfully!');
+        return redirect()->route('company.profile')->with('success', 'Password berhasil diperbarui!');
     }
 
     // NOTIFIKASI

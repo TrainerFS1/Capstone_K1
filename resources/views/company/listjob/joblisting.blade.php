@@ -7,7 +7,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        List Lowongan Kerja
+                        Daftar Lowongan Kerja
                     </h2>
                 </div>
             </div>
@@ -64,12 +64,12 @@
                                     <thead>
                                         <tr>
                                             <th class="w-1">No.</th>
-                                            <th>Job Title</th>
-                                            <th>Job Category</th>
-                                            <th>Job Type</th>
-                                            <th>Salary Range</th>
+                                            <th>Nama Lowongan</th>
+                                            <th>Kategori Lowongan</th>
+                                            <th>Tipe Pekerjaan</th>
+                                            <th>Gaji</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -92,7 +92,7 @@
                                                 <td>
                                                     <a class="btn btn-warning btn-sm" href="{{ route('company.showjobdetail', $jobListing->id) }}">Detail</a> /
                                                     <a class="btn btn-primary btn-sm" href="{{ route('company.showeditjob', $jobListing->id) }}">Edit</a> /
-                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Delete</a>
+                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Hapus</a>
                                                     @include('company.layouts.modaldeletelist')
 
                                                 </td>

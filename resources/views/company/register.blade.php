@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Company Login</title>
+    <title>Daftar | Perusahaan</title>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
@@ -32,7 +32,7 @@
       <div class="container py-4">
         <div class="card">
           <div class="card-body">
-            <h2 class="h2 text-center mb-4"><a href="{{ route('front') }}">Sign Up Company</a></h2>
+            <h2 class="h2 text-center mb-4"><a href="{{ route('front') }}">Registrasi Perusahaan</a></h2>
             @include('layouts.message')
             <form action="{{ route('company.register.submit') }}" method="post" autocomplete="off">
               @csrf
@@ -40,18 +40,18 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">
-                            Company Name <span class="text-danger">*</span>
+                            Nama Perusahaan <span class="text-danger">*</span>
                         </label>
-                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Company Name" required autofocus>
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Nama Perusahaan/Instansi/Lembaga" required autofocus>
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">
-                            Email address <span class="text-danger">*</span>
+                            Alamat Email <span class="text-danger">*</span>
                         </label>
-                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email address" required>
+                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email Perusahaan/Instansi/Lembaga" required>
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -67,42 +67,42 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">
-                            Confirm Password <span class="text-danger">*</span>
+                            Konfirmasi Password <span class="text-danger">*</span>
                         </label>
-                        <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">
-                            Company Address
+                            Alamat Perusahaan
                         </label>
-                        <input type="text" name="company_address" class="form-control @error('company_address') is-invalid @enderror" value="{{ old('company_address') }}" placeholder="Company Address">
+                        <input type="text" name="company_address" class="form-control @error('company_address') is-invalid @enderror" value="{{ old('company_address') }}" placeholder="Alamat Lengkap">
                         @error('company_address')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">
-                            Company Website
+                            Website Perusahaan
                         </label>
-                        <input type="text" name="company_website" class="form-control @error('company_website') is-invalid @enderror" value="{{ old('company_website') }}" placeholder="Company Website">
+                        <input type="text" name="company_website" class="form-control @error('company_website') is-invalid @enderror" value="{{ old('company_website') }}" placeholder="Website Perusahaan">
                         @error('company_website')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">
-                            Company Phone
+                            Telepon
                         </label>
-                        <input type="text" name="company_phone" class="form-control @error('company_phone') is-invalid @enderror" value="{{ old('company_phone') }}" placeholder="Company Phone">
+                        <input type="text" name="company_phone" class="form-control @error('company_phone') is-invalid @enderror" value="{{ old('company_phone') }}" placeholder="No. Telepon Kantor">
                         @error('company_phone')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">
-                            Industry
+                            Industri
                         </label>
                         <select name="industry_id" class="form-select @error('industry_id') is-invalid @enderror">
                           @foreach($industries as $index => $industry)
@@ -119,13 +119,13 @@
                 </div>
               </div>
               <div class="form-footer">
-                <button type="submit" class="btn btn-primary w-100">Sign up</button>
+                <button type="submit" class="btn btn-primary w-100">Daftar</button>
               </div>
             </form>
           </div>
         </div>
         <div class="text-center text-secondary mt-3">
-          Sudah Punya akun <a href="{{ route('loginCompany') }}" tabindex="-1">Sign in</a>
+          Sudah Punya akun ? <a href="{{ route('loginCompany') }}" tabindex="-1">Masuk</a>
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@ class LoginController extends Controller
             }
         }
 
-        return back()->withErrors(['email' => 'Invalid email or password.'])->withInput();
+        return back()->withErrors(['email' => 'email atau password yang Anda masukkan salah.'])->withInput();
     }
 
     public function logout()

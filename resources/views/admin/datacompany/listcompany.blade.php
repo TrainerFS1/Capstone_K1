@@ -49,9 +49,9 @@
                                                 <td>{{ $companyList->industry->industry_name }}</td>
                                                 <td>
                                                     @if($companyList->trashed())
-                                                    <span class="btn btn-sm btn-danger">Deleted</span>
+                                                    <span class="btn btn-sm btn-danger">Hapus</span>
                                                     @else
-                                                        <span class="btn btn-sm btn-success">Active</span>
+                                                        <span class="btn btn-sm btn-success">Aktif</span>
                                                     @endif
                                                 </td>
                                                 <td>
@@ -63,7 +63,7 @@
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-rotate-ccw">
                                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -5v5h5" /><path d="M12 12a8.1 8.1 0 0 0 4.2 7.3" /><path d="M12 12v1" /><path d="M12 3v9" />
                                                                 </svg>
-                                                                Restore
+                                                                Pulihkan
                                                             </button>
                                                         </form>
                                                     @else
@@ -73,7 +73,7 @@
                                                             </svg>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Delete</a>
+                                                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Hapus</a>
                                                         @include('admin.layouts.modaldeletelist')
                                                     @endif
                                                 </td>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="card-footer d-flex align-items-center">
                         <p class="m-0 text-secondary">
-                            Showing <span>{{ $company->firstItem() }}</span> to <span>{{ $company->lastItem() }}</span> of <span>{{ $company->total() }}</span> entries
+                            Menampilkan <span>{{ $company->firstItem() }}</span> hingga <span>{{ $company->lastItem() }}</span> dari <span>{{ $company->total() }}</span> baris
                         </p>
                         <ul class="pagination m-0 ms-auto">
                             <!-- Previous Page Link -->

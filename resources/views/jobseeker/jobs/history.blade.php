@@ -3,7 +3,7 @@
 @section('main')
 <div class="container container-xl">
 <div class="col-12 col-xl-8 mt-4">
-    <h2>History Apply Job</h2>
+    <h2>Riwayat Lamaran</h2>
 </div>
     @if($appliedJobs->count() > 0)
     <div class="table-responsive">
@@ -11,11 +11,11 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Applied At</th>
+                    <th>Nama Lowongan</th>
+                    <th>Perusahaan</th>
+                    <th>Tanggal Melamar</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,7 +54,7 @@
     </div>
     {{ $appliedJobs->links() }}
     @else
-    <p>No jobs applied yet.</p>
+    <p>Anda belum melamar apapun.</p>
     @endif
 </div>
 

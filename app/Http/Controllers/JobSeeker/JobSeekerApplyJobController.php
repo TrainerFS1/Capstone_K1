@@ -126,7 +126,7 @@ class JobSeekerApplyJobController extends Controller
 
         // Jika job tidak pernah diaplikasikan oleh job seeker
         if (!$appliedJob) {
-            return response()->json(['error' => 'You have not applied for this job.'], 404);
+            return response()->json(['error' => 'Anda belum melamar pekerjaan ini.'], 404);
         }
 
         // Menambahkan status job deleted jika job sudah di-soft delete

@@ -4,7 +4,7 @@
     <section class="section-0 lazy d-flex bg-image-style dark align-items-center" data-bg="{{ asset('images/bg.jpg') }}">
         <div class="container">
             <div class="col-12 col-xl-8 mt-4">
-                <h1>Temukan Pekerjaan Impian Anda</h1>
+                <h1>Cari Pekerjaan</h1>
             </div>
         </div>
     </section>
@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-md-3 mb-xs-3 mb-sm-3 mb-lg-0">
                                 <div class="d-grid gap-2">
-                                    <button type="submit" class="btn btn-primary btn-block">Search</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Cari</button>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                                         @if (!empty($job->company->company_logo))
                                             <img src="{{ asset('storage/company_logo/' . $job->company->company_logo) }}" class="img-fluid" alt="Company Logo">
                                         @else
-                                            <img src="{{ asset('images/default-logo.png') }}" class="img-fluid" alt="Company Logo">
+                                            <img src="{{ asset('images/default-logo-company.png') }}" class="img-fluid" alt="Company Logo">
                                         @endif
                                     </div>
                                     <div>

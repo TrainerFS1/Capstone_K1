@@ -2,13 +2,15 @@
 @section('main')
     <!-- Page header -->
     <div class="page-header d-print-none">
+
       <div class="container-xl">
-        <div class="row g-2 align-items-center">
-          <div class="col">
+      <div class="col mb-2">
             <h2 class="page-title">
               Lamaran Masuk
             </h2>
           </div>
+        <div class="row g-2 align-items-center">
+
           <!-- Page title actions -->
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
@@ -51,7 +53,7 @@
                     <div class="accordion-body pt-0">
                       <div>
                         @if ($job->applyJobs->isEmpty())
-                          <p>No applications found for this job.</p>
+                          <p>Belum ada yang melamar pekerjaan ini.</p>
                           @else
                           <div class="row row-cards pt-4">
                         @foreach ($job->applyJobs as $applyJob)
@@ -75,33 +77,33 @@
                                     <div class="d-flex" id="apply-job-{{ $applyJob->id }}">
                                       <button class="btn btn-danger btn-square col-6 btn-reject"  data-id="{{ $applyJob->id }}">
                                       <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-ban"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.7 5.7l12.6 12.6" /></svg>
-                                        Reject</button>
+                                        Tolak</button>
                                       <button class="btn btn-success btn-square col-6 btn-accept"  data-id="{{ $applyJob->id }}">
                                         <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
-                                        Accept</button>
+                                        Terima</button>
                                     </div>
                                   @elseif($applyJob->status == 'rejected')
                                   <div class="" >
                                     <button class="btn btn-danger btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-ban"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.7 5.7l12.6 12.6" /></svg>
-                                      Rejected</button>
+                                      Ditolak</button>
                                   </div>
                                   @elseif($applyJob->status == 'accepted')
                                   <div class="">
                                     <button class="btn btn-success btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
                                       <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
-                                      Accepted</button>
+                                      Diterima</button>
                                   </div>
                                   @endif
                                   <div class="d-none" id="rejected-job-{{ $applyJob->id }}">
                                     <button class="btn btn-danger btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-ban"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.7 5.7l12.6 12.6" /></svg>
-                                      Rejected</button>
+                                      Ditolak</button>
                                   </div>
                                   <div class="d-none" id="accepted-job-{{ $applyJob->id }}">
                                     <button class="btn btn-success btn-square col-12" data-id="{{ $applyJob->id }}" disabled>
                                       <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-check"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M9 12l2 2l4 -4" /></svg>
-                                      Accepted</button>
+                                      Diterima</button>
                                   </div>
                                 </div>
                               </div>
@@ -131,7 +133,7 @@
             var url = '{{ route("company.lamaranmasuk.reject", ":id") }}';
             url = url.replace(':id', applyJobId);
 
-            if (confirm('Are you sure you want to reject this application?')) {
+            if (confirm('Apakah Anda yakin akan menolak lamaran ini?')) {
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -145,7 +147,7 @@
                         $('#rejected-job-' + applyJobId).removeClass('d-none').show();
                     },
                     error: function(xhr) {
-                        alert('Error rejecting application');
+                        alert('Gagal menolak lamaran');
                     }
                 });
             }
@@ -157,7 +159,7 @@
             var url = '{{ route("company.lamaranmasuk.accept", ":id") }}';
             url = url.replace(':id', applyJobId);
 
-            if (confirm('Are you sure you want to reject this application?')) {
+            if (confirm('Apakah Anda yakin akan menerima lamaran ini?')) {
                 $.ajax({
                     url: url,
                     type: 'POST',
@@ -171,7 +173,7 @@
                         $('#accepted-job-' + applyJobId).removeClass('d-none').show();
                     },
                     error: function(xhr) {
-                        alert('Error accepting application');
+                        alert('Gagal menerima lamaran');
                     }
                 });
             }
@@ -232,4 +234,5 @@
     });
   });
 </script>
+
 @endsection

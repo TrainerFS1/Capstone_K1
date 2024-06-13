@@ -6,7 +6,7 @@
         <div class="row g-2 align-items-center">
             <div class="col">
                 <!-- Page pre-title -->
-                <div class="page-pretitle">Overview</div>
+                
                 <h2 class="page-title">Dashboard</h2>
             </div>
             <!-- Page title actions -->
@@ -387,11 +387,11 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Foto</th>
-                                <th>Job Seeker Name</th>
-                                <th>Job Title</th>
+                                <th>Nama Kandidat</th>
+                                <th>Nama Lowongan</th>
                                 <th>Status</th>
-                                <th>Applied At</th>
-                                <th>Action</th>
+                                <th>Tanggal Melamar</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

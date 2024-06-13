@@ -129,12 +129,6 @@
       }
     }
 
-
-    
-
-
-    
- 
     </style>
   </head>
   <body >
@@ -163,7 +157,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
               </span>
               <span class="nav-link-title">
-                Home
+                Beranda
               </span>
             </a>
           </li>
@@ -179,7 +173,7 @@
         </svg>
       </span>
       <span class="nav-link-title">
-        Find Jobs
+        Pekerjaan
       </span>
     </a>
   </li>
@@ -203,7 +197,7 @@
                 </svg>
             </span>
             <span class="nav-link-title">
-                About Us
+                Tentang Kami
             </span>
         </a>
     </li>
@@ -220,7 +214,7 @@
                         </svg>
                     </span>
                     <span class="nav-link-title">
-                        Company Profile
+                        Profil Perusahaan
                     </span>
                 </a>
             </li>
@@ -231,7 +225,7 @@
           </div>
         </div>
 
-          <div class="navbar-nav flex-row order-md-last">
+          <div class="navbar-nav flex-row order-md-last ">
             @if (!Auth::check())
             <div class="nav-item d-none d-md-flex me-3">
               <div class="btn-list">
@@ -346,7 +340,7 @@
             {{-- job seeker tombol --}}
             <div class="nav-item dropdown">
             <a href="{{ route('loginJobSeeker') }}" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-              <span class="avatar avatar-sm">
+              <span class="avatar avatar-sm mt-2">
                 @if (Auth::check() && $jobSeeker->profile_picture)
                 <img class="avatar avatar-sm" src="{{ $jobSeeker->profile_picture ? asset('storage/profile_pictures/'.$jobSeeker->profile_picture) : '' }}" >
                 @else
@@ -357,21 +351,21 @@
                   </svg>
                 @endif
               </span>
-              <div class="d-none d-xl-block ps-2">
-                <div>{{ $jobSeeker->job_seeker_name ?? 'Login' }}</div>
-                <div class="mt-1 small text-secondary">Job Seeker</div>
+              <div class="d-none d-xl-block ps-2 mt-2">
+                <div>{{ $jobSeeker->job_seeker_name ?? 'Masuk' }}</div>
+                <div class="mt-1 small text-secondary">Karyawan</div>
               </div>
             </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                 @if (Auth::check())
-                  <a href="{{ route('jobseeker.profile') }}" class="dropdown-item">Profile</a>
-                  <a href="{{ route('password.change') }}" class="dropdown-item">Settings</a>
-                  <a href="{{ route('savedJobs') }}" class="dropdown-item">Saved Jobs</a>
-                  <a href="{{ route('jobseeker.history') }}" class="dropdown-item">History Apply Job</a>
-                  <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+                  <a href="{{ route('jobseeker.profile') }}" class="dropdown-item">Data Diri</a>
+                  <a href="{{ route('password.change') }}" class="dropdown-item">Pengaturan</a>
+                  <a href="{{ route('savedJobs') }}" class="dropdown-item">Pekerjaan Tersimpan</a>
+                  <a href="{{ route('jobseeker.history') }}" class="dropdown-item">Riwayat Lamaran</a>
+                  <a href="{{ route('logout') }}" class="dropdown-item">Keluar</a>
                 @else
-                  <a href="{{ route('loginJobSeeker') }}" class="dropdown-item">Login</a>
-                  <a href="{{ route('jobseeker.register') }}" class="dropdown-item">Register</a>
+                  <a href="{{ route('loginJobSeeker') }}" class="dropdown-item">Masuk</a>
+                  <a href="{{ route('jobseeker.register') }}" class="dropdown-item">Daftar</a>
 
                 @endif
               </div>
@@ -387,7 +381,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-3 animate__animated animate__fadeInLeft">
-                <h5>Contact Us</h5>
+                <h5>Kontak Kami</h5>
                 <ul class="list-unstyled">
                     <li><i class="fas fa-envelope me-2"></i>Email: inpoloker@gmail.com</li>
                     <li><i class="fas fa-phone me-2"></i>Phone: 0895 6366 92246</li>
@@ -395,23 +389,23 @@
                 </ul>
             </div>
             <div class="col-md-3 animate__animated animate__fadeInLeft">
-                <h5>About Us</h5>
+                <h5>Tentang Kami</h5>
                 <p>Platform peyedia lowongan kerja resmi yang menyediakan lebih dari 1000 Pekerjaan.</p>
             </div>
             <div class="col-md-3 animate__animated animate__fadeInRight">
-                <h5>For Jobseekers</h5>
+                <h5>Karyawan</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white"><i class="fas fa-search me-2"></i>Search Jobs</a></li>
-                    <li><a href="#" class="text-white"><i class="fas fa-file-alt me-2"></i>Submit Resume</a></li>
-                    <li><a href="#" class="text-white"><i class="fas fa-bell me-2"></i>Job Alerts</a></li>
+                    <li><a href="{{ route('jobs') }}" class="text-white"><i class="fas fa-search me-2"></i>Cari pekerjaan</a></li>
+                    <li><a href="{{ route('jobs') }}" class="text-white"><i class="fas fa-file-alt me-2"></i>Lamar Pekerjaan</a></li>
+                    <li><a href="{{ route('savedJobs') }}"class="text-white"><i class="fas fa-info me-2"></i>Lihat Status Lamaran</a></li>
                 </ul>
             </div>
             <div class="col-md-3 animate__animated animate__fadeInRight">
-                <h5>For Employers</h5>
+                <h5>Perusahaan</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-white"><i class="fas fa-briefcase me-2"></i>Post a Job</a></li>
-                    <li><a href="#" class="text-white"><i class="fas fa-search me-2"></i>Search Resumes</a></li>
-                    <li><a href="#" class="text-white"><i class="fas fa-tachometer-alt me-2"></i>Employer Dashboard</a></li>
+                    <li><a href="#" class="text-white"><i class="fas fa-briefcase me-2"></i>Buat Lowongan Kerja</a></li>
+                    <li><a href="#" class="text-white"><i class="fas fa-search me-2"></i>Kelola Lamaran Masuk</a></li>
+                    <li><a href="#" class="text-white"><i class="fas fa-tachometer-alt me-2"></i>Dashboard Perusahaan</a></li>
                 </ul>
             </div>
         </div>

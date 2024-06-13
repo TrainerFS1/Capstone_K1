@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ApplyJobController extends Controller
 {
-
-
     public function showLamaranMasuk(Request $request)
     {
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
@@ -29,50 +27,53 @@ class ApplyJobController extends Controller
 
         return view('company.jobapply.jobapply', compact('company', 'user', 'jobCategories', 'jobTypes'));
     }
+
     public function rejectLamaran($id)
     {
         $applyJob = ApplyJob::find($id);
 
         if (!$applyJob) {
-            return response()->json(['message' => 'Application not found'], 404);
+            return response()->json(['message' => 'Lamaran tidak ditemukan'], 404);
         }
 
         // Lakukan aksi penolakan, misalnya mengupdate status
-        $applyJob->status = 'rejected';
+        $applyJob->status = 'ditolak';
         $applyJob->save();
 
-        return response()->json(['message' => 'Application rejected successfully']);
+        return response()->json(['message' => 'Lamaran berhasil ditolak']);
     }
+
     public function acceptLamaran($id)
     {
         $applyJob = ApplyJob::find($id);
 
         if (!$applyJob) {
-            return response()->json(['message' => 'Application not found'], 404);
+            return response()->json(['message' => 'Lamaran tidak ditemukan'], 404);
         }
 
-        // Lakukan aksi penolakan, misalnya mengupdate status
-        $applyJob->status = 'accepted';
+        // Lakukan aksi penerimaan, misalnya mengupdate status
+        $applyJob->status = 'diterima';
         $applyJob->save();
 
-        return response()->json(['message' => 'Application Accepted successfully']);
+        return response()->json(['message' => 'Lamaran berhasil diterima']);
     }
+
     public function showDetailModal(Request $request, $id, $jobId)
     {
-        // cek apakah company id yang ada di table jobs sesuai dengan id company yang sedang login
+        // Cek apakah company_id yang ada di tabel jobs sesuai dengan id company yang sedang login
         $company = Company::where('user_id', Auth::id())->firstOrFail();
         $job = Job::where('id', $jobId)
-        ->where('company_id', $company->id)
-        ->first();
+            ->where('company_id', $company->id)
+            ->first();
         if (!$job) {
             // Job tidak ditemukan dan company_id tidak sesuai
-            return response()->json(['message' => 'Job ID tidak valid'], 404);
+            return response()->json(['message' => 'ID Job tidak valid'], 404);
         }
 
         $jobseeker = JobSeeker::find($id);
 
         if (!$jobseeker) {
-            return response()->json(['message' => 'JobSeeker /ApplyJob not found'], 404);
+            return response()->json(['message' => 'JobSeeker/Lamaran tidak ditemukan'], 404);
         }
 
         $applyJob = ApplyJob::where('job_seeker_id', $id)->where('job_id', $jobId)->first();
@@ -88,7 +89,6 @@ class ApplyJobController extends Controller
             'job_seeker_address' => $jobseeker->job_seeker_address, // Asumsikan ada atribut address
             'job_seeker_phone' => $jobseeker->job_seeker_phone, // Asumsikan ada atribut phone
             'job_seeker_resume' => $jobseeker->job_seeker_resume, // Asumsikan ada atribut resume
-            // 'id_file' => $idFile,
             'job_seeker_cv' => $cv, // Asumsikan ada atribut CV
             'job_seeker_certificate' => $certificate, // Asumsikan ada atribut Certificate
         ]);
@@ -100,6 +100,5 @@ class ApplyJobController extends Controller
         $cv = $file->cv;
 
         return view('company.jobapply.previewPdf', compact('cv'));
-
     }
 }
