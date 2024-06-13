@@ -75,33 +75,57 @@ class JobSeekerApplyJobController extends Controller
         ]);
 
         return back()->with('success', 'Lamaran pekerjaan berhasil diajukan.')
-                     ->with('alreadyApplied', $alreadyApplied);
+            ->with('alreadyApplied', $alreadyApplied);
     }
 
     public function history()
     {
+        // Mendapatkan job seeker berdasarkan user ID yang sedang login
         $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+
+        // Mendapatkan applied jobs termasuk yang dihapus (soft delete) dan relasi dengan job
         $appliedJobs = ApplyJob::where('job_seeker_id', $jobSeeker->id)
-                               ->with('job')
-                               ->orderBy('created_at', 'desc')
-                               ->paginate(10);
-                               
+            ->withTrashed()
+            ->with(['job' => function ($query) {
+                $query->withTrashed(); // Memasukkan job yang dihapus (soft delete)
+            }])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        // Mengubah status menjadi 'job_deleted' jika job sudah di-soft delete
+        foreach ($appliedJobs as $appliedJob) {
+            if ($appliedJob->job && $appliedJob->job->trashed()) {
+                $appliedJob->status = 'job_deleted';
+            }
+        }
+
+        // Mengembalikan view dengan data job seeker dan applied jobs
         return view('jobseeker.jobs.history', compact('jobSeeker', 'appliedJobs'));
-
     }
-
     public function jobDetail($id)
     {
-        $job = Job::with(['jobType', 'category', 'company'])->findOrFail($id);
-        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
-        $appliedJob = ApplyJob::where('job_seeker_id', $jobSeeker->id)
-                              ->where('job_id', $id)
-                              ->first();
+        // Mengambil job termasuk yang sudah di-soft delete beserta relasinya
+        $job = Job::withTrashed()->with(['jobType', 'category', 'company'])->findOrFail($id);
 
+        // Mendapatkan job seeker berdasarkan user ID yang sedang login
+        $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
+
+        // Mendapatkan applied job berdasarkan job seeker dan job ID
+        $appliedJob = ApplyJob::where('job_seeker_id', $jobSeeker->id)
+            ->where('job_id', $id)
+            ->first();
+
+        // Jika job tidak pernah diaplikasikan oleh job seeker
         if (!$appliedJob) {
             return response()->json(['error' => 'You have not applied for this job.'], 404);
         }
 
+        // Menambahkan status job deleted jika job sudah di-soft delete
+        if ($job->trashed()) {
+            $appliedJob->status = 'job_deleted';
+        }
+
+        // Mengembalikan view dengan data job dan applied job
         return view('jobseeker.jobs.partials.detailhistory', compact('job', 'appliedJob'));
     }
 }
