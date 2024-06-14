@@ -64,7 +64,7 @@
                         </table>
                         <div class="card-footer d-flex align-items-center">
                             <p class="m-0 text-secondary">
-                                Menampilkan <span>{{ $jobs->firstItem() }}</span> hinggai <span>{{ $jobs->lastItem() }}</span> dari <span>{{ $jobs->total() }}</span> baris
+                                Menampilkan <span>{{ $jobs->firstItem() }}</span> hingga <span>{{ $jobs->lastItem() }}</span> dari <span>{{ $jobs->total() }}</span> baris
                             </p>
                             <ul class="pagination m-0 ms-auto">
                                 <li class="page-item {{ $jobs->onFirstPage() ? 'disabled' : '' }}">

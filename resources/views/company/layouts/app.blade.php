@@ -199,10 +199,10 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="{{ route('company.profile') }}" class="dropdown-item">Profile</a>
+                <a href="{{ route('company.profile') }}" class="dropdown-item">Pengaturan Akun</a>
                 {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                 {{-- <div class="dropdown-divider"></div> --}}
-                <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+                <a href="{{ route('logout') }}" class="dropdown-item">Keluar</a>
               </div>
             </div>
           </div>
