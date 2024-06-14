@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash; 
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\JobSeeker;
 use App\Models\FileJobSeeker;
@@ -67,7 +67,7 @@ class JobSeekerController extends Controller
         $jobSeeker = JobSeeker::where('user_id', Auth::id())->first();
 
         // Ambil file job seeker terkait
-        $fileJobSeeker = $jobSeeker->fileJobSeekers()->first();
+        $fileJobSeeker = $jobSeeker->fileJobSeekers()->where('file_type', 'primary')->first();
 
         // Kirim data ke view
         return view('jobseeker.profile', compact('jobSeeker', 'fileJobSeeker'));
@@ -87,9 +87,6 @@ class JobSeekerController extends Controller
             'certificate' => 'nullable|file|mimes:pdf,doc,docx|max:5120',
             'job_seeker_gender' => 'nullable|string|max:255',
             'job_seeker_birthdate' => 'nullable|date',
-        ], [
-            'cv.required' => 'File CV wajib diunggah.',
-            'certificate.required' => 'File sertifikat wajib diunggah.',
         ]);
 
         // Ambil data job seeker berdasarkan user_id
@@ -119,7 +116,7 @@ class JobSeekerController extends Controller
         // Handle unggah CV
         if ($request->hasFile('cv')) {
             // Ambil atau buat entri FileJobSeeker
-            $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew([]);
+            $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew(['file_type' => 'primary']);
 
             // Hapus CV sebelumnya jika ada
             if ($fileJobSeeker->cv) {
@@ -129,22 +126,19 @@ class JobSeekerController extends Controller
             // Simpan CV yang baru
             $cvFile = $request->file('cv');
             $cvName = 'cv_' . time() . '.' . $cvFile->getClientOriginalExtension();
-            $cvPath = $cvFile->storeAs('cv', $cvName, 'public');
+            $cvPath = $cvFile->storeAs('public/cv', $cvName, 'public');
 
             // Assign path CV ke FileJobSeeker
             $fileJobSeeker->cv = $cvPath;
 
             // Simpan relasi FileJobSeeker
             $jobSeeker->fileJobSeekers()->save($fileJobSeeker);
-        } elseif (!$jobSeeker->fileJobSeekers()->exists()) {
-            // Handle jika CV diperlukan tetapi tidak diunggah
-            return back()->with('error', 'File CV wajib diunggah.');
         }
 
         // Handle unggah sertifikat
         if ($request->hasFile('certificate')) {
             // Ambil atau buat entri FileJobSeeker
-            $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew([]);
+            $fileJobSeeker = $jobSeeker->fileJobSeekers()->firstOrNew(['file_type' => 'primary']);
 
             // Hapus sertifikat sebelumnya jika ada
             if ($fileJobSeeker->certificate) {
@@ -154,16 +148,13 @@ class JobSeekerController extends Controller
             // Simpan sertifikat yang baru
             $certificateFile = $request->file('certificate');
             $certificateName = 'certificate_' . time() . '.' . $certificateFile->getClientOriginalExtension();
-            $certificatePath = $certificateFile->storeAs('certificates', $certificateName, 'public');
+            $certificatePath = $certificateFile->storeAs('public/certificates', $certificateName, 'public');
 
             // Assign path sertifikat ke FileJobSeeker
             $fileJobSeeker->certificate = $certificatePath;
 
             // Simpan relasi FileJobSeeker
             $jobSeeker->fileJobSeekers()->save($fileJobSeeker);
-        } elseif (!$jobSeeker->fileJobSeekers()->exists()) {
-            // Handle jika sertifikat diperlukan tetapi tidak diunggah
-            return back()->with('error', 'File sertifikat wajib diunggah.');
         }
 
         // Simpan job seeker

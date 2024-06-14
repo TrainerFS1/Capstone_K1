@@ -17,37 +17,50 @@ class JobSeekerApplyJobController extends Controller
 {
     public function applyJob(Request $request, $id)
     {
-        // Tambahkan pengecekan apakah ada file di tabel file_job_seekers
         $user = Auth::user();
-        $fileExists = FileJobSeeker::where('job_seeker_id', $user->jobSeeker->id)->exists();
-
-        // Jika tidak ada file yang diunggah, tampilkan pesan kesalahan
-        if (!$fileExists && !$request->hasFile('cv') && !$request->hasFile('certificate')) {
-            return back()->with('error', 'Tidak ada file yang diunggah, mohon upload file.');
+        $jobSeekerId = $user->jobSeeker->id;
+    
+        // Check if there's any file uploaded in file_job_seekers table for the job seeker
+        $fileExists = FileJobSeeker::where('job_seeker_id', $jobSeekerId)->exists();
+    
+        // If "use existing files" is checked but no primary file exists, return an error message
+        if ($request->has('use_existing_files') && $request->input('use_existing_files')) {
+            $primaryFileExists = FileJobSeeker::where('job_seeker_id', $jobSeekerId)
+                ->where('file_type', 'primary')
+                ->exists();
+    
+            if (!$primaryFileExists) {
+                return back()->with('error', 'Silakan upload file utama Anda pada menu data diri.');
+            }
+        } else {
+            // If no file exists and no new file is uploaded, return an error message
+            if (!$fileExists && !$request->hasFile('cv') && !$request->hasFile('certificate')) {
+                return back()->with('error', 'Tidak ada file yang diunggah, mohon upload file.');
+            }
         }
-
+    
         $validator = Validator::make($request->all(), [
             'cv' => 'required_if:use_existing_files,null|file|mimes:pdf|max:2048',
             'certificate' => 'required_if:use_existing_files,null|file|mimes:pdf|max:2048',
         ]);
-
+    
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-
+    
         $job = Job::findOrFail($id);
         $alreadyApplied = ApplyJob::where('job_id', $job->id)
-            ->where('job_seeker_id', $user->jobSeeker->id)
+            ->where('job_seeker_id', $jobSeekerId)
             ->exists();
-
+    
         if ($alreadyApplied) {
             return back()->with('error', 'Anda sudah melamar pekerjaan ini.');
         }
-
+    
         $fileJobSeeker = null;
-
+    
         if ($request->has('use_existing_files') && $request->input('use_existing_files')) {
-            $fileJobSeeker = FileJobSeeker::where('job_seeker_id', $user->jobSeeker->id)
+            $fileJobSeeker = FileJobSeeker::where('job_seeker_id', $jobSeekerId)
                 ->where('file_type', 'primary')
                 ->firstOrFail();
         } else {
@@ -58,7 +71,7 @@ class JobSeekerApplyJobController extends Controller
             } else {
                 return back()->with('error', 'File CV diperlukan.');
             }
-
+    
             if ($request->hasFile('certificate')) {
                 $certificateFile = $request->file('certificate');
                 $certificateName = 'certificate_' . time() . '.' . $certificateFile->getClientOriginalExtension();
@@ -66,25 +79,26 @@ class JobSeekerApplyJobController extends Controller
             } else {
                 return back()->with('error', 'File sertifikat diperlukan.');
             }
-
-            $fileJobSeeker = FileJobSeeker::Create([
-                'job_seeker_id' => $user->jobSeeker->id,
+    
+            $fileJobSeeker = FileJobSeeker::create([
+                'job_seeker_id' => $jobSeekerId,
                 'cv' => $cvPath,
                 'certificate' => $certificatePath,
                 'file_type' => 'secondary',
             ]);
         }
-
+    
         ApplyJob::create([
             'job_id' => $job->id,
-            'job_seeker_id' => $user->jobSeeker->id,
+            'job_seeker_id' => $jobSeekerId,
             'file_jobseeker_id' => $fileJobSeeker->id,
             'status' => 'inprogress',
         ]);
-
+    
         return back()->with('success', 'Lamaran pekerjaan berhasil diajukan.')
                      ->with('alreadyApplied', $alreadyApplied);
     }
+    
 
     public function history()
     {

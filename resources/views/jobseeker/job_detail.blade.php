@@ -88,7 +88,7 @@
 
                                                 <div class="mb-3 form-check">
                                                     <input type="checkbox" class="form-check-input" id="useExistingFiles" name="use_existing_files">
-                                                    <label class="form-check-label" for="useExistingFiles">Gunakan File yang Sudah Ada</label>
+                                                    <label class="form-check-label" for="useExistingFiles">Gunakan File Utama</label>
                                                 </div>
 
                                                 <div class="mb-3">
