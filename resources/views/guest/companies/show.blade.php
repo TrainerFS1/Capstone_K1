@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <h2>Company Profile:</h2>
+        <h2>Profil Perusahaan:</h2>
         <div class="container mb-5">
             <div class="row">
                 <div class="card border-1 p-4 shadow">
@@ -34,7 +34,7 @@
         </div>
         </div>
 
-        <h2>Jobs Offered:</h2>
+        <h2>Tawaran Pekerjaan:</h2>
         <div class="row">
             @foreach ($jobs as $job)
                 <div class="col-md-4 mb-4">

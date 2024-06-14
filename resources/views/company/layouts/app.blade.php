@@ -195,7 +195,7 @@
                 <img class="avatar avatar-sm" src="{{ $company->company_logo ? asset('storage/company_logo/'.$company->company_logo) : '' }}" >
                 <div class="d-none d-xl-block ps-2">
                   <div>{{ $company->company_name ?? 'company'}}</div>
-                  <div class="mt-1 small text-secondary">{{ $user->user_type }}</div>
+                  <div class="mt-1 small text-secondary">perusahaan</div>
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

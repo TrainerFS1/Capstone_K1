@@ -21,10 +21,10 @@
             </div>
         </div>
         
-        <h1 class="mb-5">Search Results for "{{ $keyword }}"</h1>
+        <h1 class="mb-5">Hasil Pencarian Untuk "{{ $keyword }}"</h1>
 
     @if($companies->isEmpty())
-        <p>No companies found.</p>
+        <p>Tidak ada perusahaan ditemukan.</p>
     @else
         <div class="row">
             @foreach($companies as $company)

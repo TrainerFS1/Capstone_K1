@@ -73,8 +73,9 @@
                                                             </svg>
                                                             Edit
                                                         </a>
-                                                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Hapus</a>
-                                                        @include('admin.layouts.modaldeletelist')
+                                                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus-{{ $companyList->id }}">Hapus</a>
+                                                        @include('admin.layouts.modaldeletelist', ['companylistId' => $companyList->id])
+
                                                     @endif
                                                 </td>
                                             </tr>

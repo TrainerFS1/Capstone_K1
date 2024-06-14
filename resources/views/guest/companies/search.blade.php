@@ -2,19 +2,19 @@
 
 @section('main')
 <div class="container">
-    <h1>Search Companies</h1>
+    <h1>Cari Perusahaan</h1>
 
     <form action="{{ route('guest.companies.searchCompany') }}" method="GET">
         <div class="input-group mb-3">
-            <input type="text" name="keyword" class="form-control" placeholder="Search for companies..." aria-label="Search for companies..." aria-describedby="button-search">
-            <button class="btn btn-primary" type="submit" id="button-search">Search</button>
+            <input type="text" name="keyword" class="form-control" placeholder="Cari perusahaan disini..." aria-label="Search for companies..." aria-describedby="button-search">
+            <button class="btn btn-primary" type="submit" id="button-search">Cari</button>
         </div>
     </form>
 
     <div class="card border-1 shadow p-5">
-        <h1>All Companies</h1>
+        <h1>Semua Perusahaan</h1>
         @if($companies->isEmpty())
-            <p>No companies found.</p>
+            <p>Tidak ada perusahaan ditemukan.</p>
         @else
             <div class="row">
                 @foreach($companies as $company)

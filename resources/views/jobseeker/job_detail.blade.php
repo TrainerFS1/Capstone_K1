@@ -75,6 +75,8 @@
                                     </div>
                                 @endif
                             </div>
+                            <a href="{{ route('guest.companies.show', $job->company->id) }}" class="btn btn-outline-primary btn-sm mt-2">Lihat Profil Perusahaan</a>
+
 
                             @auth
                                 <div class="card shadow border-0 p-3 mt-4">

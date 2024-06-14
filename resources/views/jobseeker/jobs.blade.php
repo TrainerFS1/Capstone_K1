@@ -69,7 +69,7 @@
                                         <p class="mb-1">
                                             <span class="fw-bolder"><i class="fas fa-clock"></i></span>
                                             <span class="ps-1">{{ $job->jobType->job_type_name }}</span>
-                                        </p>
+                                        </p>                                       
                                     </div>
                                 </a>
                             </div>

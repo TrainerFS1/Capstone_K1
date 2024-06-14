@@ -214,7 +214,7 @@
                         </svg>
                     </span>
                     <span class="nav-link-title">
-                        Profil Perusahaan
+                        Telusuri Perusahaan
                     </span>
                 </a>
             </li>
@@ -341,7 +341,7 @@
             <div class="nav-item dropdown">
             <a href="{{ route('loginJobSeeker') }}" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
               <span class="avatar avatar-sm mt-2">
-                @if (Auth::check() && $jobSeeker->profile_picture)
+              @if (Auth::check() && $jobSeeker && $jobSeeker->profile_picture)
                 <img class="avatar avatar-sm" src="{{ $jobSeeker->profile_picture ? asset('storage/profile_pictures/'.$jobSeeker->profile_picture) : '' }}" >
                 @else
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
@@ -353,7 +353,7 @@
               </span>
               <div class="d-none d-xl-block ps-2 mt-2">
                 <div>{{ $jobSeeker->job_seeker_name ?? 'Masuk' }}</div>
-                <div class="mt-1 small text-secondary">Karyawan</div>
+                <div class="mt-1 small text-secondary">karyawan</div>
               </div>
             </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
