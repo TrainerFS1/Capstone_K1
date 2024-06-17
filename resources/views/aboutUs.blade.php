@@ -30,10 +30,10 @@
                     <h3>Tentang Kami</h3>
                 </div>
                 <div class="card-body text-center">
-                    <p>Welcome to InpoLoker! We are dedicated to helping job seekers find their dream jobs and connecting them with reputable companies.</p>
-                    <p>Our mission is to provide a platform where job seekers can explore various job opportunities and employers can find talented individuals to join their teams.</p>
-                    <p>At InpoLoker, we strive to make the job search process as smooth and efficient as possible for both job seekers and employers. Whether you're looking for your first job or aiming to advance your career, we're here to support you every step of the way.</p>
-                    <p>Thank you for choosing InpoLoker for your job search needs!</p>
+                    <p>Selamat datang di InpoLoker! Kami berdedikasi untuk membantu pencari kerja menemukan pekerjaan impian mereka dan menghubungkan mereka dengan perusahaan yang bereputasi baik.
+                    Misi kami adalah menyediakan platform di mana pencari kerja dapat menjelajahi berbagai peluang kerja dan pengusaha dapat menemukan individu berbakat untuk bergabung dengan tim mereka.</p>
+                    <p>Di InpoLoker, kami berusaha untuk membuat proses pencarian kerja semulus dan seefisien mungkin bagi pencari kerja dan pengusaha. Baik Anda mencari pekerjaan pertama atau berusaha untuk memajukan karir Anda, kami di sini untuk mendukung Anda setiap langkahnya.</p>
+                    <p>Terima kasih telah memilih InpoLoker untuk kebutuhan pencarian kerja Anda!</p>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
                         <!-- Team Member 1 -->
                         <div class="col-sm-6 col-md-4 col-lg-2 mb-4">
                             <div class="card h-100 animasi">
-                                <img src="images/foto-asmaranti.jpeg" alt="Team Member 1">
+                                <img src="images/perempuan.png" alt="Team Member 1">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Asmarani</h5>
                                     <p class="card-text">Ketua Kelompok</p>
@@ -62,7 +62,7 @@
                         <!-- Team Member 2 -->
                         <div class="col-sm-6 col-md-4 col-lg-2 mb-4">
                             <div class="card h-100 animasi">
-                                <img src="images/foto-asmaranti.jpeg"  alt="Team Member 2">
+                                <img src="images/laki.png"  alt="Team Member 2">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Zahruddin Fanani</h5>
                                     <p class="card-text">Anggota</p>
@@ -72,7 +72,7 @@
                         <!-- Team Member 3 -->
                         <div class="col-sm-6 col-md-4 col-lg-2 mb-4">
                             <div class="card h-100 animasi">
-                                <img src="images/foto-asmaranti.jpeg"  alt="Team Member 3">
+                                <img src="images/perempuan.png"  alt="Team Member 3">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Asmaranti</h5>
                                     <p class="card-text">Anggota</p>
@@ -82,7 +82,7 @@
                         <!-- Team Member 4 -->
                         <div class="col-sm-6 col-md-4 col-lg-2 mb-4">
                             <div class="card h-100 animasi">
-                                <img src="images/foto-asmaranti.jpeg"  alt="Team Member 4">
+                                <img src="images/laki.png"  alt="Team Member 4">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Angelo</h5>
                                     <p class="card-text">Anggota</p>
@@ -92,7 +92,7 @@
                         <!-- Team Member 5 -->
                         <div class="col-sm-6 col-md-4 col-lg-2 mb-4">
                             <div class="card h-100 animasi">
-                                <img src="images/foto-asmaranti.jpeg"  alt="Team Member 5">
+                                <img src="images/laki.png"  alt="Team Member 5">
                                 <div class="card-body text-center">
                                     <h5 class="card-title">Hisyam Ali</h5>
                                     <p class="card-text">Anggota</p>
