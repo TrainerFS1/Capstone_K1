@@ -21,7 +21,7 @@
           <form action="{{ route('company.updateprofile') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
-              <h2 class="mb-4">Akun Perusahaan Anda</h2>
+              <h2 class="mb-4">Akun Saya</h2>
               <h3 class="card-title">Detail Profil</h3>
               <div class="row align-items-center">
                 <div class="col-auto">
@@ -32,7 +32,7 @@
                     <input type="file" name="company_logo" id="company-logo-input" class="btn">
                 </div>
                 <div class="col-auto">
-                    <a href="#" class="btn btn-outline-danger" onclick="document.getElementById('delete-company-logo').submit();">Delete company logo</a>
+                    <a href="#" class="btn btn-outline-danger" onclick="document.getElementById('delete-company-logo').submit();">Hapus Logo Perusahaan</a>
                 </div>
               </div>
               <h3 class="card-title mt-4">Profil Perusahaan</h3>
@@ -66,7 +66,7 @@
                   <input type="text" name="company_address" class="form-control" value="{{ $company->company_address }}">
                 </div>
                 <div class="col-md-6">
-                  <div class="form-label">No. Telepon</div>
+                  <div class="form-label">Telepon</div>
                   <input type="text" name="company_phone" class="form-control" value="{{ $company->company_phone }}">
                 </div>
                 <div class="col-md-12">
@@ -74,14 +74,14 @@
                   <input type="email" name="email" class="form-control" value="{{ $user->email}}">
                 </div>
                 <div class="col-md-12">
-                  <div class="form-label">Deskripsi Perusahaan</div>
-                  <textarea class="form-control" name="company_description" data-bs-toggle="autosize" placeholder="About Company">{{ $company->company_description}}</textarea>
+                  <div class="form-label">Tentang Perusahaan</div>
+                  <textarea class="form-control" name="company_description" data-bs-toggle="autosize" placeholder="Isian tentang perusahaan">{{ $company->company_description}}</textarea>
                 </div>
               </div>
               <h3 class="card-title mt-4">Kata Sandi</h3>
               <div>
                 <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#setNewPassword" data-id="{{ $company->id }}">
-                  Ubah Kata Sandi
+                  Atur Kata Sandi Baru
                 </button>
               </div>
             </div>

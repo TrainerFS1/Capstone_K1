@@ -20,22 +20,33 @@
                     <div class="card">
                         <div class="card-header border-bottom text-secondary d-flex flex-wrap justify-content-between align-items-center">
                             <div class="col-12 col-sm-6 col-md-4 mb-2 mb-sm-0">
-                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path d="M12 5l0 14" />
-                                        <path d="M5 12l14 0" />
-                                    </svg>
-                                    Tambah Lowongan Kerja
-                                </button>
+                              <button type="button" class="btn btn-primary w-75" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="icon"
+                                  width="24"
+                                  height="24"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="2"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                  <path d="M12 5l0 14" />
+                                  <path d="M5 12l14 0" />
+                                </svg>
+                                Tambah Lowongan Kerja
+                              </button>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4">
-                                <form action="{{ route('company.jobs.search') }}" method="GET" class="d-flex">
-                                    <div class="input-group">
-                                        <input type="text" name="search" value="{{ request('search') }}" class="form-control" aria-label="Search jobs" placeholder="search...">
-                                        <button class="btn btn-primary" type="submit">Search</button>
-                                    </div>
-                                </form>
+                              <form action="{{ route('company.jobs.search') }}" method="GET" class="d-flex">
+                                <div class="input-group">
+                                  <input type="text" name="search" value="{{ request('search') }}" class="form-control" aria-label="Search jobs" placeholder="cari lowongan kerja...">
+                                  <button class="btn btn-primary" type="submit">Cari</button>
+                                </div>
+                              </form>
                             </div>
                         </div>
 
@@ -91,11 +102,11 @@
                         @endif
                         <div class="card-footer d-flex align-items-center">
                             <p class="m-0 text-secondary">
-                                Showing <span>{{ $jobs->firstItem() }}</span> to <span>{{ $jobs->lastItem() }}</span> of <span>{{ $jobs->total() }}</span> entries
+                                Menampilkan <span>{{ $jobs->firstItem() }}</span> hingga <span>{{ $jobs->lastItem() }}</span> dari <span>{{ $jobs->total() }}</span> entri
                             </p>
                             <ul class="pagination m-0 ms-auto">
                                 <li class="page-item {{ $jobs->onFirstPage() ? 'disabled' : '' }}">
-                                    <a class="page-link" href="{{ $jobs->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $jobs->onFirstPage() }}">prev</a>
+                                    <a class="page-link" href="{{ $jobs->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $jobs->onFirstPage() }}">Sebelumnya</a>
                                 </li>
                                 @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
                                     <li class="page-item {{ $page == $jobs->currentPage() ? 'active' : '' }}">
@@ -103,7 +114,7 @@
                                     </li>
                                 @endforeach
                                 <li class="page-item {{ $jobs->hasMorePages() ? '' : 'disabled' }}">
-                                    <a class="page-link" href="{{ $jobs->nextPageUrl() }}" aria-disabled="{{ !$jobs->hasMorePages() }}">next</a>
+                                    <a class="page-link" href="{{ $jobs->nextPageUrl() }}" aria-disabled="{{ !$jobs->hasMorePages() }}">Selanjutnya</a>
                                 </li>
                             </ul>
                         </div>

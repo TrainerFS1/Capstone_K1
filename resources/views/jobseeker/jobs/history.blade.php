@@ -31,13 +31,13 @@
                             @endphp
                             @switch($status)
                                 @case('rejected')
-                                    <span class="badge rounded-pill text-bg-danger">{{ $appliedJob->status }}</span>
+                                    <span class="badge rounded-pill text-bg-danger">Ditolak</span>
                                     @break
                                 @case('inprogress')
-                                    <span class="badge rounded-pill text-bg-info">{{ $appliedJob->status }}</span>
+                                    <span class="badge rounded-pill text-bg-info">Dalam Proses</span>
                                     @break
                                 @case('accepted')
-                                    <span class="badge rounded-pill text-bg-success">{{ $appliedJob->status }}</span>
+                                    <span class="badge rounded-pill text-bg-success">Diterima</span>
                                     @break
                                 @default
                                     <span class="badge badge-secondary">{{ $appliedJob->status }}</span>

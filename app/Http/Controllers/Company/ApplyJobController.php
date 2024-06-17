@@ -37,7 +37,7 @@ class ApplyJobController extends Controller
         }
 
         // Lakukan aksi penolakan, misalnya mengupdate status
-        $applyJob->status = 'ditolak';
+        $applyJob->status = 'rejected';
         $applyJob->save();
 
         return response()->json(['message' => 'Lamaran berhasil ditolak']);
@@ -52,7 +52,7 @@ class ApplyJobController extends Controller
         }
 
         // Lakukan aksi penerimaan, misalnya mengupdate status
-        $applyJob->status = 'diterima';
+        $applyJob->status = 'accepted';
         $applyJob->save();
 
         return response()->json(['message' => 'Lamaran berhasil diterima']);

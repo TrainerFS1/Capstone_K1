@@ -28,46 +28,48 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Title</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Judul Lowongan Pekerjaan</h3>
                             <p>{{ $job->job_title }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Job Category</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Kategori Pekerjaan</h3>
                             <p>{{ $job->category->category_name }}</p>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Job Type</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Tipe Pekerjaan</h3>
                             <p>{{ $job->jobType->job_type_name }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Job Location</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Lokasi Pekerjaan</h3>
                             <p>{{ $job->job_location }}</p>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Salary Range</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Kisaran Gaji</h3>
                             <p>{{ $job->job_salary }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Skills</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Keahlian Yang Dibutuhkan</h3>
                             <p>{{ $job->job_skills }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Description</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Deskripsi Pekerjaan</h3>
                             <p>{{ $job->job_description }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Status</h3>
-                            <p>{{ $job->job_status }}</p>
+                            <h3 class="form-label" style="font-size: 1.25em;">Status Pekerjaan</h3>
+                            <button class="btn btn-{{ $job->job_status == 'active' ? 'success' : 'danger' }} btn-sm" type="submit">
+                                {{ $job->job_status == 'active' ? 'Active' : 'Inactive' }}
+                            </button>
                         </div>
                     </div>
                     <div class="row">
