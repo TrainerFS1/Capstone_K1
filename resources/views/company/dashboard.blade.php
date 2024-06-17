@@ -131,10 +131,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{ $activeJobs }} Active
+                                        {{ $activeJobs }} Aktif
                                     </div>
                                     <div class="text-secondary">
-                                        Lowongan Active
+                                        Lowongan Aktif
                                     </div>
                                 </div>
                             </div>
@@ -180,10 +180,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{ $inactiveJobs }} Inactive
+                                        {{ $inactiveJobs }} Tidak Aktif
                                     </div>
                                     <div class="text-secondary">
-                                        Lowongan Inactive
+                                        Lowongan Tidak Aktif
                                     </div>
                                 </div>
                             </div>
@@ -264,7 +264,7 @@
                                 </div>
                                 <div class="col">
                                     <div class="font-weight-medium">
-                                        {{ $inprogressApplyJobs }} inprogress
+                                        {{ $inprogressApplyJobs }} Dalam Proses
                                     </div>
                                     <div class="text-secondary">
                                         Belum Di Proses

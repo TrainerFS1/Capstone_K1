@@ -50,14 +50,14 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="job_seeker_name" placeholder="Job Seeker" value="{{ $jobSeeker->job_seeker_name ?? '' }}" autofocus required>
+                                                <input type="text" class="form-control" name="job_seeker_name" placeholder="John Doe" value="{{ $jobSeeker->job_seeker_name ?? '' }}" autofocus required>
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6 col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">No. Telepon <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="job_seeker_phone" placeholder="Phone" value="{{ $jobSeeker->job_seeker_phone ?? '' }}" required>
+                                                <input type="text" class="form-control" name="job_seeker_phone" placeholder="08xxxxxxxx" value="{{ $jobSeeker->job_seeker_phone ?? '' }}" required>
                                             </div>
                                         </div>
 
@@ -71,7 +71,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Alamat</label>
-                                                <input type="text" class="form-control" name="job_seeker_address" placeholder="Home Address" value="{{ $jobSeeker->job_seeker_address ?? '' }}">
+                                                <input type="text" class="form-control" name="job_seeker_address" placeholder="Alamat Rumah" value="{{ $jobSeeker->job_seeker_address ?? '' }}">
                                             </div>
                                         </div>
 
@@ -99,7 +99,7 @@
                                         <div class="col-md-12">
                                             <div class="mb-3 mb-0">
                                                 <label class="form-label">Deskripsi Anda</label>
-                                                <textarea rows="5" class="form-control" name="job_seeker_resume" placeholder="Here can be your description">{{ $jobSeeker->job_seeker_resume ?? '' }}</textarea>
+                                                <textarea rows="5" class="form-control" name="job_seeker_resume" placeholder="Tuliskan deskripsi singkat anda">{{ $jobSeeker->job_seeker_resume ?? '' }}</textarea>
                                             </div>
                                         </div>
 

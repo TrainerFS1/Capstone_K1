@@ -5,7 +5,7 @@
     <div class="row g-2 align-items-center">
       <div class="col">
         <h2 class="page-title">
-          Account Settings
+          Pengaturan Akun
         </h2>
       </div>
     </div>
@@ -21,8 +21,8 @@
           <form action="{{ route('company.updateprofile') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="card-body">
-              <h2 class="mb-4">My Account</h2>
-              <h3 class="card-title">Profile Details</h3>
+              <h2 class="mb-4">Akun Saya</h2>
+              <h3 class="card-title">Detail Profil</h3>
               <div class="row align-items-center">
                 <div class="col-auto">
                   <img class="avatar avatar-xl" id="company-logo-preview" 
@@ -32,21 +32,21 @@
                     <input type="file" name="company_logo" id="company-logo-input" class="btn">
                 </div>
                 <div class="col-auto">
-                    <a href="#" class="btn btn-outline-danger" onclick="document.getElementById('delete-company-logo').submit();">Delete company logo</a>
+                    <a href="#" class="btn btn-outline-danger" onclick="document.getElementById('delete-company-logo').submit();">Hapus Logo Perusahaan</a>
                 </div>
               </div>
-              <h3 class="card-title mt-4">Company Profile</h3>
+              <h3 class="card-title mt-4">Profil Perusahaan</h3>
               <div class="row g-3">
                 <div class="col-md-6">
-                  <div class="form-label required">Company Name</div>
+                  <div class="form-label required">Nama Perusahaan</div>
                   <input type="text" name="company_name" class="form-control" value="{{ $company->company_name }}">
                 </div>
                 <div class="col-md-6">
                   <label class="form-label required">
-                    Industry
+                    Industri
                   </label>
                   <select name="industry_id" class="form-select @error('industry_id') is-invalid @enderror">
-                    <option value="">Select Industry</option>
+                    <option value="">Pilih Industri</option>
                       @foreach($industries as $industry)
                       <option value="{{ $industry->id }}" {{ $company->industry_id == $industry->id ? 'selected' : '' }}>
                         {{ $industry->industry_name }}
@@ -58,15 +58,15 @@
                   @enderror
                 </div>
                 <div class="col-md-6">
-                  <div class="form-label">Company Website</div>
+                  <div class="form-label">Website Perusahaan</div>
                   <input type="text" name="company_website" class="form-control" value="{{ $company->company_website }}">
                 </div>
                 <div class="col-md-6">
-                  <div class="form-label">Location</div>
+                  <div class="form-label">Lokasi</div>
                   <input type="text" name="company_address" class="form-control" value="{{ $company->company_address }}">
                 </div>
                 <div class="col-md-6">
-                  <div class="form-label">Phone</div>
+                  <div class="form-label">Telepon</div>
                   <input type="text" name="company_phone" class="form-control" value="{{ $company->company_phone }}">
                 </div>
                 <div class="col-md-12">
@@ -74,23 +74,23 @@
                   <input type="email" name="email" class="form-control" value="{{ $user->email}}">
                 </div>
                 <div class="col-md-12">
-                  <div class="form-label">About Company</div>
-                  <textarea class="form-control" name="company_description" data-bs-toggle="autosize" placeholder="About Company">{{ $company->company_description}}</textarea>
+                  <div class="form-label">Tentang Perusahaan</div>
+                  <textarea class="form-control" name="company_description" data-bs-toggle="autosize" placeholder="Isian tentang perusahaan">{{ $company->company_description}}</textarea>
                 </div>
               </div>
               <h3 class="card-title mt-4">Password</h3>
               <div>
                 <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#setNewPassword" data-id="{{ $company->id }}">
-                  Set new password
+                  Atur Kata Sandi Baru
                 </button>
               </div>
             </div>
             <div class="card-footer bg-transparent mt-auto">
               <div class="btn-list justify-content-end">
                 <a href="{{ route('company.dashboard') }}" class="btn">
-                  Cancel
+                  Batal
                 </a>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
               </div>
             </div>
           </form>
