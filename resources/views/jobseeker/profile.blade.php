@@ -80,7 +80,7 @@
                                                 <label class="form-label">Jenis Kelamin</label><br>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="job_seeker_gender" id="male" value="laki-laki" {{ $jobSeeker->job_seeker_gender == 'Laki-laki' ? 'checked' : '' }}>
-                                                    <label class="form-check-label" for="female">Laki-laki</label>
+                                                    <label class="form-check-label" for="male">Laki-laki</label>
                                                 </div>
                                                 <div class="form-check form-check-inline">
                                                     <input class="form-check-input" type="radio" name="job_seeker_gender" id="female" value="perempuan" {{ $jobSeeker->job_seeker_gender == 'Perempuan' ? 'checked' : '' }}>

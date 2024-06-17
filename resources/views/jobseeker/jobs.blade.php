@@ -51,9 +51,9 @@
                                 <a href="{{ route('jobDetail', $job->id) }}" class="card-body d-flex align-items-center text-decoration-none">
                                     <div class="avatar avatar-xl me-4 rounded">
                                         @if (!empty($job->company->company_logo))
-                                            <img src="{{ asset('storage/company_logo/' . $job->company->company_logo) }}" class="img-fluid" alt="Company Logo">
+                                            <img src="{{ asset('storage/company_logo/' . $job->company->company_logo) }}" class="img-fluid" alt="">
                                         @else
-                                            <img src="{{ asset('images/default-logo-company.png') }}" class="img-fluid" alt="Company Logo">
+                                            <img src="{{ asset('images/default-logo-company.png') }}" class="img-fluid" alt="">
                                         @endif
                                     </div>
                                     <div>
