@@ -96,7 +96,7 @@ class JobSeekerApplyJobController extends Controller
         ]);
     
         return back()->with('success', 'Lamaran pekerjaan berhasil diajukan.')
-                     ->with('alreadyApplied', $alreadyApplied);
+            ->with('alreadyApplied', $alreadyApplied);
     }
     
 
