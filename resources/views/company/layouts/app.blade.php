@@ -12,8 +12,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Company</title>
-    <link rel="icon" href="" type="image/x-icon">
+    <title>Perusahaan</title>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
 <?php $notifications = [] ?>
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
@@ -238,7 +238,7 @@
       </footer>
       </div>
     </div>
-    @include('sweetalert::alert')
+
     @yield('modal')
     <!-- Libs JS -->
     {{-- <script src="{{ asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js') }}" defer></script>

@@ -154,6 +154,7 @@
             </div>
         </div>
     </section>
+    @include('sweetalert::alert')
 @endsection
 
 @push('scripts')
