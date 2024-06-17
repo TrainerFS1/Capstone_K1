@@ -68,9 +68,7 @@
             </form>
           </div>
         </div>
-        {{-- <div class="text-center text-secondary mt-3">
-          Belum Punya Akun <a href="{{ route('company.register') }}" tabindex="-1">Daftar</a>
-        </div> --}}
+
       </div>
     </div>
     <!-- Libs JS -->

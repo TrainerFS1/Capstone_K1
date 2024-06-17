@@ -36,8 +36,8 @@ class JobSeekerController extends Controller
             'job_seeker_gender' => 'nullable|string|max:255',
             'job_seeker_birthdate' => 'nullable|date',
         ], [
-            'password.min' => 'Password must be at least 5 characters.',
-            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, and one number.',
+            'password.min' => 'Password harus minimal 5 karakter.',
+            'password.regex' => 'Password harus mengandung setidaknya satu huruf besar, satu huruf kecil, dan satu angka.',
         ]);
 
         // Create user
@@ -57,7 +57,7 @@ class JobSeekerController extends Controller
         ]);
 
         // Redirect to login with success message
-        return redirect()->route('loginJobSeeker')->with('success', 'Job Seeker registered successfully. Please login.');
+        return redirect()->route('loginJobSeeker')->with('success', 'Registrasi berhasil, silakan login.');
     }
 
     // Menampilkan halaman profil job seeker

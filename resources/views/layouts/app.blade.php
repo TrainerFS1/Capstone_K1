@@ -8,176 +8,144 @@
 * Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
 -->
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>InpoLoker</title>
-        <link rel="icon" href="images/Logo-Brand-2.png" type="image/x-icon" />
-        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-        <!-- CSS files -->
-        <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
-        <link
-            href="{{ asset('dist/css/tabler-flags.min.css') }}"
-            rel="stylesheet"
-        />
-        <link
-            href="{{ asset('dist/css/tabler-payments.min.css') }}"
-            rel="stylesheet"
-        />
-        <link
-            href="{{ asset('dist/css/tabler-vendors.min.css') }}"
-            rel="stylesheet"
-        />
-        <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet" />
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>InpoLoker</title>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <!-- CSS files -->
+    <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('dist/css/tabler-flags.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('dist/css/tabler-payments.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <!-- Tambahkan Animate.css CDN di sini -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+      footer {
+        background-color: #041533;
+        color: #ffffff;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    footer h5 {
+        margin-bottom: 20px;
+    }
+    footer ul {
+        padding-left: 0;
+    }
+    footer ul li {
+        list-style: none;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    footer ul li a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    footer ul li a:hover {
+        text-decoration: underline;
+    }
+    .me-2 {
+        margin-right: 0.5rem;
+    }
+    
+    /*thumbnail */
+    .news-v1 {
+      padding: 60px 0;
+      background-color: #f9f9f9;
+    }
+    .news-v1 .heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .news-v1 .heading h2 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .news-v1 .heading p {
+      font-size: 16px;
+      color: #777;
+    }
+    .news-v1 .news-carousel .item {
+      padding: 15px;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    .news-v1 .news-carousel .item:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    .news-v1 .news-carousel .thumb {
+      position: relative;
+      padding-top: 56.25%;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+    .news-v1 .news-carousel .photo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+    }
+    .news-v1 .news-carousel .text h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .news-v1 .news-carousel .text h3 a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .news-v1 .news-carousel .text h3 a:hover {
+      color: #007bff;
+    }
+    .news-v1 .news-carousel .text p {
+      font-size: 14px;
+      color: #777;
+    }
+    @media (max-width: 767px) {
+      .navbar-nav {
+        text-align: center;
+      }
+      .navbar-nav .nav-item {
+        display: inline-block;
+        margin: 0 10px; /* Sesuaikan margin sesuai kebutuhan */
+      }
+    }
 
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        />
-        <!-- Tambahkan Animate.css CDN di sini -->
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        />
-        <style>
-            @import url("https://rsms.me/inter/inter.css");
-            :root {
-                --tblr-font-sans-serif: "Inter Var", -apple-system,
-                    BlinkMacSystemFont, San Francisco, Segoe UI, Roboto,
-                    Helvetica Neue, sans-serif;
-            }
-            body {
-                font-feature-settings: "cv03", "cv04", "cv11";
-            }
-            footer {
-                background-color: #041533;
-                color: #ffffff;
-                padding-top: 2rem;
-                padding-bottom: 2rem;
-            }
-            footer h5 {
-                margin-bottom: 20px;
-            }
-            footer ul {
-                padding-left: 0;
-            }
-            footer ul li {
-                list-style: none;
-                margin-bottom: 10px;
-                display: flex;
-                align-items: center;
-            }
-            footer ul li a {
-                color: #ffffff;
-                text-decoration: none;
-            }
-            footer ul li a:hover {
-                text-decoration: underline;
-            }
-            .me-2 {
-                margin-right: 0.5rem;
-            }
+    </style>
+  </head>
+  <body >
+    <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
+    <div class="page">
+      <!-- Navbar -->
+      <header class="navbar navbar-expand-md d-print-none">
+        <div class="container-xl">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+          <a href="{{ route('front') }}">
+          <img src="{{ asset('images/Logo-Brand-2.png') }}" alt="Logo Brand 2" class="navbar-brand-image">
+</a>
 
-            /*thumbnail */
-            .news-v1 {
-                padding: 60px 0;
-                background-color: #f9f9f9;
-            }
-            .news-v1 .heading {
-                text-align: center;
-                margin-bottom: 40px;
-            }
-            .news-v1 .heading h2 {
-                font-size: 36px;
-                margin-bottom: 10px;
-            }
-            .news-v1 .heading p {
-                font-size: 16px;
-                color: #777;
-            }
-            .news-v1 .news-carousel .item {
-                padding: 15px;
-                background: #fff;
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-                transition: all 0.3s ease;
-            }
-            .news-v1 .news-carousel .item:hover {
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            }
-            .news-v1 .news-carousel .thumb {
-                position: relative;
-                padding-top: 56.25%;
-                overflow: hidden;
-                margin-bottom: 15px;
-            }
-            .news-v1 .news-carousel .photo {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-size: cover;
-                background-position: center;
-            }
-            .news-v1 .news-carousel .text h3 {
-                font-size: 18px;
-                margin-bottom: 10px;
-            }
-            .news-v1 .news-carousel .text h3 a {
-                color: #333;
-                text-decoration: none;
-                transition: color 0.3s ease;
-            }
-            .news-v1 .news-carousel .text h3 a:hover {
-                color: #007bff;
-            }
-            .news-v1 .news-carousel .text p {
-                font-size: 14px;
-                color: #777;
-            }
-            @media (max-width: 767px) {
-                .navbar-nav {
-                    text-align: center;
-                }
-                .navbar-nav .nav-item {
-                    display: inline-block;
-                    margin: 0 10px; /* Sesuaikan margin sesuai kebutuhan */
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
-        <div class="page">
-            <!-- Navbar -->
-            <header class="navbar navbar-expand-md d-print-none">
-                <div class="container-xl">
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbar-menu"
-                        aria-controls="navbar-menu"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <h1
-                        class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3"
-                    >
-                        <a href="{{ route('front') }}">
-                            <img
-                                src="{{ asset('images/Logo-Brand-2.png') }}"
-                                alt="Logo Brand 2"
-                                class="navbar-brand-image"
-                            />
-                        </a>
-                    </h1>
+          </h1>
 
                     <div class="collapse navbar-collapse" id="navbar-menu">
                         <div>
@@ -987,11 +955,11 @@
             </footer>
         </div>
 
-        @include('sweetalert::alert')
-        <!-- Libs JS -->
-        <!-- Tabler Core -->
-        <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
-        <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
+
+<!-- Libs JS -->
+<!-- Tabler Core -->
+<script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
+<script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {

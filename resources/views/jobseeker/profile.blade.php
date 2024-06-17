@@ -147,6 +147,7 @@
             </div>
         </div>
     </div>
+    @include('sweetalert::alert')
 @endsection
 
 @section('customjs')

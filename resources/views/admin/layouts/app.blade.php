@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Admin</title>
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <!-- CSS files -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-flags.min.css') }}" rel="stylesheet"/>
@@ -174,10 +176,8 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                {{-- <a href="{{ route('company.profile') }}" class="dropdown-item">Profile</a> --}}
                 {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                 {{-- <div class="dropdown-divider"></div> --}}
-                {{-- <a href="{{ route('company.setting') }}" class="dropdown-item">Settings</a> --}}
                 <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
               </div>
             </div>
@@ -215,7 +215,7 @@
       </footer>
       </div>
     </div>
-    @include('sweetalert::alert')
+ 
     @yield('modal')
     <!-- Libs JS -->
     <script src="{{ asset('dist/libs/apexcharts/dist/apexcharts.min.js') }}" defer></script>

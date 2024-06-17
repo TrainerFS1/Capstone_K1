@@ -146,4 +146,5 @@ function validatePassword() {
         return true;
     }
 </script>
+@include('sweetalert::alert')
 @endsection
