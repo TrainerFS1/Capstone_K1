@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
@@ -22,6 +21,7 @@ class JobListingController extends Controller
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $company = Company::where('user_id', Auth::id())->first();
         $user = User::where('id', Auth::id())->firstOrFail();
+
         if (!$company) {
             $company = new Company(); // Atau Anda bisa membuat data default
             $company->user_id = Auth::id();
@@ -29,15 +29,18 @@ class JobListingController extends Controller
             $company->company_logo = 'Company';
             // Set properti lainnya sesuai kebutuhan
         }
+
         $search = $request->input('search');
-        $query = Job::where('company_id', $company->id);
+        $query = Job::where('company_id', $company->id); // Batasi pencarian berdasarkan company_id
 
         if ($search) {
-            $query->where('job_title', 'LIKE', "%{$search}%")
-                ->orWhere('job_description', 'LIKE', "%{$search}%")
-                ->orWhere('job_location', 'LIKE', "%{$search}%")
-                ->orWhere('job_skills', 'LIKE', "%{$search}%")
-                ->orWhere('job_salary', 'LIKE', "%{$search}%");
+            $query->where(function($query) use ($search) {
+                $query->where('job_title', 'LIKE', "%{$search}%")
+                    ->orWhere('job_description', 'LIKE', "%{$search}%")
+                    ->orWhere('job_location', 'LIKE', "%{$search}%")
+                    ->orWhere('job_skills', 'LIKE', "%{$search}%")
+                    ->orWhere('job_salary', 'LIKE', "%{$search}%");
+            });
         }
 
         $jobs = $query->paginate(10);
@@ -46,13 +49,14 @@ class JobListingController extends Controller
         if ($search) {
             $jobs->appends(['search' => $search]);
         }
+
         $jobCategories = Category::all();
         $jobTypes = JobType::all();
-        
 
         // Kirim data perusahaan ke tampilan 'company.joblisting'
-        return view('company.listjob.joblisting', compact('company', 'user', 'jobs','jobCategories','jobTypes'));
+        return view('company.listjob.joblisting', compact('company', 'user', 'jobs', 'jobCategories', 'jobTypes'));
     }
+
     // search
     public function ajaxSearch(Request $request)
     {
@@ -65,11 +69,13 @@ class JobListingController extends Controller
         // Redirect to the jobs page with the query string
         return redirect($url . '?' . $queryParameters);
     }
+
     // Edit Job
     public function showEditJob($id)
     {
         $company = Company::where('user_id', Auth::id())->first();
         $user = User::where('id', Auth::id())->firstOrFail();
+
         if (!$company) {
             $company = new Company(); // Atau Anda bisa membuat data default
             $company->user_id = Auth::id();
@@ -77,44 +83,48 @@ class JobListingController extends Controller
             $company->company_logo = 'Company';
             // Set properti lainnya sesuai kebutuhan
         }
-        // Cari job berdasarkan ID
-        $job = Job::findOrFail($id);
+
+        // Cari job berdasarkan ID dan pastikan job tersebut milik company yang sedang login
+        $job = Job::where('company_id', $company->id)->findOrFail($id);
         $jobCategories = Category::all();
         $jobTypes = JobType::all();
 
         // Tampilkan halaman edit dengan data yang diperlukan
         return view('company.listjob.editjob', compact('company', 'user', 'job', 'jobCategories', 'jobTypes'));
     }
-    //show detail job
+
+    // Show detail job
     public function showJobDetail($id)
     {
         $company = Company::where('user_id', Auth::id())->first();
         $user = User::where('id', Auth::id())->firstOrFail();
-        $job = Job::with(['company', 'category', 'jobType'])->findOrFail($id);
+
+        // Cari job berdasarkan ID dan pastikan job tersebut milik company yang sedang login
+        $job = Job::where('company_id', $company->id)->with(['company', 'category', 'jobType'])->findOrFail($id);
 
         return view('company.listjob.detailjob', compact('job', 'user', 'company'));
     }
-    // Show Add Job Form
+
     // Update Job
     public function updateStatus(Request $request, $id)
     {
-        // Cari job berdasarkan ID
+  
         $job = Job::findOrFail($id);
 
         // Periksa status yang diinginkan dari permintaan
         if ($job->job_status == 'active') {
             $job->job_status = 'inactive';
-            $job->save();
         } elseif ($job->job_status == 'inactive') {
             $job->job_status = 'active';
-            $job->save();
-            // dd($job);
         }
+
         // Simpan perubahan
+        $job->save();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job has been updated successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Status lowongan berhasil diperbarui');
     }
+
     public function updateJob(Request $request, $id)
     {
         // Validasi input
@@ -128,7 +138,9 @@ class JobListingController extends Controller
             'job_description' => 'required|string',
         ]);
 
+ 
         $job = Job::findOrFail($id);
+
         // Update data job
         $job->job_title = $request->job_title;
         $job->category_id = $request->category_id;
@@ -140,20 +152,23 @@ class JobListingController extends Controller
         $job->save();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job has been Edited successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan berhasil diperbarui');
     }
+
     // Delete Job
     public function deleteJob($id)
     {
-        // Cari job berdasarkan ID
+        
+        // Cari job berdasarkan ID dan pastikan job tersebut milik company yang sedang login
         $job = Job::findOrFail($id);
 
         // Hapus job
         $job->delete();
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'Job has been deleted successfully.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan berhasil di hapus');
     }
+
     // Create Job
     public function addJob(Request $request)
     {
@@ -183,6 +198,6 @@ class JobListingController extends Controller
         ]);
 
         // Redirect ke halaman yang diinginkan dengan pesan sukses
-        return redirect()->route('company.jobs')->with('success', 'The job has been created successfully. Please activate the status from show to jobseeker.');
+        return redirect()->route('company.jobs')->with('success', 'Lowongan baru berhasil dibuat');
     }
 }

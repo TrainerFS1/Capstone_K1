@@ -32,7 +32,7 @@
 
 <div class="card mb-4">
     <div class="card-header">
-        <h3>Application Status</h3>
+        <h3>Status Melamar</h3>
     </div>
     <div class="card-body">
         <p>Applied At: {{ $appliedJob->created_at->format('d M Y') }}</p>

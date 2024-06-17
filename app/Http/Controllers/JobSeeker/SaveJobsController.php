@@ -32,7 +32,7 @@ class SaveJobsController extends Controller
             SavedJob::where('job_id', $job->id)
                 ->where('job_seeker_id', $jobSeeker->id)
                 ->delete();
-            return back()->with('success', 'Pekerjaan berhasil dihapus dari simpanan.');
+            return back()->with('success', 'Pekerjaan berhasil dihapus dari simpan.');
         }
 
         // Save job to saved jobs list
@@ -64,6 +64,6 @@ class SaveJobsController extends Controller
     {
         $savedJob->delete();
 
-        return back()->with('success', 'Pekerjaan berhasil dihapus dari simpanan.');
+        return back()->with('success', 'Pekerjaan berhasil dihapus dari simpan.');
     }
 }

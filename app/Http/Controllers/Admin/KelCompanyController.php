@@ -18,19 +18,32 @@ use Illuminate\Support\Facades\Hash;
 
 class KelCompanyController extends Controller
 {
-    //
     public function showKelCompany(Request $request)
     {
         // Ambil perusahaan berdasarkan user_id dari pengguna yang sedang login
         $user = Auth::user(); // Dapatkan user yang sedang login
 
-        // Ambil semua perusahaan, termasuk yang telah di-soft delete
-        $company = Company::withTrashed()->paginate(10);
+        // Ambil query pencarian
+        $search = $request->input('search');
 
-        // Kirim data perusahaan ke tampilan 'admin.listcompany'
-        return view('admin.datacompany.listcompany', compact('company', 'user'));
+        // Query perusahaan
+        $query = Company::withTrashed();
+
+        // Jika ada pencarian, tambahkan ke query
+        if ($search) {
+            $query->where(function($q) use ($search) {
+                $q->where('company_name', 'like', "%$search%")
+                  ->orWhere('company_address', 'like', "%$search%")
+                  ->orWhere('company_phone', 'like', "%$search%");
+            });
+        }
+
+        // Ambil data perusahaan dengan pagination
+        $company = $query->paginate(10);
+
+        // Kirim data perusahaan ke tampilan 'admin.datacompany.listcompany'
+        return view('admin.datacompany.listcompany', compact('company', 'user', 'search'));
     }
-
 
     public function showEditCompany($id)
     {
@@ -39,7 +52,7 @@ class KelCompanyController extends Controller
 
         // Validasi jika company tidak ditemukan
         if (!$company) {
-            return redirect()->back()->with('error', 'Company not found');
+            return redirect()->back()->with('error', 'Perusahaan tidak ditemukan');
         }
         // Mendapatkan user yang sedang login
         $user = Auth::user();
@@ -47,6 +60,7 @@ class KelCompanyController extends Controller
         // Tampilkan halaman edit dengan data yang diperlukan
         return view('admin.datacompany.editcompany', compact('company', 'user', 'industries'));
     }
+
     public function updateCompany(Request $request, $id)
     {
         $company = Company::where('id', $id)->first();
@@ -74,7 +88,7 @@ class KelCompanyController extends Controller
 
         // dd($company);
 
-        return redirect()->route('admin.companylist')->with('success', 'Company updated successfully');
+        return redirect()->route('admin.companylist')->with('success', 'Perusahaan berhasil diperbarui');
     }
 
     public function deleteCompany($id)
@@ -101,12 +115,13 @@ class KelCompanyController extends Controller
             User::findOrFail($userId)->delete();
 
             // Redirect ke halaman yang diinginkan dengan pesan sukses
-            return redirect()->route('admin.companylist')->with('success', 'Company and associated user deleted successfully');
+            return redirect()->route('admin.companylist')->with('success', 'Perusahaan dan pengguna terkait berhasil dihapus');
         } catch (\Exception $e) {
             // Tangani error dan redirect dengan pesan error
-            return redirect()->route('admin.companylist')->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->route('admin.companylist')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
     public function restoreCompany($id)
     {
         try {
@@ -119,11 +134,12 @@ class KelCompanyController extends Controller
             // Restore jobs terkait
             $company->jobs()->withTrashed()->restore();
 
-            return redirect()->route('admin.companylist')->with('success', 'Company restored successfully');
+            return redirect()->route('admin.companylist')->with('success', 'Perusahaan berhasil dipulihkan');
         } catch (\Exception $e) {
-            return redirect()->route('admin.companylist')->with('error', 'An error occurred: ' . $e->getMessage());
+            return redirect()->route('admin.companylist')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
     public function showDetail(Request $request, $id)
     {
         $company = Company::find($id);
@@ -132,6 +148,5 @@ class KelCompanyController extends Controller
         dd($user);
         // Mengembalikan detail jobseeker dalam format JSON
         return view('admin.datacompany.detailcompany', compact('company','industries','user'));
-
     }
 }

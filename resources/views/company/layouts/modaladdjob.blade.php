@@ -10,11 +10,11 @@
               @csrf
               <div class="card-body row">
                   <div class="col-12 mb-3">
-                      <label class="form-label required">Job Title</label>
+                      <label class="form-label required">Nama Lowongan</label>
                       <input type="text" name="job_title" class="form-control" placeholder="Fullstack Laravel Developer" autofocus required>
                   </div>
                   <div class="col-md-6 col-sm-12 mb-3">
-                      <label class="form-label required">Job Category</label>
+                      <label class="form-label required">Kategori Lowongan</label>
                       <select name="category_id" class="form-select" required>
                           @foreach($jobCategories as $category)
                           <option value="{{ $category->id }}">{{ $category->category_name }}</option>
@@ -22,7 +22,7 @@
                       </select>
                   </div>
                   <div class="col-md-6 col-sm-12 mb-3">
-                      <label class="form-label required">Job Type</label>
+                      <label class="form-label required">Tipe Pekerjaan</label>
                       <select name="job_type_id" class="form-select" required>
                           @foreach($jobTypes as $type)
                           <option value="{{ $type->id }}">{{ $type->job_type_name }}</option>
@@ -30,24 +30,24 @@
                       </select>
                   </div>
                   <div class="col-md-6 col-sm-12 mb-3">
-                      <label class="form-label required">Job Location</label>
+                      <label class="form-label required">Lokasi Kerja</label>
                       <input type="text" name="job_location" class="form-control" placeholder="Lamongan" required>
                   </div>
                   <div class="col-md-6 col-sm-12 mb-3">
-                      <label class="form-label required">Salary Range</label>
+                      <label class="form-label required">Gaji</label>
                       <input type="text" name="job_salary" class="form-control" placeholder="4.000.000 - 5.000.000" required>
                   </div>
                   <div class="col-12 mb-3">
-                      <label class="form-label required">Job Skills</label>
+                      <label class="form-label required">Skill Yang dibutuhkan</label>
                       <input type="text" name="job_skills" class="form-control" placeholder="HTML,CSS,PHP,Laravel" required>
                   </div>
                   <div class="col-12 mb-3">
-                      <label class="form-label required">Job Description</label>
+                      <label class="form-label required">Deskripsi Pekerjaan</label>
                       <textarea name="job_description" class="form-control" rows="5" required></textarea>
                   </div>
               </div>
               <div class="card-footer text-end">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Buat Lowongan</button>
               </div>
           </form>
       </div>

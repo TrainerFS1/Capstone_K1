@@ -1,11 +1,16 @@
 @extends('admin.layouts.app')
 
 @section('main')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Daftar Pekerjaan</div>
+<div class="container-xl">
+<div class="row g-2 align-items-center">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2>Daftar Lowongan</h2>
+                        <form class="d-flex" action="{{ route('admin.joblisting') }}" method="GET">
+                            <input class="form-control me-2" type="search" name="search" value="{{ $search ?? '' }}" placeholder="Cari pekerjaan atau perusahaan">
+                            <button class="btn btn-outline-primary" type="submit">Cari</button>
+                        </form>
+                    </div>
 
                     <div class="card-body">
                         <table class="table">
@@ -20,9 +25,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($jobs as $job)
+                                @forelse($jobs as $job)
                                 <tr>
-                                    <td><span class="text-secondary">{{ $loop->iteration }}</span></td>
+                                    <td><span class="text-secondary">{{ $loop->iteration + ($jobs->currentPage() - 1) * $jobs->perPage() }}</span></td>
                                     <td>{{ $job->job_title }}</td>
                                     <td>{{ $job->company->company_name }}</td>
                                     <td>{{ $job->category->category_name }}</td>
@@ -50,9 +55,31 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <tr>
+                                    <td colspan="6">Tidak ada pekerjaan ditemukan</td>
+                                </tr>
+                                @endforelse
                             </tbody>
                         </table>
+                        <div class="card-footer d-flex align-items-center">
+                            <p class="m-0 text-secondary">
+                                Menampilkan <span>{{ $jobs->firstItem() }}</span> hingga <span>{{ $jobs->lastItem() }}</span> dari <span>{{ $jobs->total() }}</span> baris
+                            </p>
+                            <ul class="pagination m-0 ms-auto">
+                                <li class="page-item {{ $jobs->onFirstPage() ? 'disabled' : '' }}">
+                                    <a class="page-link" href="{{ $jobs->previousPageUrl() }}" tabindex="-1" aria-disabled="{{ $jobs->onFirstPage() }}">prev</a>
+                                </li>
+                                @foreach ($jobs->getUrlRange(1, $jobs->lastPage()) as $page => $url)
+                                    <li class="page-item {{ $page == $jobs->currentPage() ? 'active' : '' }}">
+                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                    </li>
+                                @endforeach
+                                <li class="page-item {{ $jobs->hasMorePages() ? '' : 'disabled' }}">
+                                    <a class="page-link" href="{{ $jobs->nextPageUrl() }}" aria-disabled="{{ !$jobs->hasMorePages() }}">next</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

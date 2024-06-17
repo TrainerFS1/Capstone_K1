@@ -6,7 +6,7 @@
         <div class="container-xl">
             <div class="row g-2 align-items-center">
                 <div class="col">
-                    <h2 class="page-title">Job Seeker Registration</h2>
+                    <h2 class="page-title">Registrasi Calon Karyawan</h2>
                 </div>
             </div>
         </div>
@@ -22,18 +22,18 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label class="form-label">
-                                        Full Name <span class="text-danger">*</span>
+                                        Nama Lengkap <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Full Name" required autofocus>
+                                    <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" placeholder="Nama Lengkap" required autofocus>
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">
-                                        Email address <span class="text-danger">*</span>
+                                        Email <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Email address" required>
+                                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" placeholder="Alamat Email" required>
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -49,11 +49,11 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">
-                                        Confirm Password <span class="text-danger">*</span>
+                                        Konfirmasi Password <span class="text-danger">*</span>
                                     </label>
-                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
+                                    <input type="password" name="password_confirmation" class="form-control" placeholder="Konfirmasi Password" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn btn-primary">Daftar</button>
                             </form>
                         </div>
                     </div>

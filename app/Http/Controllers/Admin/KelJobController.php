@@ -12,19 +12,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class KelJobController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user(); // Mengambil informasi user yang sedang login
-        $jobs = Job::with('company', 'category')->get();
-        return view('admin.datajobs.joblisting', compact('jobs', 'user'));
+        
+        // Menerima input pencarian
+        $search = $request->input('search');
+        
+        // Mengambil data pekerjaan dengan pencarian dan paginasi
+        $jobs = Job::with('company', 'category')
+                    ->when($search, function($query, $search) {
+                        return $query->where('job_title', 'like', "%{$search}%")
+                                     ->orWhereHas('company', function($query) use ($search) {
+                                         $query->where('company_name', 'like', "%{$search}%");
+                                     });
+                    })
+                    ->paginate(10);
+        
+        return view('admin.datajobs.joblisting', compact('jobs', 'user', 'search'));
     }
 
     public function ShowdetailJobAdmin($id)
     {
-                
- 
         $user = User::where('id', Auth::id())->firstOrFail();
         $job = Job::with(['company', 'category', 'jobType'])->findOrFail($id);
         return view('admin.datajobs.jobdetail', compact('job', 'user'));

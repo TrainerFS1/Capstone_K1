@@ -27,7 +27,7 @@
                   </div>
                   <div class="col-6">
                     <a href="#" id="job_seeker_certificate" target="_blank" class="btn btn-outline-info col-12">
-                      Certificate
+                      Sertifikat
                     </a>
                   </div>
                 </div>
@@ -38,11 +38,11 @@
         <div class="card-body">
           <div class="datagrid">
             <div class="datagrid-item">
-              <div class="datagrid-title">Address</div>
+              <div class="datagrid-title">Alamat</div>
               <div class="datagrid-content" id="job_seeker_address"></div>
             </div>
             <div class="datagrid-item">
-              <div class="datagrid-title">Phone</div>
+              <div class="datagrid-title">No. Telepon</div>
               <div class="datagrid-content" id="job_seeker_phone">Third Party</div>
             </div>
           </div>

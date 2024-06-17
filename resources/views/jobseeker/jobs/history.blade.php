@@ -3,7 +3,7 @@
 @section('main')
 <div class="container container-xl">
 <div class="col-12 col-xl-8 mt-4">
-    <h2>History Apply Job</h2>
+    <h2>Riwayat Lamaran</h2>
 </div>
     @if($appliedJobs->count() > 0)
     <div class="table-responsive">
@@ -11,11 +11,11 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Applied At</th>
+                    <th>Nama Lowongan</th>
+                    <th>Perusahaan</th>
+                    <th>Tanggal Melamar</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +45,7 @@
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#jobDetailModal" data-job-id="{{ $appliedJob->job->id }}">Detail</button>
+                            @include('jobseeker.jobs.modalhistory')
                         </td>
                     </tr>
                 @endforeach
@@ -53,27 +54,11 @@
     </div>
     {{ $appliedJobs->links() }}
     @else
-    <p>No jobs applied yet.</p>
+    <p>Anda belum melamar apapun.</p>
     @endif
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="jobDetailModal" tabindex="-1" aria-labelledby="jobDetailModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="jobDetailModalLabel">Job Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Job details will be loaded here via AJAX -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 @endsection
 @push('scripts')

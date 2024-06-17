@@ -1,4 +1,3 @@
-
 @extends('company.layouts.app')
 @section('main')
     <!-- Page header -->
@@ -7,7 +6,7 @@
             <div class="row g-2 align-items-center">
                 <div class="col">
                     <h2 class="page-title">
-                        List Lowongan Kerja
+                        Daftar Lowongan Kerja
                     </h2>
                 </div>
             </div>
@@ -21,36 +20,25 @@
                     <div class="card">
                         <div class="card-header border-bottom text-secondary d-flex flex-wrap justify-content-between align-items-center">
                             <div class="col-12 col-sm-6 col-md-4 mb-2 mb-sm-0">
-                              <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  class="icon"
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
-                                  stroke-width="2"
-                                  stroke="currentColor"
-                                  fill="none"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                  <path d="M12 5l0 14" />
-                                  <path d="M5 12l14 0" />
-                                </svg>
-                                Tambah Lowongan Kerja
-                              </button>
+                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <path d="M12 5l0 14" />
+                                        <path d="M5 12l14 0" />
+                                    </svg>
+                                    Tambah Lowongan Kerja
+                                </button>
                             </div>
                             <div class="col-12 col-sm-6 col-md-4">
-                              <form action="{{ route('company.jobs.search') }}" method="GET" class="d-flex">
-                                <div class="input-group">
-                                  <input type="text" name="search" value="{{ request('search') }}" class="form-control" aria-label="Search jobs" placeholder="search...">
-                                  <button class="btn btn-primary" type="submit">Search</button>
-                                </div>
-                              </form>
+                                <form action="{{ route('company.jobs.search') }}" method="GET" class="d-flex">
+                                    <div class="input-group">
+                                        <input type="text" name="search" value="{{ request('search') }}" class="form-control" aria-label="Search jobs" placeholder="search...">
+                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    </div>
+                                </form>
                             </div>
-                          </div>
-                          
+                        </div>
+
                         @if(session('success'))
                             <div class="alert alert-success">
                                 {{ session('success') }}
@@ -64,12 +52,12 @@
                                     <thead>
                                         <tr>
                                             <th class="w-1">No.</th>
-                                            <th>Job Title</th>
-                                            <th>Job Category</th>
-                                            <th>Job Type</th>
-                                            <th>Salary Range</th>
+                                            <th>Nama Lowongan</th>
+                                            <th>Kategori Lowongan</th>
+                                            <th>Tipe Pekerjaan</th>
+                                            <th>Gaji</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -90,11 +78,10 @@
                                                     </form>
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-warning btn-sm" href="{{ route('company.showjobdetail', $jobListing->id) }}">Detail</a> /
-                                                    <a class="btn btn-primary btn-sm" href="{{ route('company.showeditjob', $jobListing->id) }}">Edit</a> /
-                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus">Delete</a>
-                                                    @include('company.layouts.modaldeletelist')
-
+                                                    <a class="btn btn-warning btn-sm" href="{{ route('company.showjobdetail', $jobListing->id) }}">Detail</a>
+                                                    <a class="btn btn-primary btn-sm" href="{{ route('company.showeditjob', $jobListing->id) }}">Edit</a>
+                                                    <a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-hapus-{{ $jobListing->id }}">Hapus</a>
+                                                    @include('company.layouts.modaldeletelist', ['jobListingId' => $jobListing->id])
                                                 </td>
                                             </tr>
                                         @endforeach

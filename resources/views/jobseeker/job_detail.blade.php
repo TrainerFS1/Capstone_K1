@@ -52,7 +52,7 @@
 
                             <div class="card shadow border-0 ">
                                 <div class="row mb-3">
-                                    <h4 class="mb-1">Nama Instansi/Perusahaan</h4>
+                                    <h4 class="mb-1">Nama Perusahaan</h4>
                                     <p>{!! nl2br($job->company->company_name) !!}</p>
                                 </div>
 
@@ -70,11 +70,13 @@
 
                                 @if (!empty($job->job_skills))
                                     <div class="row mb-3">
-                                        <h4 class="mb-1">Keterampilan yang dibutuhkan</h4>
+                                        <h4 class="mb-1">Skill yang dibutuhkan</h4>
                                         <p>{{ $job->job_skills }}</p>
                                     </div>
                                 @endif
                             </div>
+                            <a href="{{ route('guest.companies.show', $job->company->id) }}" class="btn btn-outline-primary btn-sm mt-2">Lihat Profil Perusahaan</a>
+
 
                             @auth
                                 <div class="card shadow border-0 p-3 mt-4">
@@ -86,7 +88,7 @@
 
                                                 <div class="mb-3 form-check">
                                                     <input type="checkbox" class="form-check-input" id="useExistingFiles" name="use_existing_files">
-                                                    <label class="form-check-label" for="useExistingFiles">Gunakan File yang Sudah Ada</label>
+                                                    <label class="form-check-label" for="useExistingFiles">Gunakan File Utama</label>
                                                 </div>
 
                                                 <div class="mb-3">
@@ -124,7 +126,7 @@
                                     <form action="{{ route('saveJob', $job->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-{{ $alreadySaved ? 'success' : 'warning' }} ms-auto">
-                                            <i class="fas fa-bookmark me-2"></i>{{ $alreadySaved ? 'Saved' : 'Save This Job' }}
+                                            <i class="fas fa-bookmark me-2"></i>{{ $alreadySaved ? 'Tersimpan' : 'Simpan' }}
                                         </button>
                                     </form>
                                 </div>

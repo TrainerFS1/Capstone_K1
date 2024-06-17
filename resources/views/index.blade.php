@@ -95,7 +95,7 @@
                                 <h1 class="huruf">Impian Anda</h1>
                                 <p>Berbagai macam pekerjaan tersedia di sini.</p>
                                 <div class="banner-btn mt-5">
-                                    <a href="{{ route('jobs') }}" class="btn btn-yellow mb-4 mb-sm-0">Explore Sekarang</a>
+                                    <a href="{{ route('jobs') }}" class="btn btn-yellow mb-4 mb-sm-0">Telusuri Sekarang</a>
                                 </div>
                             </div>
                         </div>

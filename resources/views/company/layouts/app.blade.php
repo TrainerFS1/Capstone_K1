@@ -38,18 +38,17 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <h1 class="navbar-brand navbar-brand-autodark">
-            <a href="{{ route('company.dashboard') }}">
-              {{-- <img src="./static/logo.svg" width="110" height="32" alt="InpoLoker" class="navbar-brand-image"> --}}
-              InpoLoker
-            </a>
+          <a href="{{ route('company.dashboard') }}">
+          <img src="{{ asset('images/Logo-Brand-2.png') }}" alt="Logo Brand 2" class="navbar-brand-image">
+</a>
           </h1>
           <div class="dropdown d-flex gap-2">
-          <a href="?theme=dark" class="nav-link px-0 hide-theme-dark d-sm-inline d-lg-none"  title="Enable dark mode" data-bs-toggle="tooltip"
+          <a href="?theme=dark" class="nav-link px-0 hide-theme-dark d-sm-inline d-lg-none"  title="Mode gelap" data-bs-toggle="tooltip"
             data-bs-placement="bottom">
             <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
           </a>
-          <a href="?theme=light" class="nav-link px-0 hide-theme-light d-sm-inline d-lg-none" title="Enable light mode" data-bs-toggle="tooltip"
+          <a href="?theme=light" class="nav-link px-0 hide-theme-light d-sm-inline d-lg-none" title="Mode cerah" data-bs-toggle="tooltip"
             data-bs-placement="bottom">
             <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>
@@ -69,7 +68,7 @@
                 <div class="progress-bar progress-bar-indeterminate"></div>
               </div>
                 <div class="card-header">
-                    <h3 class="card-title">Last updates</h3>
+                    <h3 class="card-title">Notifikasi</h3>
                 </div>
                 <div class="list-group list-group-flush list-group-hoverable notifications-container" id="notifications-container">
                     <!-- Notifications will be appended here -->
@@ -99,7 +98,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
                 </span>
                 <span class="nav-link-title">
-                  Home
+                  Beranda
                 </span>
               </a>
             </li>
@@ -109,7 +108,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
                 </span>
                 <span class="nav-link-title">
-                  List Lowongan Kerja
+                  Daftar Lowongan Kerja
                 </span>
               </a>
             </li>
@@ -119,7 +118,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l3 3l8 -8" /><path d="M20 12v6a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h9" /></svg>
                 </span>
                 <span class="nav-link-title">
-                  Lamaran Masuk
+                  Daftar Lamaran Masuk
                 </span>
               </a>
             </li>
@@ -156,12 +155,12 @@
           </button>
           <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex">
-              <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip"
+              <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Mode gelap" data-bs-toggle="tooltip"
 		            data-bs-placement="bottom">
                 <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
               </a>
-              <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode" data-bs-toggle="tooltip"
+              <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Mode cerah" data-bs-toggle="tooltip"
 		            data-bs-placement="bottom">
                 <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>
@@ -182,7 +181,7 @@
                         <div class="progress-bar progress-bar-indeterminate"></div>
                       </div>
                         <div class="card-header">
-                            <h3 class="card-title">Last updates</h3>
+                            <h3 class="card-title">Notifikasi Terbaru</h3>
                         </div>
                         <div class="list-group list-group-flush list-group-hoverable notifications-container" id="notifications-container">
                             <!-- Notifications will be appended here -->
@@ -196,14 +195,14 @@
                 <img class="avatar avatar-sm" src="{{ $company->company_logo ? asset('storage/company_logo/'.$company->company_logo) : '' }}" >
                 <div class="d-none d-xl-block ps-2">
                   <div>{{ $company->company_name ?? 'company'}}</div>
-                  <div class="mt-1 small text-secondary">{{ $user->user_type }}</div>
+                  <div class="mt-1 small text-secondary">perusahaan</div>
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="{{ route('company.profile') }}" class="dropdown-item">Profile</a>
+                <a href="{{ route('company.profile') }}" class="dropdown-item">Pengaturan Akun</a>
                 {{-- <a href="#" class="dropdown-item">Feedback</a> --}}
                 {{-- <div class="dropdown-divider"></div> --}}
-                <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
+                <a href="{{ route('logout') }}" class="dropdown-item">Keluar</a>
               </div>
             </div>
           </div>
@@ -239,6 +238,7 @@
       </footer>
       </div>
     </div>
+    @include('sweetalert::alert')
     @yield('modal')
     <!-- Libs JS -->
     {{-- <script src="{{ asset('dist/libs/jsvectormap/dist/js/jsvectormap.min.js') }}" defer></script>
@@ -259,46 +259,64 @@
     </script>
     @yield('customjs')
     <script>
-      $(document).ready(function() {
-        $('.notificationDropdown').on('click', function() {
-            showLoadingIndicator()
-              $.ajax({
-                  url: '{{ route("notifications") }}',
-                  type: 'GET',
-                  dataType: 'json',
-                  success: function(response) {
-                      $('.notifications-container').empty();
-                      if (response.length > 0) {
-                          $('.notificationBadge').text(response.length);
-                          $.each(response, function(index, notification) {
-                              $('.notifications-container').append(
-                                  '<div class="list-group-item">' +
-                                      '<div class="row align-items-center">' +
-                                          '<div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>' +
-                                          '<div class="col text-truncate">' +
-                                              '<a href="#" class="text-body d-block">' + notification.job_seeker_name + '</a>' +
-                                              '<div class="d-block text-secondary text-truncate mt-n1">' + notification.created_at + '</div>' +
-                                          '</div>' +
-                                      '</div>' +
-                                  '</div>'
-                              );
-                          });
-                      } else {
-                          $('.notifications-container').append('<div class="list-group-item">No new notifications</div>');
-                      }
-                      hideLoadingIndicator()
-                  },
-                  error: function(xhr, status, error) {
-                      console.error(error);
-                  }
-              });
-          });
-          $('.notificationDropdown').on('hidden.bs.dropdown', function () {
-              $('.list-group-item').hide(); // Ganti '.list-group-item' dengan selektor yang sesuai dengan notifikasi Anda
-              $('.notificationBadge').hide();
-          });
-      });
-      </script>
+  function showLoadingIndicator() {
+    $('.progress').hide().show(); // Reset dan tampilkan indikator kemajuan
+  }
+
+  function hideLoadingIndicator() {
+    $('.progress').hide();
+  }
+
+  $(document).ready(function() {
+    $('.notificationDropdown').on('click', function() {
+        showLoadingIndicator();
+        $.ajax({
+            url: '{{ route("notifications") }}',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $('.notifications-container').empty();
+                if (response.length > 0) {
+                    $('.notificationBadge').text(response.length);
+                    $.each(response, function(index, notification) {
+                        var notificationItem = $(
+                            '<div class="list-group-item">' +
+                                '<div class="row align-items-center">' +
+                                    '<div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>' +
+                                    '<div class="col text-truncate">' +
+                                        '<a href="#" class="text-body d-block notification-link" data-id="' + notification.id + '">' + 
+                                            '<strong>' + notification.job_seeker_name + '</strong> melamar lowongan ' + notification.job_title +
+                                        '</a>' +
+                                        '<div class="d-block text-secondary text-truncate mt-n1">' + notification.created_at + '</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                        notificationItem.find('.notification-link').on('click', function(e) {
+                            e.preventDefault();
+                            window.location.href = '{{ route("company.lamaranmasuk") }}';
+                        });
+                        $('.notifications-container').append(notificationItem);
+                    });
+                } else {
+                    $('.notifications-container').append('<div class="list-group-item">No new notifications</div>');
+                }
+                hideLoadingIndicator();
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+    $('.notificationDropdown').on('hidden.bs.dropdown', function () {
+        $('.list-group-item').hide(); // Ganti '.list-group-item' dengan selektor yang sesuai dengan notifikasi Anda
+        $('.notificationBadge').hide();
+    });
+});
+
+</script>
+
   </body>
 </html>
 
