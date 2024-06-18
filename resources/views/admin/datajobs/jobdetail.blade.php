@@ -24,45 +24,45 @@
                 <div class="card-body">
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Title</h3>
+                            <h3 class="form-label">Nama Lowongan</h3>
                             <p>{{ $job->job_title }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Job Category</h3>
+                            <h3 class="form-label">Kategori Lowongan</h3>
                             <p>{{ $job->category->category_name }}</p>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Job Type</h3>
+                            <h3 class="form-label">Tipe Pekerjaan</h3>
                             <p>{{ $job->jobType->job_type_name }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Job Location</h3>
+                            <h3 class="form-label">Lokasi</h3>
                             <p>{{ $job->job_location }}</p>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <h3 class="form-label">Salary Range</h3>
+                            <h3 class="form-label">Gaji</h3>
                             <p>{{ $job->job_salary }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Skills</h3>
+                            <h3 class="form-label">Skil yang dibutuhkan</h3>
                             <p>{{ $job->job_skills }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Description</h3>
+                            <h3 class="form-label">Deskripsi Pekerjaan</h3>
                             <p>{{ $job->job_description }}</p>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label">Job Status</h3>
+                            <h3 class="form-label">Status</h3>
                             <p>{{ $job->job_status }}</p>
                         </div>
                     </div>

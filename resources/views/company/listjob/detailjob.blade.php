@@ -54,7 +54,7 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12">
-                            <h3 class="form-label" style="font-size: 1.25em;">Keahlian Yang Dibutuhkan</h3>
+                            <h3 class="form-label" style="font-size: 1.25em;">Skill Yang Dibutuhkan</h3>
                             <p>{{ $job->job_skills }}</p>
                         </div>
                     </div>

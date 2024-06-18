@@ -843,12 +843,12 @@
                                     inpoloker@gmail.com
                                 </li>
                                 <li>
-                                    <i class="fas fa-phone me-2"></i>Phone: 0895
+                                    <i class="fas fa-phone me-2"></i>Telepon: 0895
                                     6366 92246
                                 </li>
                                 <li>
                                     <i class="fas fa-map-marker-alt me-2"></i
-                                    >Address: Gamelab, Indonesia
+                                    >Alamat: Gamelab, Indonesia
                                 </li>
                             </ul>
                         </div>
