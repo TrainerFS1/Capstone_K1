@@ -179,7 +179,7 @@
         <div class="container-fluid">
         <div class="row" style="padding-bottom: 30px;margin-top: 30px; padding-bottom: 35px;">
             <div class="col-md-4">
-                <div class="box" data-aos="zoom-in" style="border: 4px solid gray;">
+                <div class="box" data-aos="zoom-in" style="border: 4px solid gray; padding-bottom: 35px;">
                     <i class="fa-solid fa-clipboard-check fa-3x" style="color: #021679"></i>
                     <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Lowongan Pekerjaan Terbaik</h3>
                     <p style="color: black; margin-top: 10px;">Menawarkan Akses Lowongan pekerjaan Terbaik dari berbagai industri</p>
@@ -210,7 +210,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="display-4" style="font-weight: 600;">Rekomendasi Job</h2>
+                <h2 class="display-4" style="font-weight: 600;">Pilihan Kategori</h2>
             </div>
         </div>
         <div class="container-fluid">
