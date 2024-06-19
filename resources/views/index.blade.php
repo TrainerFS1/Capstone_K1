@@ -226,7 +226,7 @@
                 <div class="box" data-aos="zoom-out">
                     <img src="{{ asset('images/technology.png') }}" class="card-img-top">
                     <i class="fa-solid fa-desktop fa-2x" style="color: #A67B5B;"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Teknologi</h3>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">IT</h3>
                 </div>
             </div>
             <div class="col-md-3">
