@@ -26,7 +26,7 @@
               <div class="row align-items-center">
                 <div class="col-auto">
                   <img class="avatar avatar-xl" id="company-logo-preview" 
-                    src="{{ $company->company_logo ? asset('storage/company_logo/' . $company->company_logo) : '' }}" >
+                    src="{{ $company->company_logo ? asset('storage/company_logo/' . $company->company_logo) : asset('images/default-logo-company.png') }}" >
                 </div>
                 <div class="col-auto">
                     <input type="file" name="company_logo" id="company-logo-input" class="btn">
