@@ -44,7 +44,7 @@
                                 @if (!empty($job->company->company_logo))
                                     <img src="{{ asset('storage/company_logo/' . $job->company->company_logo) }}" class="img-fluid" alt="Company Logo">
                                 @else
-                                    <img src="{{ asset('images/default-logo.png') }}" class="img-fluid" alt="Company Logo">
+                                    <img src="{{ asset('images/default-logo-company.png') }}" class="img-fluid" alt="Company Logo">
                                 @endif
                             </div>
                             <div>
