@@ -179,24 +179,24 @@
         <div class="container-fluid">
         <div class="row" style="padding-bottom: 30px;margin-top: 30px;">
             <div class="col-md-4">
-                <div class="box" data-aos="zoom-in" style="border: 4px solid gray; padding-bottom: 35px;">
-                    <i class="fa-solid fa-clipboard-check fa-3x" style="color: #021679"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Lowongan Pekerjaan Terbaik</h3>
-                    <p style="color: black; margin-top: 10px;">Menawarkan Akses Lowongan pekerjaan Terbaik dari berbagai industri Terbaik</p>
+                <div class="box" data-aos="zoom-in" style="border: 4px solid gray">
+                    <i class="fa-solid fa-briefcase fa-3x" style="color: #021679;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Daftar Pekerjaan yang Luas</h3>
+                    <p style="color: black; margin-top: 10px;">Telusuri ribuan daftar pekerjaan dari berbagai industri.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="box" data-aos="zoom-in" style="border: 4px solid gray; padding-bottom: 35px;">
-                    <i class="fa-solid fa-person-running fa-3x" style="color: #021679"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Fitur Lamaran Yang Cepat</h3>
-                    <p style="color: black; margin-top: 20px;">Kirim lamaran anda hanya dengan satu klik</p>
+                <div class="box" data-aos="zoom-in" style="border: 4px solid gray;">
+                    <i class="fa-solid fa-people-group fa-3x" style="color: #021679;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Peluang Jaringan</h3>
+                    <p style="color: black; margin-top: 10px;">Terhubung dengan profesional dan kembangkan jaringan Anda.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="box" data-aos="zoom-in" style="border: 4px solid gray; padding-bottom: 35px;">
-                    <i class="fa-solid fa-newspaper fa-3x" style="color: #021679"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Informasi Perusahaan Yang jelas</h3>
-                    <p style="color: black; margin-top: 20px;">Detail Informasi  perusahaan yang Baik dan Jelas</p>
+                <div class="box" data-aos="zoom-in" style="border: 4px solid gray;">
+                    <i class="fa-solid fa-file-invoice fa-3x" style="color: #021679;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Pengajuan Mudah</h3>
+                    <p style="color: black; margin-top: 20px;">Ajukan lamaran pekerjaan dengan cepat dan mudah dengan proses cepat.</p>
                 </div>
             </div>
         </div>
@@ -210,18 +210,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h2 class="display-4" style="font-weight: 600;">Pilihan Kategori</h2>
+                <h2 class="display-4" style="font-weight: 600;">Rekomendasi Job</h2>
             </div>
         </div>
         <div class="container-fluid">
         <div class="row" style="padding-bottom: 50px;margin-top: 30px;">
-            <div class="col-md-3">
-                <div class="box" data-aos="zoom-out" data-aos-delay="150">
-                    <img src="{{ asset('images/Sales.png') }}" class="card-img-top">
-                    <i class="fa-solid fa-money-bill-trend-up fa-2x" style="color: #A67B5B;"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Sales</h3>
-                </div>
-            </div>
             <div class="col-md-3">
                 <div class="box" data-aos="zoom-out">
                     <img src="{{ asset('images/technology.png') }}" class="card-img-top">
@@ -230,18 +223,24 @@
                 </div>
             </div>
             <div class="col-md-3">
+                <div class="box" data-aos="zoom-out" data-aos-delay="150">
+                    <img src="{{ asset('images/medic.png') }}" class="card-img-top">
+                    <i class="fa-solid fa-hand-holding-medical fa-2x" style="color: #A67B5B;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Kesehatan</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="box" data-aos="zoom-out" data-aos-delay="200">
-                    <img src="{{ asset('images/enginering.png') }}" class="card-img-top">
-                    <i class="fa-solid fa-gear fa-2x" style="color: #A67B5B"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Engineering</h3>
+                    <img src="{{ asset('images/keuangan.png') }}" class="card-img-top">
+                    <i class="fa-solid fa-money-bill-trend-up fa-2x" style="color: #A67B5B;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Keuangan</h3>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="box" data-aos="zoom-out" data-aos-delay="300">
-                    <img src="{{ asset('images/education.jpg') }}" class="card-img-top">
-                    <i class="fa-solid fa-school fa-2x" style="color: #A67B5B;"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Education</h3>
-                </div>
+                    <img src="{{ asset('images/building.png') }}" class="card-img-top">
+                    <i class="fa-solid fa-hotel" style="color: #A67B5B;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">industri</h3>
                 </div>
             </div>
         </div>
