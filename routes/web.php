@@ -36,6 +36,7 @@ Route::get('/jobs/search/ajax', [JobController::class, 'searchJobsAjax'])->name(
 Route::get('/job/{id}', [JobController::class, 'jobDetail'])->name('jobDetail');
 
 
+
 Route::get('/companies/search', [GuestCompanyController::class, 'search'])->name('guest.companies.search');
 Route::get('/companies/{company}', [GuestCompanyController::class, 'show'])->name('guest.companies.show');
 Route::get('/companies', [GuestCompanyController::class, 'searchCompany'])->name('guest.companies.searchCompany');

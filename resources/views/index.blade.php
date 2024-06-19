@@ -1,7 +1,10 @@
 @extends('layouts.app')
+
 @section('main')
 
+
 <!-- Page body -->
+
 <style>
   .carousel-caption.custom-caption {
       top: 45%;
@@ -12,9 +15,23 @@
       font-size: 50px;
   }
 
+  .icon-section {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin: 40px 0;
+  }
+
   .icon-section .icon-box {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       padding: 20px;
+      margin: 10px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fff;
+      flex: 1;
+      min-width: 200px;
   }
 
   .icon-section .icon-box:hover {
@@ -23,61 +40,82 @@
   }
 
   .icon-section .icon-box i {
-      color: #007bff; /* Adjust icon color as needed */
+      color: #007bff;
   }
 
-  .thumbnails {
-      display: flex;
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-      margin: 40px 0;
+  .three-boxes-section {
+      margin: 50px 0;
   }
 
-  .thumbnail-wrapper {
-      display: flex;
-      transition: transform 0.5s ease;
-  }
-
-  .thumbnail {
-      flex: 0 0 200px;
-      margin: 0 10px;
-      text-align: center;
+  .three-boxes-section .box {
       border: 1px solid #ddd;
-      padding: 10px;
       border-radius: 8px;
+      padding: 20px;
+      text-align: center;
       background-color: #fff;
+      margin: 10px;
+      transition: box-shadow 0.3s ease;
   }
 
-  .thumbnail img {
-      width: 100%;
+  .three-boxes-section .box:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .three-boxes-section .box img {
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
+      margin-bottom: 20px;
   }
 
-  .news-carousel .item {
-      padding: 10px;
-      box-sizing: border-box;
-    }
-    .news-carousel .thumb {
-      position: relative;
-      overflow: hidden;
-    }
-    .news-carousel .photo {
-      width: 100%;
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-    }
-    .news-carousel .text {
-      padding: 10px;
-      background: #fff;
-    }
-    .news-carousel .text h3 {
-      margin: 0;
-    }
+  .three-boxes-section .box h3 {
+      margin-bottom: 15px;
+  }
+
+  .job-categories-section {
+      text-align: center;
+      margin: 50px 0;
+  }
+
+  .job-categories-section h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+      text-align: center;
+  }
+
+  .job-category {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      background-color: #fff;
+      width: 200px;
+      transition: box-shadow 0.3s ease;
+  }
+
+  .job-category img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+  }
+
+  .job-category:hover {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .job-category h3 {
+      margin-bottom: 10px;
+  }
+
+  .job-category i {
+      font-size: 2em;
+      margin-bottom: 10px;
+      display: block;
+  }
 
 </style>
-
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <section>
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -131,33 +169,87 @@
     </div>
 </section>
 
-<section>
-    <div class="container icon-section mt-5">
-        <div class="row text-center">
+<section class="three-boxes-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="display-4" style="font-weight: 600; font-size: 50px;">Kenapa Harus Daftar Disini?</h3>
+            </div>
+        </div>
+        <div class="container-fluid">
+        <div class="row" style="padding-bottom: 30px;margin-top: 30px;">
             <div class="col-md-4">
-                <div class="icon-box">
-                    <i class="fas fa-search fa-3x"></i>
-                    <h3 class="mt-3">Cari Pekerjaan</h3>
-                    <p>Temukan pekerjaan yang sesuai dengan keahlian Anda.</p>
+                <div class="box" data-aos="zoom-in" style="border: 4px solid gray">
+                    <i class="fa-solid fa-briefcase fa-3x" style="color: #021679;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Daftar Pekerjaan yang Luas</h3>
+                    <p style="color: black; margin-top: 10px;">Telusuri ribuan daftar pekerjaan dari berbagai industri.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="icon-box">
-                    <i class="fas fa-briefcase fa-3x"></i>
-                    <h3 class="mt-3">Lamar Pekerjaan</h3>
-                    <p>Lamar pekerjaan dengan mudah dan cepat.</p>
+                <div class="box" data-aos="zoom-in" style="border: 4px solid gray;">
+                    <i class="fa-solid fa-people-group fa-3x" style="color: #021679;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Peluang Jaringan</h3>
+                    <p style="color: black; margin-top: 10px;">Terhubung dengan profesional dan kembangkan jaringan Anda.</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="icon-box">
-                    <i class="fas fa-user-tie fa-3x"></i>
-                    <h3 class="mt-3">Pilih Karyawan</h3>
-                    <p>Temukan dan pilih karyawan sesuai spesifikasi.</p>
+                <div class="box" data-aos="zoom-in" style="border: 4px solid gray;">
+                    <i class="fa-solid fa-file-invoice fa-3x" style="color: #021679;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Pengajuan Mudah</h3>
+                    <p style="color: black; margin-top: 15px;">Ajukan lamaran pekerjaan dengan proses yang cepat dan mudah.</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
+    
 </section>
 
-
+<section class="three-boxes-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="display-4" style="font-weight: 600;">Pilihan Kategori</h3>
+            </div>
+        </div>
+        <div class="container-fluid">
+        <div class="row" style="padding-bottom: 50px;margin-top: 30px;">
+            <div class="col-md-3">
+                <div class="box" data-aos="zoom-out">
+                    <img src="{{ asset('images/technology.png') }}" class="card-img-top">
+                    <i class="fa-solid fa-desktop fa-2x" style="color: #A67B5B;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">IT & Software</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box" data-aos="zoom-out" data-aos-delay="150">
+                    <img src="{{ asset('images/medic.png') }}" class="card-img-top">
+                    <i class="fa-solid fa-hand-holding-medical fa-2x" style="color: #A67B5B;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Kesehatan</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box" data-aos="zoom-out" data-aos-delay="200">
+                    <img src="{{ asset('images/keuangan.png') }}" class="card-img-top">
+                    <i class="fa-solid fa-money-bill-trend-up fa-2x" style="color: #A67B5B;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Keuangan</h3>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="box" data-aos="zoom-out" data-aos-delay="300">
+                    <img src="{{ asset('images/building.png') }}" class="card-img-top">
+                    <i class="fa-solid fa-hotel" style="color: #A67B5B;"></i>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Konstruksi</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<script src="https://kit.fontawesome.com/85f7bb8c96.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
 @endsection
