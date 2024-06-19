@@ -126,7 +126,7 @@ class JobSeekerController extends Controller
             // Simpan CV yang baru
             $cvFile = $request->file('cv');
             $cvName = 'cv_' . time() . '.' . $cvFile->getClientOriginalExtension();
-            $cvPath = $cvFile->storeAs('public/cv', $cvName, 'public');
+            $cvPath = $cvFile->storeAs('cv', $cvName, 'public');
 
             // Assign path CV ke FileJobSeeker
             $fileJobSeeker->cv = $cvPath;
@@ -148,7 +148,7 @@ class JobSeekerController extends Controller
             // Simpan sertifikat yang baru
             $certificateFile = $request->file('certificate');
             $certificateName = 'certificate_' . time() . '.' . $certificateFile->getClientOriginalExtension();
-            $certificatePath = $certificateFile->storeAs('public/certificates', $certificateName, 'public');
+            $certificatePath = $certificateFile->storeAs('certificates', $certificateName, 'public');
 
             // Assign path sertifikat ke FileJobSeeker
             $fileJobSeeker->certificate = $certificatePath;
