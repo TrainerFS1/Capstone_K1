@@ -78,7 +78,7 @@
           {{-- profile --}}
           <div class="nav-item dropdown nav-link px-0 d-sm-inline d-lg-none">
             <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
-              <img class="avatar avatar-sm" src="{{ $company->company_logo ? asset('storage/company_logo/'.$company->company_logo) : '' }}" >
+              <img class="avatar avatar-sm" src="{{ $company->company_logo ? asset('storage/company_logo/'.$company->company_logo) : asset('images/default-logo-company.png') }}" >
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
               <a href="{{ route('company.profile') }}" class="dropdown-item">Profile</a>
