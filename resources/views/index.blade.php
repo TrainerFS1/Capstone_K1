@@ -242,7 +242,7 @@
                     <i class="fa-solid fa-school fa-2x" style="color: #A67B5B;"></i>
                     <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Education</h3>
                 </div>
-            </div>
+            </div>
         </div>
     </div>
 </div>
