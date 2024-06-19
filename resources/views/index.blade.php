@@ -195,8 +195,8 @@
             <div class="col-md-4">
                 <div class="box" data-aos="zoom-in" style="border: 4px solid gray; padding-bottom: 35px;">
                     <i class="fa-solid fa-newspaper fa-3x" style="color: #021679"></i>
-                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Informasi Perusahaan Yang jelas</h3>
-                    <p style="color: black; margin-top: 20px;">Informasi Perusahaan yang Lengkap dan Jelas</p>
+                    <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Informasi Perusahaan </h3>
+                    <p style="color: black; margin-top: 20px;"> Informasi perusahaan yang detail dan Jelas.</p>
                 </div>
             </div>
         </div>
