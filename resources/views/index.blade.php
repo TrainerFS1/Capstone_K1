@@ -217,7 +217,7 @@
         <div class="row" style="padding-bottom: 50px;margin-top: 30px;">
             <div class="col-md-3">
                 <div class="box" data-aos="zoom-out" data-aos-delay="150">
-                    <img src="{{ asset('images/Sales.png') }}" class="card-img-top">
+                    <img src="{{ asset('images/sales.png') }}" class="card-img-top">
                     <i class="fa-solid fa-money-bill-trend-up fa-2x" style="color: #A67B5B;"></i>
                     <h3 style="color: black; font-size: 20px; font-weight: 700; margin-top: 20px;">Sales</h3>
                 </div>
